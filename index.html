@@ -1,0 +1,1995 @@
+<!-- index.html copy of dsa-sheet.html for instant root hosting on Vercel / Netlify / GitHub Pages -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Tracker — Rani & Swaroop Dual Partner Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Earthy Warm Light Palette */
+    --bg: #FBF8F4;
+    --bg-alt: #F4EFE6;
+    --card: #FFFFFF;
+    --card-subtle: #FDFCF9;
+    --border: #E8DEC8;
+    --border-hover: #D4C3A3;
+    
+    --text-main: #2D2118;
+    --text-muted: #7A695A;
+    --text-light: #A39180;
+    
+    --brown-dark: #3D261D;    /* Deep Chocolate */
+    --brown-medium: #6E473B;
+    --brown-light: #EFE4D8;
+    
+    /* User Colors */
+    --swaroop-color: #D96B27;       /* Warm Terracotta */
+    --swaroop-bg: #FDF0E6;
+    --swaroop-border: #F7D4BD;
+    
+    --rani-color: #D94E6B;          /* Warm Rose / Coral */
+    --rani-bg: #FDF0F3;
+    --rani-border: #F7D0D8;
+    
+    /* Active accent switches dynamically */
+    --accent: var(--swaroop-color);
+    --accent-light: var(--swaroop-bg);
+    --accent-border: var(--swaroop-border);
+    
+    /* Hardness Levels */
+    --easy-color: #2D7A4D;
+    --easy-bg: #E8F5E9;
+    --easy-border: #C8E6C9;
+    
+    --medium-color: #C07000;
+    --medium-bg: #FFF8E1;
+    --medium-border: #FFE082;
+    
+    --hard-color: #C62828;
+    --hard-bg: #FFEBEE;
+    --hard-border: #FFCDD2;
+    
+    --done-bg: #F0F7F2;
+    --done-border: #D1E7DD;
+    --done-text: #2D7A4D;
+    
+    --shadow-sm: 0 2px 8px rgba(61, 38, 29, 0.04);
+    --shadow-md: 0 4px 16px rgba(61, 38, 29, 0.08);
+    --shadow-lg: 0 10px 30px rgba(61, 38, 29, 0.12);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-full: 9999px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.5;
+    padding-bottom: 60px;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px 20px;
+  }
+
+  /* Header Section */
+  header {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 28px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .brand h1 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--brown-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.3px;
+  }
+
+  .brand h1 span.logo-icon {
+    background: linear-gradient(135deg, var(--swaroop-color), var(--rani-color));
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(217, 107, 39, 0.25);
+  }
+
+  .brand p {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  /* User Switcher Toolbar */
+  .user-toggle-container {
+    display: flex;
+    align-items: center;
+    background: var(--bg-alt);
+    padding: 4px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border);
+    gap: 4px;
+  }
+
+  .user-btn {
+    padding: 8px 18px;
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .user-btn.active-swaroop {
+    background: var(--swaroop-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(217, 107, 39, 0.35);
+  }
+
+  .user-btn.active-rani {
+    background: var(--rani-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(217, 78, 107, 0.35);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .sync-btn {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    color: var(--brown-dark);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+
+  .sync-btn:hover {
+    border-color: var(--border-hover);
+    background: #EFE8DC;
+  }
+
+  /* Schedule Configuration Toolbar */
+  .schedule-config-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .date-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .date-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--brown-dark);
+  }
+
+  .date-item input[type="date"] {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-weight: 700;
+    color: var(--brown-dark);
+    cursor: pointer;
+    outline: none;
+  }
+
+  .deadline-highlight-badge {
+    background: #FFF3E0;
+    border: 1px solid #FFE0B2;
+    color: #D96B27;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Partner Comparison Dashboard */
+  .partner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .partner-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .partner-card {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+
+  .partner-card.is-active-user {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+  }
+
+  .partner-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .partner-identity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .partner-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .partner-avatar.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); border: 1px solid var(--swaroop-border); }
+  .partner-avatar.rani { background: var(--rani-bg); color: var(--rani-color); border: 1px solid var(--rani-border); }
+
+  .partner-name {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--brown-dark);
+  }
+
+  .partner-status-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+  }
+
+  .partner-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 14px 0 12px;
+    background: var(--bg-alt);
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+  }
+
+  .p-stat-item {
+    text-align: center;
+  }
+
+  .p-stat-val {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--brown-dark);
+  }
+
+  .p-stat-lbl {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .partner-progress-track {
+    height: 8px;
+    background: #E8DEC8;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-top: 6px;
+  }
+
+  .partner-progress-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.4s ease;
+  }
+
+  .partner-progress-fill.swaroop { background: var(--swaroop-color); }
+  .partner-progress-fill.rani { background: var(--rani-color); }
+
+  /* Navigation Tabs */
+  .nav-tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 24px;
+  }
+
+  .tab-btn {
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+
+  .tab-btn:hover {
+    color: var(--accent);
+  }
+
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* Views */
+  .view-pane {
+    display: none;
+  }
+  .view-pane.active {
+    display: block;
+  }
+
+  /* Sheet Controls */
+  .controls-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .search-box {
+    position: relative;
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 9px 14px 9px 38px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    color: var(--text-main);
+    outline: none;
+  }
+
+  .search-box input:focus {
+    border-color: var(--accent);
+  }
+
+  .search-box::before {
+    content: "🔍";
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.6;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 7px 14px;
+    border-radius: var(--radius-full);
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn.active {
+    background: var(--brown-dark);
+    color: #FFFFFF;
+    border-color: var(--brown-dark);
+  }
+
+  /* Dynamic Prepone Banner */
+  .cascade-banner {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--brown-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  /* Topic Accordion Card */
+  .topic-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .topic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--card-subtle);
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .topic-header:hover {
+    background: #FAF5EE;
+  }
+
+  .topic-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .topic-title {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--brown-dark);
+  }
+
+  .topic-user-progress-badges {
+    display: flex;
+    gap: 6px;
+  }
+
+  .u-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+  }
+
+  .u-badge.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); border: 1px solid var(--swaroop-border); }
+  .u-badge.rani { background: var(--rani-bg); color: var(--rani-color); border: 1px solid var(--rani-border); }
+
+  .topic-schedule-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 12.5px;
+  }
+
+  .target-date-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .target-date-label {
+    font-size: 10.5px;
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .target-date-val {
+    font-weight: 700;
+    color: var(--brown-dark);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .status-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .status-tag.ahead { background: #E8F5E9; color: #2D7A4D; }
+  .status-tag.ontrack { background: #E3F2FD; color: #1565C0; }
+  .status-tag.expanded { background: #FFF3E0; color: #D96B27; border: 1px solid #FFE0B2; }
+  .status-tag.done { background: var(--done-bg); color: var(--done-text); }
+
+  .topic-chevron {
+    color: var(--text-muted);
+    font-size: 13px;
+    transition: transform 0.25s ease;
+  }
+
+  .topic-card.open .topic-chevron {
+    transform: rotate(90deg);
+  }
+
+  /* Problems Table inside Accordion */
+  .problems-list {
+    display: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .topic-card.open .problems-list {
+    display: block;
+  }
+
+  .problem-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+    font-size: 13.5px;
+    background: var(--card);
+    transition: background 0.15s;
+  }
+
+  .problem-row:last-child {
+    border-bottom: none;
+  }
+
+  .problem-row:hover {
+    background: #FCFAF7;
+  }
+
+  /* Dual Checkboxes */
+  .partner-checkboxes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .user-check-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 3px 6px;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+
+  .user-check-wrap:hover {
+    background: var(--bg-alt);
+  }
+
+  .user-check-wrap.swaroop { color: var(--swaroop-color); }
+  .user-check-wrap.rani { color: var(--rani-color); }
+
+  .user-check-wrap input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .user-check-wrap.swaroop input { accent-color: var(--swaroop-color); }
+  .user-check-wrap.rani input { accent-color: var(--rani-color); }
+
+  .problem-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-light);
+    width: 38px;
+    flex-shrink: 0;
+  }
+
+  .problem-title {
+    flex: 1;
+    font-weight: 500;
+  }
+
+  .problem-title a {
+    color: var(--brown-dark);
+    text-decoration: none;
+  }
+
+  .problem-title a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  /* Hardness Badges */
+  .diff-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .diff-badge.Easy { background: var(--easy-bg); color: var(--easy-color); border: 1px solid var(--easy-border); }
+  .diff-badge.Medium { background: var(--medium-bg); color: var(--medium-color); border: 1px solid var(--medium-border); }
+  .diff-badge.Hard { background: var(--hard-bg); color: var(--hard-color); border: 1px solid var(--hard-border); }
+
+  .status-badges-group {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .solved-pill {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .solved-pill.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); border: 1px solid var(--swaroop-border); }
+  .solved-pill.rani { background: var(--rani-bg); color: var(--rani-color); border: 1px solid var(--rani-border); }
+
+  /* CALENDAR VIEW */
+  .calendar-section {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 24px;
+  }
+
+  @media (max-width: 900px) {
+    .calendar-section {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .calendar-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .calendar-header h2 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--brown-dark);
+  }
+
+  .month-nav-btn {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    color: var(--brown-dark);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+
+  .day-name {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-light);
+    padding-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .calendar-day {
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--card-subtle);
+    cursor: pointer;
+    transition: all 0.15s;
+    min-height: 70px;
+  }
+
+  .calendar-day:hover {
+    border-color: var(--accent);
+    transform: scale(1.02);
+  }
+
+  .calendar-day.other-month {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .calendar-day.today {
+    border: 2px solid var(--brown-dark);
+  }
+
+  .day-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--brown-dark);
+  }
+
+  .day-partner-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 2px;
+  }
+
+  .day-u-pill {
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 1px 4px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .day-u-pill.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); border: 1px solid var(--swaroop-border); }
+  .day-u-pill.rani { background: var(--rani-bg); color: var(--rani-color); border: 1px solid var(--rani-border); }
+
+  /* Activity Sidebar */
+  .activity-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .activity-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .activity-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .log-item {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .log-item:last-child { border-bottom: none; }
+
+  .log-date {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .log-desc {
+    font-size: 12.5px;
+    color: var(--brown-dark);
+    margin-top: 2px;
+  }
+
+  /* Sync & Day Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(45, 33, 24, 0.45);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-overlay.open {
+    display: flex;
+  }
+
+  .modal-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    width: 90%;
+    max-width: 520px;
+    padding: 24px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .modal-head h3 {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--brown-dark);
+  }
+
+  .close-modal {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+
+  .sync-textarea {
+    width: 100%;
+    height: 140px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-alt);
+    color: var(--brown-dark);
+    margin: 10px 0 16px;
+    resize: none;
+  }
+
+  .modal-btn-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--text-light);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <h1><span class="logo-icon">✨</span> Rani & Swaroop DSA Tracker</h1>
+      <p>Target Deadline: <strong>October 15, 2026</strong> • Finishing early expands time for future topics! 🎯</p>
+    </div>
+    
+    <div class="header-actions">
+      <!-- Active User Switcher -->
+      <div class="user-toggle-container">
+        <span style="font-size:11.5px; font-weight:700; color:var(--text-muted); padding:0 6px;">I am:</span>
+        <button class="user-btn active-swaroop" id="user-btn-swaroop" onclick="setActiveUser('Swaroop')">🦊 Swaroop</button>
+        <button class="user-btn" id="user-btn-rani" onclick="setActiveUser('Rani')">🌸 Rani</button>
+      </div>
+
+      <button class="sync-btn" id="open-sync-btn">🔄 Sync / Share Data</button>
+    </div>
+  </header>
+
+  <!-- Schedule Configuration Toolbar -->
+  <div class="schedule-config-bar">
+    <div class="date-group">
+      <div class="date-item">
+        <span>📅 Start Date:</span>
+        <input type="date" id="schedule-start-input">
+      </div>
+      <div class="date-item">
+        <span>🎯 Target Deadline:</span>
+        <input type="date" id="schedule-deadline-input">
+      </div>
+    </div>
+    <div class="deadline-highlight-badge">
+      <span>⚡ Fixed Oct 15 Finish: Early completions add extra practice buffer to remaining topics!</span>
+    </div>
+  </div>
+
+  <!-- Partner Comparison Cards -->
+  <div class="partner-grid">
+    <!-- Swaroop Card -->
+    <div class="partner-card is-active-user" id="card-swaroop">
+      <div class="partner-head">
+        <div class="partner-identity">
+          <div class="partner-avatar swaroop">🦊</div>
+          <div>
+            <div class="partner-name">Swaroop's Progress</div>
+            <div style="font-size:11.5px; color:var(--text-muted);">Partner Target & Streak</div>
+          </div>
+        </div>
+        <span class="partner-status-badge" id="swaroop-status-badge" style="background:var(--swaroop-bg); color:var(--swaroop-color);">Active User</span>
+      </div>
+
+      <div class="partner-stats-row">
+        <div class="p-stat-item">
+          <div class="p-stat-val" id="swaroop-solved">0 / 0</div>
+          <div class="p-stat-lbl">Solved</div>
+        </div>
+        <div class="p-stat-item">
+          <div class="p-stat-val" id="swaroop-streak">0 🔥</div>
+          <div class="p-stat-lbl">Streak</div>
+        </div>
+        <div class="p-stat-item">
+          <div class="p-stat-val" id="swaroop-finish">Oct 15, 2026</div>
+          <div class="p-stat-lbl">Final Finish</div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; font-size:11.5px; font-weight:700; color:var(--brown-dark);">
+        <span>Completion</span>
+        <span id="swaroop-pct">0%</span>
+      </div>
+      <div class="partner-progress-track">
+        <div class="partner-progress-fill swaroop" id="swaroop-bar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Rani Card -->
+    <div class="partner-card" id="card-rani">
+      <div class="partner-head">
+        <div class="partner-identity">
+          <div class="partner-avatar rani">🌸</div>
+          <div>
+            <div class="partner-name">Rani's Progress</div>
+            <div style="font-size:11.5px; color:var(--text-muted);">Partner Target & Streak</div>
+          </div>
+        </div>
+        <span class="partner-status-badge" id="rani-status-badge" style="background:var(--rani-bg); color:var(--rani-color);">Partner</span>
+      </div>
+
+      <div class="partner-stats-row">
+        <div class="p-stat-item">
+          <div class="p-stat-val" id="rani-solved">0 / 0</div>
+          <div class="p-stat-lbl">Solved</div>
+        </div>
+        <div class="p-stat-item">
+          <div class="p-stat-val" id="rani-streak">0 🔥</div>
+          <div class="p-stat-lbl">Streak</div>
+        </div>
+        <div class="p-stat-item">
+          <div class="p-stat-val" id="rani-finish">Oct 15, 2026</div>
+          <div class="p-stat-lbl">Final Finish</div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; font-size:11.5px; font-weight:700; color:var(--brown-dark);">
+        <span>Completion</span>
+        <span id="rani-pct">0%</span>
+      </div>
+      <div class="partner-progress-track">
+        <div class="partner-progress-fill rani" id="rani-bar" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" data-tab="sheet-view">📋 Dual Practice Sheet & Dynamic Buffer Targets</button>
+    <button class="tab-btn" data-tab="calendar-view">📅 Joint Activity Calendar & Daily Check-in</button>
+  </div>
+
+  <!-- SHEET VIEW -->
+  <div class="view-pane active" id="sheet-view">
+    <div class="controls-bar">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search problem or topic...">
+      </div>
+      <div class="filter-group" id="diff-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Easy">Easy</button>
+        <button class="filter-btn" data-filter="Medium">Medium</button>
+        <button class="filter-btn" data-filter="Hard">Hard</button>
+        <button class="filter-btn" data-filter="unsolved-me">My Unsolved</button>
+        <button class="filter-btn" data-filter="both-done">Both Solved</button>
+      </div>
+    </div>
+
+    <!-- Cascade Notice -->
+    <div class="cascade-banner">
+      <div>⚡ <strong>Adaptive Buffer Expansion:</strong> The final sheet date is fixed at <strong>Oct 15</strong>. Whenever you complete a topic early, the saved days automatically expand the practice time allocated to all remaining harder topics!</div>
+    </div>
+
+    <div id="topics-container"></div>
+  </div>
+
+  <!-- CALENDAR VIEW -->
+  <div class="view-pane" id="calendar-view">
+    <div class="calendar-section">
+      <div class="calendar-card">
+        <div class="calendar-header">
+          <h2 id="calendar-month-title">August 2026</h2>
+          <div style="display:flex; gap:8px;">
+            <button class="month-nav-btn" id="prev-month-btn">◀ Prev</button>
+            <button class="month-nav-btn" id="next-month-btn">Next ▶</button>
+          </div>
+        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
+      </div>
+
+      <div class="activity-sidebar">
+        <div class="activity-card">
+          <h3>📌 Daily Partner Activity Log</h3>
+          <div id="activity-log-list">
+            <div style="color:var(--text-light); font-size:13px; text-align:center; padding:20px 0;">
+              No recent partner activity logged. Check off questions to see your daily progress!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    DSA Practice Sheet for Rani & Swaroop • Target Finish Anchored on October 15, 2026 🚀
+  </footer>
+</div>
+
+<!-- Modal: Day Activity Inspector -->
+<div class="modal-overlay" id="day-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modal-date-title">Activity on Sep 01</h3>
+      <button class="close-modal" onclick="closeModal('day-modal')">&times;</button>
+    </div>
+    <div id="modal-body-content"></div>
+  </div>
+</div>
+
+<!-- Modal: Sync / Share Data -->
+<div class="modal-overlay" id="sync-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>🔄 Sync & Share Progress</h3>
+      <button class="close-modal" onclick="closeModal('sync-modal')">&times;</button>
+    </div>
+    <p style="font-size:13px; color:var(--text-muted);">
+      Copy this sync code to share with your partner, or paste their code below to merge their progress into your sheet!
+    </p>
+    <textarea class="sync-textarea" id="sync-code-area" placeholder="Paste partner sync code here..."></textarea>
+    <div class="modal-btn-row">
+      <button class="sync-btn" onclick="copySyncData()">📋 Copy My Data</button>
+      <button class="filter-btn active" onclick="mergeSyncData()">📥 Merge Partner Data</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Comprehensive Expanded Question Bank Across 18 Major Topics
+const DATA = [
+  ["Arrays & Hashing", [
+    ["Easy","Two Sum","1","https://leetcode.com/problems/two-sum/"],
+    ["Easy","Contains Duplicate","217","https://leetcode.com/problems/contains-duplicate/"],
+    ["Easy","Valid Anagram","242","https://leetcode.com/problems/valid-anagram/"],
+    ["Easy","Replace Elements with Greatest Element on Right","1299","https://leetcode.com/problems/replace-elements-with-greatest-element-on-right-side/"],
+    ["Easy","Is Subsequence","392","https://leetcode.com/problems/is-subsequence/"],
+    ["Medium","Group Anagrams","49","https://leetcode.com/problems/group-anagrams/"],
+    ["Medium","Top K Frequent Elements","347","https://leetcode.com/problems/top-k-frequent-elements/"],
+    ["Medium","Product of Array Except Self","238","https://leetcode.com/problems/product-of-array-except-self/"],
+    ["Medium","Valid Sudoku","36","https://leetcode.com/problems/valid-sudoku/"],
+    ["Medium","Encode and Decode Strings","271","https://leetcode.com/problems/encode-and-decode-strings/"],
+    ["Medium","Longest Consecutive Sequence","128","https://leetcode.com/problems/longest-consecutive-sequence/"],
+    ["Medium","Subarray Sum Equals K","560","https://leetcode.com/problems/subarray-sum-equals-k/"],
+    ["Hard","First Missing Positive","41","https://leetcode.com/problems/first-missing-positive/"]
+  ]],
+
+  ["Two Pointers", [
+    ["Easy","Valid Palindrome","125","https://leetcode.com/problems/valid-palindrome/"],
+    ["Easy","Two Sum II - Input Array Is Sorted","167","https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/"],
+    ["Easy","Merge Sorted Array","88","https://leetcode.com/problems/merge-sorted-array/"],
+    ["Medium","3Sum","15","https://leetcode.com/problems/3sum/"],
+    ["Medium","Container With Most Water","11","https://leetcode.com/problems/container-with-most-water/"],
+    ["Medium","4Sum","18","https://leetcode.com/problems/4sum/"],
+    ["Medium","Boats to Save People","881","https://leetcode.com/problems/boats-to-save-people/"],
+    ["Hard","Trapping Rain Water","42","https://leetcode.com/problems/trapping-rain-water/"]
+  ]],
+
+  ["Sliding Window", [
+    ["Easy","Best Time to Buy and Sell Stock","121","https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"],
+    ["Medium","Longest Substring Without Repeating Characters","3","https://leetcode.com/problems/longest-substring-without-repeating-characters/"],
+    ["Medium","Longest Repeating Character Replacement","424","https://leetcode.com/problems/longest-repeating-character-replacement/"],
+    ["Medium","Permutation in String","567","https://leetcode.com/problems/permutation-in-string/"],
+    ["Medium","Max Consecutive Ones III","1004","https://leetcode.com/problems/max-consecutive-ones-iii/"],
+    ["Hard","Minimum Window Substring","76","https://leetcode.com/problems/minimum-window-substring/"],
+    ["Hard","Sliding Window Maximum","239","https://leetcode.com/problems/sliding-window-maximum/"]
+  ]],
+
+  ["Stack & Queue", [
+    ["Easy","Valid Parentheses","20","https://leetcode.com/problems/valid-parentheses/"],
+    ["Easy","Implement Queue using Stacks","232","https://leetcode.com/problems/implement-queue-using-stacks/"],
+    ["Medium","Min Stack","155","https://leetcode.com/problems/min-stack/"],
+    ["Medium","Evaluate Reverse Polish Notation","150","https://leetcode.com/problems/evaluate-reverse-polish-notation/"],
+    ["Medium","Generate Parentheses","22","https://leetcode.com/problems/generate-parentheses/"],
+    ["Medium","Daily Temperatures","739","https://leetcode.com/problems/daily-temperatures/"],
+    ["Medium","Car Fleet","853","https://leetcode.com/problems/car-fleet/"],
+    ["Medium","Simplify Path","71","https://leetcode.com/problems/simplify-path/"],
+    ["Hard","Largest Rectangle in Histogram","84","https://leetcode.com/problems/largest-rectangle-in-histogram/"]
+  ]],
+
+  ["Binary Search", [
+    ["Easy","Binary Search","704","https://leetcode.com/problems/binary-search/"],
+    ["Easy","Search Insert Position","35","https://leetcode.com/problems/search-insert-position/"],
+    ["Easy","First Bad Version","278","https://leetcode.com/problems/first-bad-version/"],
+    ["Medium","Search a 2D Matrix","74","https://leetcode.com/problems/search-a-2d-matrix/"],
+    ["Medium","Koko Eating Bananas","875","https://leetcode.com/problems/koko-eating-bananas/"],
+    ["Medium","Find Minimum in Rotated Sorted Array","153","https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"],
+    ["Medium","Search in Rotated Sorted Array","33","https://leetcode.com/problems/search-in-rotated-sorted-array/"],
+    ["Medium","Time Based Key-Value Store","981","https://leetcode.com/problems/time-based-key-value-store/"],
+    ["Hard","Median of Two Sorted Arrays","4","https://leetcode.com/problems/median-of-two-sorted-arrays/"]
+  ]],
+
+  ["Linked List", [
+    ["Easy","Reverse Linked List","206","https://leetcode.com/problems/reverse-linked-list/"],
+    ["Easy","Merge Two Sorted Lists","21","https://leetcode.com/problems/merge-two-sorted-lists/"],
+    ["Easy","Linked List Cycle","141","https://leetcode.com/problems/linked-list-cycle/"],
+    ["Medium","Reorder List","143","https://leetcode.com/problems/reorder-list/"],
+    ["Medium","Remove Nth Node From End of List","19","https://leetcode.com/problems/remove-nth-node-from-end-of-list/"],
+    ["Medium","Copy List with Random Pointer","138","https://leetcode.com/problems/copy-list-with-random-pointer/"],
+    ["Medium","Add Two Numbers","2","https://leetcode.com/problems/add-two-numbers/"],
+    ["Medium","Find the Duplicate Number","287","https://leetcode.com/problems/find-the-duplicate-number/"],
+    ["Medium","LRU Cache","146","https://leetcode.com/problems/lru-cache/"],
+    ["Hard","Merge k Sorted Lists","23","https://leetcode.com/problems/merge-k-sorted-lists/"],
+    ["Hard","Reverse Nodes in k-Group","25","https://leetcode.com/problems/reverse-nodes-in-k-group/"]
+  ]],
+
+  ["Trees & BST", [
+    ["Easy","Invert Binary Tree","226","https://leetcode.com/problems/invert-binary-tree/"],
+    ["Easy","Maximum Depth of Binary Tree","104","https://leetcode.com/problems/maximum-depth-of-binary-tree/"],
+    ["Easy","Diameter of Binary Tree","543","https://leetcode.com/problems/diameter-of-binary-tree/"],
+    ["Easy","Balanced Binary Tree","110","https://leetcode.com/problems/balanced-binary-tree/"],
+    ["Easy","Same Tree","100","https://leetcode.com/problems/same-tree/"],
+    ["Easy","Subtree of Another Tree","572","https://leetcode.com/problems/subtree-of-another-tree/"],
+    ["Medium","Lowest Common Ancestor of BST","235","https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"],
+    ["Medium","Binary Tree Level Order Traversal","102","https://leetcode.com/problems/binary-tree-level-order-traversal/"],
+    ["Medium","Binary Tree Right Side View","199","https://leetcode.com/problems/binary-tree-right-side-view/"],
+    ["Medium","Count Good Nodes in Binary Tree","1448","https://leetcode.com/problems/count-good-nodes-in-binary-tree/"],
+    ["Medium","Validate Binary Search Tree","98","https://leetcode.com/problems/validate-binary-search-tree/"],
+    ["Medium","Kth Smallest Element in a BST","230","https://leetcode.com/problems/kth-smallest-element-in-a-bst/"],
+    ["Medium","Construct Binary Tree from Preorder & Inorder","105","https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/"],
+    ["Hard","Binary Tree Maximum Path Sum","124","https://leetcode.com/problems/binary-tree-maximum-path-sum/"],
+    ["Hard","Serialize and Deserialize Binary Tree","297","https://leetcode.com/problems/serialize-and-deserialize-binary-tree/"]
+  ]],
+
+  ["Tries", [
+    ["Medium","Implement Trie (Prefix Tree)","208","https://leetcode.com/problems/implement-trie-prefix-tree/"],
+    ["Medium","Design Add and Search Words Data Structure","211","https://leetcode.com/problems/design-add-and-search-words-data-structure/"],
+    ["Hard","Word Search II","212","https://leetcode.com/problems/word-search-ii/"]
+  ]],
+
+  ["Heap / Priority Queue", [
+    ["Easy","Kth Largest Element in a Stream","703","https://leetcode.com/problems/kth-largest-element-in-a-stream/"],
+    ["Easy","Last Stone Weight","1046","https://leetcode.com/problems/last-stone-weight/"],
+    ["Medium","K Closest Points to Origin","973","https://leetcode.com/problems/k-closest-points-to-origin/"],
+    ["Medium","Kth Largest Element in an Array","215","https://leetcode.com/problems/kth-largest-element-in-an-array/"],
+    ["Medium","Task Scheduler","621","https://leetcode.com/problems/task-scheduler/"],
+    ["Medium","Design Twitter","355","https://leetcode.com/problems/design-twitter/"],
+    ["Hard","Find Median from Data Stream","295","https://leetcode.com/problems/find-median-from-data-stream/"]
+  ]],
+
+  ["Backtracking", [
+    ["Medium","Subsets","78","https://leetcode.com/problems/subsets/"],
+    ["Medium","Combination Sum","39","https://leetcode.com/problems/combination-sum/"],
+    ["Medium","Permutations","46","https://leetcode.com/problems/permutations/"],
+    ["Medium","Subsets II","90","https://leetcode.com/problems/subsets-ii/"],
+    ["Medium","Combination Sum II","40","https://leetcode.com/problems/combination-sum-ii/"],
+    ["Medium","Word Search","79","https://leetcode.com/problems/word-search/"],
+    ["Medium","Palindrome Partitioning","131","https://leetcode.com/problems/palindrome-partitioning/"],
+    ["Medium","Letter Combinations of a Phone Number","17","https://leetcode.com/problems/letter-combinations-of-a-phone-number/"],
+    ["Hard","N-Queens","51","https://leetcode.com/problems/n-queens/"]
+  ]],
+
+  ["Graphs", [
+    ["Medium","Number of Islands","200","https://leetcode.com/problems/number-of-islands/"],
+    ["Medium","Clone Graph","133","https://leetcode.com/problems/clone-graph/"],
+    ["Medium","Max Area of Island","695","https://leetcode.com/problems/max-area-of-island/"],
+    ["Medium","Pacific Atlantic Water Flow","417","https://leetcode.com/problems/pacific-atlantic-water-flow/"],
+    ["Medium","Surrounded Regions","130","https://leetcode.com/problems/surrounded-regions/"],
+    ["Medium","Rotting Oranges","994","https://leetcode.com/problems/rotting-oranges/"],
+    ["Medium","Course Schedule","207","https://leetcode.com/problems/course-schedule/"],
+    ["Medium","Course Schedule II","210","https://leetcode.com/problems/course-schedule-ii/"],
+    ["Medium","Graph Valid Tree","261","https://leetcode.com/problems/graph-valid-tree/"],
+    ["Medium","Number of Connected Components in Graph","323","https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/"],
+    ["Hard","Word Ladder","127","https://leetcode.com/problems/word-ladder/"]
+  ]],
+
+  ["1-D Dynamic Programming", [
+    ["Easy","Climbing Stairs","70","https://leetcode.com/problems/climbing-stairs/"],
+    ["Easy","Min Cost Climbing Stairs","746","https://leetcode.com/problems/min-cost-climbing-stairs/"],
+    ["Medium","House Robber","198","https://leetcode.com/problems/house-robber/"],
+    ["Medium","House Robber II","213","https://leetcode.com/problems/house-robber-ii/"],
+    ["Medium","Longest Palindromic Substring","5","https://leetcode.com/problems/longest-palindromic-substring/"],
+    ["Medium","Palindromic Substrings","647","https://leetcode.com/problems/palindromic-substrings/"],
+    ["Medium","Decode Ways","91","https://leetcode.com/problems/decode-ways/"],
+    ["Medium","Coin Change","322","https://leetcode.com/problems/coin-change/"],
+    ["Medium","Maximum Product Subarray","152","https://leetcode.com/problems/maximum-product-subarray/"],
+    ["Medium","Word Break","139","https://leetcode.com/problems/word-break/"],
+    ["Medium","Longest Increasing Subsequence","300","https://leetcode.com/problems/longest-increasing-subsequence/"],
+    ["Medium","Partition Equal Subset Sum","416","https://leetcode.com/problems/partition-equal-subset-sum/"]
+  ]],
+
+  ["2-D Dynamic Programming", [
+    ["Medium","Unique Paths","62","https://leetcode.com/problems/unique-paths/"],
+    ["Medium","Longest Common Subsequence","1143","https://leetcode.com/problems/longest-common-subsequence/"],
+    ["Medium","Best Time to Buy & Sell Stock with Cooldown","309","https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/"],
+    ["Medium","Coin Change II","518","https://leetcode.com/problems/coin-change-ii/"],
+    ["Medium","Target Sum","494","https://leetcode.com/problems/target-sum/"],
+    ["Hard","Edit Distance","72","https://leetcode.com/problems/edit-distance/"],
+    ["Hard","Burst Balloons","312","https://leetcode.com/problems/burst-balloons/"],
+    ["Hard","Regular Expression Matching","10","https://leetcode.com/problems/regular-expression-matching/"]
+  ]],
+
+  ["Greedy", [
+    ["Medium","Maximum Subarray","53","https://leetcode.com/problems/maximum-subarray/"],
+    ["Medium","Jump Game","55","https://leetcode.com/problems/jump-game/"],
+    ["Medium","Jump Game II","45","https://leetcode.com/problems/jump-game-ii/"],
+    ["Medium","Gas Station","134","https://leetcode.com/problems/gas-station/"],
+    ["Medium","Hand of Straights","846","https://leetcode.com/problems/hand-of-straights/"],
+    ["Medium","Merge Triplets to Form Target Triplet","1899","https://leetcode.com/problems/merge-triplets-to-form-target-triplet/"],
+    ["Medium","Partition Labels","763","https://leetcode.com/problems/partition-labels/"],
+    ["Hard","Candy","135","https://leetcode.com/problems/candy/"]
+  ]],
+
+  ["Intervals", [
+    ["Medium","Insert Interval","57","https://leetcode.com/problems/insert-interval/"],
+    ["Medium","Merge Intervals","56","https://leetcode.com/problems/merge-intervals/"],
+    ["Medium","Non-overlapping Intervals","435","https://leetcode.com/problems/non-overlapping-intervals/"],
+    ["Medium","Meeting Rooms","252","https://leetcode.com/problems/meeting-rooms/"],
+    ["Medium","Meeting Rooms II","253","https://leetcode.com/problems/meeting-rooms-ii/"],
+    ["Hard","Minimum Interval to Include Each Query","1851","https://leetcode.com/problems/minimum-interval-to-include-each-query/"]
+  ]],
+
+  ["Math & Geometry", [
+    ["Easy","Happy Number","202","https://leetcode.com/problems/happy-number/"],
+    ["Medium","Rotate Image","48","https://leetcode.com/problems/rotate-image/"],
+    ["Medium","Spiral Matrix","54","https://leetcode.com/problems/spiral-matrix/"],
+    ["Medium","Set Matrix Zeroes","73","https://leetcode.com/problems/set-matrix-zeroes/"],
+    ["Medium","Pow(x, n)","50","https://leetcode.com/problems/powx-n/"]
+  ]],
+
+  ["Bit Manipulation", [
+    ["Easy","Single Number","136","https://leetcode.com/problems/single-number/"],
+    ["Easy","Number of 1 Bits","191","https://leetcode.com/problems/number-of-1-bits/"],
+    ["Easy","Counting Bits","338","https://leetcode.com/problems/counting-bits/"],
+    ["Easy","Reverse Bits","190","https://leetcode.com/problems/reverse-bits/"],
+    ["Easy","Missing Number","268","https://leetcode.com/problems/missing-number/"],
+    ["Medium","Sum of Two Integers","371","https://leetcode.com/problems/sum-of-two-integers/"],
+    ["Medium","Reverse Integer","7","https://leetcode.com/problems/reverse-integer/"]
+  ]]
+];
+
+// STATE STORAGE FOR BOTH USERS (RANI & SWAROOP)
+let appState = {
+  activeUser: 'Swaroop',
+  currentFilter: 'all',
+  searchQuery: '',
+  calendarCurrentDate: new Date(2026, 7, 30),
+  startDate: '2026-08-30',
+  targetDeadline: '2026-10-15',
+  users: {
+    Swaroop: { progress: {} },
+    Rani: { progress: {} }
+  }
+};
+
+function slug(topic, num) {
+  return (topic + '-' + num).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+}
+
+function formatDate(d) {
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function parseDate(str) {
+  const [y, m, d] = str.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function addDays(d, days) {
+  const res = new Date(d);
+  res.setDate(res.getDate() + days);
+  return res;
+}
+
+function formatPrettyDate(dateObj) {
+  return dateObj.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+}
+
+// STORAGE
+function loadState() {
+  try {
+    const raw = localStorage.getItem('dsa_dual_app_v3');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed.users) appState.users = parsed.users;
+      if (parsed.activeUser) appState.activeUser = parsed.activeUser;
+      if (parsed.startDate) appState.startDate = parsed.startDate;
+      if (parsed.targetDeadline) appState.targetDeadline = parsed.targetDeadline;
+    }
+  } catch (e) { console.error('Load failed', e); }
+
+  document.getElementById('schedule-start-input').value = appState.startDate;
+  document.getElementById('schedule-deadline-input').value = appState.targetDeadline;
+  updateActiveUserUI();
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('dsa_dual_app_v3', JSON.stringify({
+      activeUser: appState.activeUser,
+      startDate: appState.startDate,
+      targetDeadline: appState.targetDeadline,
+      users: appState.users
+    }));
+  } catch (e) { console.error('Save failed', e); }
+}
+
+function setActiveUser(user) {
+  appState.activeUser = user;
+  saveState();
+  updateActiveUserUI();
+  render();
+}
+
+function updateActiveUserUI() {
+  const isSwaroop = appState.activeUser === 'Swaroop';
+  document.getElementById('user-btn-swaroop').className = `user-btn ${isSwaroop ? 'active-swaroop' : ''}`;
+  document.getElementById('user-btn-rani').className = `user-btn ${!isSwaroop ? 'active-rani' : ''}`;
+
+  document.getElementById('card-swaroop').classList.toggle('is-active-user', isSwaroop);
+  document.getElementById('card-rani').classList.toggle('is-active-user', !isSwaroop);
+
+  document.getElementById('swaroop-status-badge').textContent = isSwaroop ? 'Active User' : 'Partner';
+  document.getElementById('rani-status-badge').textContent = !isSwaroop ? 'Active User' : 'Partner';
+
+  document.documentElement.style.setProperty('--accent', isSwaroop ? 'var(--swaroop-color)' : 'var(--rani-color)');
+  document.documentElement.style.setProperty('--accent-light', isSwaroop ? 'var(--swaroop-bg)' : 'var(--rani-bg)');
+  document.documentElement.style.setProperty('--accent-border', isSwaroop ? 'var(--swaroop-border)' : 'var(--rani-border)');
+}
+
+// HARDNESS POINTS
+function computeTopicPoints(probs) {
+  let pts = 0;
+  probs.forEach(([diff]) => {
+    if (diff === 'Easy') pts += 1.0;
+    else if (diff === 'Medium') pts += 2.5;
+    else if (diff === 'Hard') pts += 4.5;
+  });
+  return pts;
+}
+
+// ADAPTIVE BUFFER ALLOCATION ALGORITHM:
+// ANCHORS FINAL DEADLINE TO OCT 15. EARLY FINISH EXPANDS DAYS FOR REMAINING TOPICS!
+function calculateScheduleForUser(userName) {
+  const userObj = appState.users[userName] || { progress: {} };
+  const finalDeadline = parseDate(appState.targetDeadline);
+  let scheduleMap = [];
+
+  let completedTopics = [];
+  let incompleteTopics = [];
+
+  DATA.forEach(([topic, probs], idx) => {
+    const pts = computeTopicPoints(probs);
+    const completedProbs = probs.filter(([,,num]) => userObj.progress[slug(topic, num)]?.done);
+    const isDone = completedProbs.length === probs.length;
+
+    let actualCompletionDate = null;
+    if (isDone) {
+      let maxDate = null;
+      probs.forEach(([,,num]) => {
+        const item = userObj.progress[slug(topic, num)];
+        if (item && item.date) {
+          if (!maxDate || item.date > maxDate) maxDate = item.date;
+        }
+      });
+      actualCompletionDate = maxDate ? parseDate(maxDate) : new Date();
+    }
+
+    const topicData = {
+      idx,
+      topic,
+      probs,
+      pts,
+      doneCount: completedProbs.length,
+      isDone,
+      actualCompletionDate
+    };
+
+    if (isDone) completedTopics.push(topicData);
+    else incompleteTopics.push(topicData);
+  });
+
+  let lastCompletedDate = parseDate(appState.startDate);
+  completedTopics.forEach(t => {
+    if (t.actualCompletionDate && t.actualCompletionDate > lastCompletedDate) {
+      lastCompletedDate = new Date(t.actualCompletionDate);
+    }
+  });
+
+  const remainingDaysTotal = Math.max(incompleteTopics.length, Math.round((finalDeadline.getTime() - lastCompletedDate.getTime()) / (1000 * 3600 * 24)));
+  const remainingPoints = incompleteTopics.reduce((sum, t) => sum + t.pts, 0) || 1;
+
+  const totalSheetPoints = DATA.reduce((sum, [, probs]) => sum + computeTopicPoints(probs), 0);
+  const totalSheetDays = Math.max(17, Math.round((finalDeadline.getTime() - parseDate(appState.startDate).getTime()) / (1000 * 3600 * 24)));
+
+  let runningDate = parseDate(appState.startDate);
+
+  DATA.forEach(([topic, probs], idx) => {
+    const pts = computeTopicPoints(probs);
+    const completedProbs = probs.filter(([,,num]) => userObj.progress[slug(topic, num)]?.done);
+    const isDone = completedProbs.length === probs.length;
+
+    const baseDays = (pts / totalSheetPoints) * totalSheetDays;
+
+    if (isDone) {
+      let actualDate = null;
+      let maxDateStr = null;
+      probs.forEach(([,,num]) => {
+        const item = userObj.progress[slug(topic, num)];
+        if (item && item.date) {
+          if (!maxDateStr || item.date > maxDateStr) maxDateStr = item.date;
+        }
+      });
+      actualDate = maxDateStr ? parseDate(maxDateStr) : runningDate;
+
+      scheduleMap.push({
+        topic,
+        totalProbs: probs.length,
+        doneCount: completedProbs.length,
+        isDone: true,
+        estDays: Math.round(baseDays * 10) / 10,
+        targetEndDate: actualDate,
+        isExpanded: false,
+        extraBufferDays: 0
+      });
+
+      runningDate = new Date(actualDate);
+    } else {
+      const allocatedDays = Math.max(1, (pts / remainingPoints) * remainingDaysTotal);
+      const extraBuffer = Math.round((allocatedDays - baseDays) * 10) / 10;
+      
+      const topicStartDate = new Date(runningDate);
+      const topicEndDate = addDays(topicStartDate, Math.max(1, Math.round(allocatedDays)));
+
+      scheduleMap.push({
+        topic,
+        totalProbs: probs.length,
+        doneCount: completedProbs.length,
+        isDone: false,
+        estDays: Math.round(allocatedDays * 10) / 10,
+        baseDays: Math.round(baseDays * 10) / 10,
+        targetEndDate: (idx === DATA.length - 1) ? finalDeadline : topicEndDate,
+        isExpanded: extraBuffer > 0.2,
+        extraBufferDays: extraBuffer
+      });
+
+      runningDate = new Date(topicEndDate);
+    }
+  });
+
+  return scheduleMap;
+}
+
+function computeUserStats(userName) {
+  const userObj = appState.users[userName] || { progress: {} };
+  let totalProbs = 0;
+  let solvedProbs = 0;
+  let activityDates = {};
+
+  DATA.forEach(([topic, probs]) => {
+    probs.forEach(([,,num]) => {
+      totalProbs++;
+      const item = userObj.progress[slug(topic, num)];
+      if (item && item.done) {
+        solvedProbs++;
+        if (item.date) activityDates[item.date] = (activityDates[item.date] || 0) + 1;
+      }
+    });
+  });
+
+  let streak = 0;
+  let checkDate = new Date();
+  while (true) {
+    const dStr = formatDate(checkDate);
+    if (activityDates[dStr] && activityDates[dStr] > 0) {
+      streak++;
+      checkDate = addDays(checkDate, -1);
+    } else if (dStr === formatDate(new Date())) {
+      checkDate = addDays(checkDate, -1);
+      const yStr = formatDate(checkDate);
+      if (activityDates[yStr] && activityDates[yStr] > 0) {
+      } else { break; }
+    } else { break; }
+  }
+
+  const sched = calculateScheduleForUser(userName);
+  const estFinish = formatPrettyDate(parseDate(appState.targetDeadline));
+
+  return { totalProbs, solvedProbs, streak, estFinish, activityDates, sched };
+}
+
+// MAIN RENDER
+function render() {
+  const swaroopStats = computeUserStats('Swaroop');
+  const raniStats = computeUserStats('Rani');
+
+  document.getElementById('swaroop-solved').textContent = `${swaroopStats.solvedProbs} / ${swaroopStats.totalProbs}`;
+  document.getElementById('swaroop-streak').textContent = `${swaroopStats.streak} 🔥`;
+  document.getElementById('swaroop-finish').textContent = swaroopStats.estFinish;
+  const sPct = swaroopStats.totalProbs ? Math.round(swaroopStats.solvedProbs / swaroopStats.totalProbs * 100) : 0;
+  document.getElementById('swaroop-pct').textContent = sPct + '%';
+  document.getElementById('swaroop-bar').style.width = sPct + '%';
+
+  document.getElementById('rani-solved').textContent = `${raniStats.solvedProbs} / ${raniStats.totalProbs}`;
+  document.getElementById('rani-streak').textContent = `${raniStats.streak} 🔥`;
+  document.getElementById('rani-finish').textContent = raniStats.estFinish;
+  const rPct = raniStats.totalProbs ? Math.round(raniStats.solvedProbs / raniStats.totalProbs * 100) : 0;
+  document.getElementById('rani-pct').textContent = rPct + '%';
+  document.getElementById('rani-bar').style.width = rPct + '%';
+
+  const activeStats = appState.activeUser === 'Swaroop' ? swaroopStats : raniStats;
+
+  const topicsContainer = document.getElementById('topics-container');
+  topicsContainer.innerHTML = '';
+
+  const q = appState.searchQuery.toLowerCase();
+
+  DATA.forEach(([topic, probs], idx) => {
+    const sSched = swaroopStats.sched[idx];
+    const rSched = raniStats.sched[idx];
+    const activeSched = activeStats.sched[idx];
+
+    const matchingProbs = probs.filter(([diff, title, num]) => {
+      const sDone = !!appState.users.Swaroop.progress[slug(topic, num)]?.done;
+      const rDone = !!appState.users.Rani.progress[slug(topic, num)]?.done;
+      const myDone = appState.activeUser === 'Swaroop' ? sDone : rDone;
+
+      const matchesSearch = !q || title.toLowerCase().includes(q) || topic.toLowerCase().includes(q) || num.includes(q);
+      
+      let matchesFilter = true;
+      if (appState.currentFilter === 'Easy' || appState.currentFilter === 'Medium' || appState.currentFilter === 'Hard') {
+        matchesFilter = (diff === appState.currentFilter);
+      } else if (appState.currentFilter === 'unsolved-me') {
+        matchesFilter = !myDone;
+      } else if (appState.currentFilter === 'both-done') {
+        matchesFilter = (sDone && rDone);
+      }
+      return matchesSearch && matchesFilter;
+    });
+
+    if (matchingProbs.length === 0 && (q || appState.currentFilter !== 'all')) return;
+
+    const card = document.createElement('div');
+    card.className = `topic-card ${activeSched.isDone ? 'open' : ''}`;
+
+    const targetDateStr = formatPrettyDate(activeSched.targetEndDate);
+
+    let statusTagHTML = '';
+    if (activeSched.isDone) {
+      statusTagHTML = `<span class="status-tag done">✓ Completed</span>`;
+    } else if (activeSched.isExpanded && activeSched.extraBufferDays > 0) {
+      statusTagHTML = `<span class="status-tag expanded">⏱️ +${activeSched.extraBufferDays}d Buffer (${activeSched.estDays}d)</span>`;
+    } else {
+      statusTagHTML = `<span class="status-tag ontrack">${Math.round(activeSched.estDays)} Days</span>`;
+    }
+
+    card.innerHTML = `
+      <div class="topic-header">
+        <div class="topic-title-group">
+          <span class="topic-title">${topic}</span>
+          <div class="topic-user-progress-badges">
+            <span class="u-badge swaroop">🦊 S: ${sSched.doneCount}/${probs.length}</span>
+            <span class="u-badge rani">🌸 R: ${rSched.doneCount}/${probs.length}</span>
+          </div>
+        </div>
+        <div class="topic-schedule-meta">
+          <div class="target-date-box">
+            <span class="target-date-label">Target Date</span>
+            <span class="target-date-val">${targetDateStr}</span>
+          </div>
+          ${statusTagHTML}
+          <span class="topic-chevron">▶</span>
+        </div>
+      </div>
+      <div class="problems-list"></div>
+    `;
+
+    card.querySelector('.topic-header').onclick = () => card.classList.toggle('open');
+    const listEl = card.querySelector('.problems-list');
+
+    matchingProbs.forEach(([diff, title, num, link]) => {
+      const key = slug(topic, num);
+      const sItem = appState.users.Swaroop.progress[key] || {};
+      const rItem = appState.users.Rani.progress[key] || {};
+      const isSDone = !!sItem.done;
+      const isRDone = !!rItem.done;
+
+      const row = document.createElement('div');
+      row.className = 'problem-row';
+
+      row.innerHTML = `
+        <div class="partner-checkboxes">
+          <label class="user-check-wrap swaroop" title="Swaroop">
+            <input type="checkbox" ${isSDone ? 'checked' : ''} data-user="Swaroop" data-key="${key}">
+            <span>🦊 S</span>
+          </label>
+          <label class="user-check-wrap rani" title="Rani">
+            <input type="checkbox" ${isRDone ? 'checked' : ''} data-user="Rani" data-key="${key}">
+            <span>🌸 R</span>
+          </label>
+        </div>
+
+        <span class="problem-num">#${num}</span>
+        <span class="problem-title"><a href="${link}" target="_blank" rel="noopener">${title}</a></span>
+        <span class="diff-badge ${diff}">${diff}</span>
+
+        <div class="status-badges-group">
+          ${isSDone ? `<span class="solved-pill swaroop">🦊 ${sItem.date ? sItem.date.slice(5) : '✓'}</span>` : ''}
+          ${isRDone ? `<span class="solved-pill rani">🌸 ${rItem.date ? rItem.date.slice(5) : '✓'}</span>` : ''}
+        </div>
+      `;
+
+      row.querySelectorAll('input[type="checkbox"]').forEach(input => {
+        input.addEventListener('change', (e) => {
+          const user = e.target.dataset.user;
+          const k = e.target.dataset.key;
+          const isChecked = e.target.checked;
+
+          if (isChecked) {
+            appState.users[user].progress[k] = { done: true, date: formatDate(new Date()) };
+          } else {
+            appState.users[user].progress[k] = { done: false, date: null };
+          }
+          saveState();
+          render();
+        });
+      });
+
+      listEl.appendChild(row);
+    });
+
+    topicsContainer.appendChild(card);
+  });
+
+  renderCalendar(swaroopStats, raniStats);
+  renderActivityLog();
+}
+
+// CALENDAR
+function renderCalendar(swaroopStats, raniStats) {
+  const grid = document.getElementById('calendar-grid');
+  grid.innerHTML = '';
+
+  const curr = appState.calendarCurrentDate;
+  const year = curr.getFullYear();
+  const month = curr.getMonth();
+
+  document.getElementById('calendar-month-title').textContent = curr.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+  ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'day-name';
+    el.textContent = d;
+    grid.appendChild(el);
+  });
+
+  const firstDayOfMonth = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const prevMonthDays = new Date(year, month, 0).getDate();
+
+  for (let i = firstDayOfMonth - 1; i >= 0; i--) {
+    const cell = document.createElement('div');
+    cell.className = 'calendar-day other-month';
+    cell.innerHTML = `<span class="day-num">${prevMonthDays - i}</span>`;
+    grid.appendChild(cell);
+  }
+
+  const todayStr = formatDate(new Date());
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cellDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const cell = document.createElement('div');
+    cell.className = 'calendar-day';
+    if (cellDateStr === todayStr) cell.classList.add('today');
+
+    let sCount = 0;
+    let rCount = 0;
+    let details = { swaroop: [], rani: [] };
+
+    DATA.forEach(([topic, probs]) => {
+      probs.forEach(([diff, title, num]) => {
+        const k = slug(topic, num);
+        const sIt = appState.users.Swaroop.progress[k];
+        const rIt = appState.users.Rani.progress[k];
+
+        if (sIt && sIt.done && sIt.date === cellDateStr) {
+          sCount++;
+          details.swaroop.push({ topic, title, num, diff });
+        }
+        if (rIt && rIt.done && rIt.date === cellDateStr) {
+          rCount++;
+          details.rani.push({ topic, title, num, diff });
+        }
+      });
+    });
+
+    cell.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span class="day-num">${d}</span>
+      </div>
+      <div class="day-partner-badges">
+        ${sCount ? `<span class="day-u-pill swaroop">🦊 S: ${sCount}</span>` : ''}
+        ${rCount ? `<span class="day-u-pill rani">🌸 R: ${rCount}</span>` : ''}
+      </div>
+    `;
+
+    cell.onclick = () => showDayModal(cellDateStr, details);
+    grid.appendChild(cell);
+  }
+}
+
+// ACTIVITY LOG
+function renderActivityLog() {
+  const logContainer = document.getElementById('activity-log-list');
+  logContainer.innerHTML = '';
+
+  let entries = [];
+  ['Swaroop', 'Rani'].forEach(u => {
+    const uObj = appState.users[u];
+    DATA.forEach(([topic, probs]) => {
+      probs.forEach(([diff, title, num]) => {
+        const item = uObj.progress[slug(topic, num)];
+        if (item && item.done && item.date) {
+          entries.push({ user: u, topic, title, num, diff, date: item.date });
+        }
+      });
+    });
+  });
+
+  entries.sort((a, b) => b.date.localeCompare(a.date));
+
+  if (entries.length === 0) {
+    logContainer.innerHTML = `<div style="color:var(--text-light); font-size:13px; text-align:center; padding:20px 0;">No partner activity logged yet.</div>`;
+    return;
+  }
+
+  entries.slice(0, 12).forEach(e => {
+    const isS = e.user === 'Swaroop';
+    const item = document.createElement('div');
+    item.className = 'log-item';
+    item.innerHTML = `
+      <div class="log-date">📅 ${e.date} • <strong style="color:${isS ? 'var(--swaroop-color)' : 'var(--rani-color)'}">${isS ? '🦊 Swaroop' : '🌸 Rani'}</strong></div>
+      <div class="log-desc">Solved <strong>#${e.num} ${e.title}</strong></div>
+      <span style="font-size:10.5px; color:var(--text-muted); background:var(--bg-alt); padding:2px 6px; border-radius:4px; margin-top:4px; display:inline-block;">${e.topic}</span>
+    `;
+    logContainer.appendChild(item);
+  });
+}
+
+// MODAL CONTROLS
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+function showDayModal(dateStr, details) {
+  document.getElementById('modal-date-title').textContent = `Activity on ${dateStr}`;
+  const modalBody = document.getElementById('modal-body-content');
+
+  const sLen = details.swaroop.length;
+  const rLen = details.rani.length;
+
+  if (sLen === 0 && rLen === 0) {
+    modalBody.innerHTML = `<p style="color:var(--text-muted); font-size:13.5px;">No problems solved on this date by either partner.</p>`;
+  } else {
+    modalBody.innerHTML = `
+      <div style="margin-bottom:16px;">
+        <h4 style="color:var(--swaroop-color); font-size:14px; margin-bottom:6px;">🦊 Swaroop (${sLen} solved):</h4>
+        ${sLen === 0 ? '<div style="font-size:12px; color:var(--text-light);">No problems solved.</div>' : `
+          <ul style="list-style:none;">
+            ${details.swaroop.map(it => `
+              <li style="font-size:12.5px; padding:4px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between;">
+                <span>#${it.num} ${it.title}</span>
+                <span class="diff-badge ${it.diff}">${it.diff}</span>
+              </li>
+            `).join('')}
+          </ul>
+        `}
+      </div>
+
+      <div>
+        <h4 style="color:var(--rani-color); font-size:14px; margin-bottom:6px;">🌸 Rani (${rLen} solved):</h4>
+        ${rLen === 0 ? '<div style="font-size:12px; color:var(--text-light);">No problems solved.</div>' : `
+          <ul style="list-style:none;">
+            ${details.rani.map(it => `
+              <li style="font-size:12.5px; padding:4px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between;">
+                <span>#${it.num} ${it.title}</span>
+                <span class="diff-badge ${it.diff}">${it.diff}</span>
+              </li>
+            `).join('')}
+          </ul>
+        `}
+      </div>
+    `;
+  }
+
+  document.getElementById('day-modal').classList.add('open');
+}
+
+// SYNC & DATA SHARING
+document.getElementById('open-sync-btn').addEventListener('click', () => {
+  document.getElementById('sync-code-area').value = JSON.stringify(appState.users, null, 2);
+  document.getElementById('sync-modal').classList.add('open');
+});
+
+function copySyncData() {
+  const code = JSON.stringify(appState.users);
+  navigator.clipboard.writeText(code).then(() => {
+    alert('Sync Code copied to clipboard! Send this code to Rani/Swaroop.');
+  }).catch(() => {
+    const el = document.getElementById('sync-code-area');
+    el.select();
+    document.execCommand('copy');
+    alert('Sync Code selected and copied!');
+  });
+}
+
+function mergeSyncData() {
+  const raw = document.getElementById('sync-code-area').value.trim();
+  try {
+    const parsed = JSON.parse(raw);
+    if (parsed.Swaroop && parsed.Rani) {
+      appState.users.Swaroop.progress = { ...appState.users.Swaroop.progress, ...parsed.Swaroop.progress };
+      appState.users.Rani.progress = { ...appState.users.Rani.progress, ...parsed.Rani.progress };
+      saveState();
+      render();
+      closeModal('sync-modal');
+      alert('Successfully merged Rani & Swaroop progress data!');
+    } else {
+      alert('Invalid sync data format. Please make sure the JSON contains Swaroop and Rani profiles.');
+    }
+  } catch (e) {
+    alert('Could not parse sync code. Please check and try again.');
+  }
+}
+
+// EVENT LISTENERS
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.view-pane').forEach(p => p.classList.remove('active'));
+    
+    btn.classList.add('active');
+    const tabId = btn.dataset.tab;
+    document.getElementById(tabId).classList.add('active');
+  });
+});
+
+document.getElementById('schedule-start-input').addEventListener('change', (e) => {
+  appState.startDate = e.target.value;
+  saveState();
+  render();
+});
+
+document.getElementById('schedule-deadline-input').addEventListener('change', (e) => {
+  appState.targetDeadline = e.target.value;
+  saveState();
+  render();
+});
+
+document.getElementById('search-input').addEventListener('input', (e) => {
+  appState.searchQuery = e.target.value;
+  render();
+});
+
+document.getElementById('diff-filters').addEventListener('click', (e) => {
+  if (e.target.tagName !== 'BUTTON') return;
+  document.querySelectorAll('#diff-filters .filter-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  appState.currentFilter = e.target.dataset.filter;
+  render();
+});
+
+document.getElementById('prev-month-btn').addEventListener('click', () => {
+  appState.calendarCurrentDate.setMonth(appState.calendarCurrentDate.getMonth() - 1);
+  renderCalendar(computeUserStats('Swaroop'), computeUserStats('Rani'));
+});
+
+document.getElementById('next-month-btn').addEventListener('click', () => {
+  appState.calendarCurrentDate.setMonth(appState.calendarCurrentDate.getMonth() + 1);
+  renderCalendar(computeUserStats('Swaroop'), computeUserStats('Rani'));
+});
+
+// INITIALIZE
+loadState();
+render();
+</script>
+</body>
+</html>
