@@ -543,7 +543,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 20px;
+    padding: 14px 20px;
     cursor: pointer;
     user-select: none;
     background: var(--card-subtle);
@@ -559,6 +559,17 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .topic-master-checks {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-alt);
+    padding: 3px 8px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
   }
 
   .topic-title {
@@ -1918,10 +1929,26 @@ function render() {
       statusTagHTML = `<span class="status-tag ontrack">${Math.round(activeSched.estDays)} Days</span>`;
     }
 
+    const isSAllDone = (sSched.doneCount === probs.length && probs.length > 0);
+    const isRAllDone = (rSched.doneCount === probs.length && probs.length > 0);
+
     card.innerHTML = `
       <div class="topic-header">
         <div class="topic-title-group">
+          <!-- Topic Master Checkboxes for Swaroop & Rani -->
+          <div class="topic-master-checks" title="Mark entire topic complete">
+            <label class="user-check-wrap swaroop" title="Mark whole topic for Swaroop">
+              <input type="checkbox" class="topic-master-check" data-topic="${topic}" data-user="Swaroop" ${isSAllDone ? 'checked' : ''}>
+              <span>🦊 S</span>
+            </label>
+            <label class="user-check-wrap rani" title="Mark whole topic for Rani">
+              <input type="checkbox" class="topic-master-check" data-topic="${topic}" data-user="Rani" ${isRAllDone ? 'checked' : ''}>
+              <span>🌸 R</span>
+            </label>
+          </div>
+
           <span class="topic-title">${topic}</span>
+
           <div class="topic-user-progress-badges">
             <span class="u-badge swaroop">🦊 S: ${sSched.doneCount}/${probs.length}</span>
             <span class="u-badge rani">🌸 R: ${rSched.doneCount}/${probs.length}</span>
@@ -1939,7 +1966,47 @@ function render() {
       <div class="problems-list"></div>
     `;
 
-    card.querySelector('.topic-header').onclick = () => {
+    // Set indeterminate states
+    const sMaster = card.querySelector('.topic-master-check[data-user="Swaroop"]');
+    if (sMaster && sSched.doneCount > 0 && sSched.doneCount < probs.length) {
+      sMaster.indeterminate = true;
+    }
+    const rMaster = card.querySelector('.topic-master-check[data-user="Rani"]');
+    if (rMaster && rSched.doneCount > 0 && rSched.doneCount < probs.length) {
+      rMaster.indeterminate = true;
+    }
+
+    // Toggle entire topic on master check
+    card.querySelectorAll('.topic-master-check').forEach(masterInput => {
+      masterInput.addEventListener('click', (e) => e.stopPropagation());
+      masterInput.addEventListener('change', (e) => {
+        e.stopPropagation();
+        const user = e.target.dataset.user;
+        const top = e.target.dataset.topic;
+        const isChecked = e.target.checked;
+        const todayStr = formatDate(new Date());
+
+        const targetTopicData = DATA.find(([t]) => t === top);
+        if (targetTopicData) {
+          const [, pList] = targetTopicData;
+          pList.forEach(([,, num]) => {
+            const k = slug(top, num);
+            if (isChecked) {
+              appState.users[user].progress[k] = { done: true, date: todayStr };
+            } else {
+              appState.users[user].progress[k] = { done: false, date: null };
+            }
+          });
+        }
+
+        openTopics.add(top);
+        saveState();
+        render();
+      });
+    });
+
+    card.querySelector('.topic-header').onclick = (e) => {
+      if (e.target.closest('.topic-master-checks')) return;
       if (openTopics.has(topic)) {
         openTopics.delete(topic);
         card.classList.remove('open');
