@@ -26,16 +26,16 @@
     --text-muted: #7A695A;
     --text-light: #A39180;
     
-    --brown-dark: #3D261D;    /* Deep Chocolate */
+    --brown-dark: #3D261D;
     --brown-medium: #6E473B;
     --brown-light: #EFE4D8;
     
     /* User Colors */
-    --swaroop-color: #D96B27;       /* Warm Terracotta */
+    --swaroop-color: #D96B27;
     --swaroop-bg: #FDF0E6;
     --swaroop-border: #F7D4BD;
     
-    --rani-color: #D94E6B;          /* Warm Rose / Coral */
+    --rani-color: #D94E6B;
     --rani-bg: #FDF0F3;
     --rani-border: #F7D0D8;
     
@@ -79,7 +79,6 @@
     padding-bottom: 60px;
   }
 
-  /* Container */
   .container {
     max-width: 1180px;
     margin: 0 auto;
@@ -380,7 +379,7 @@
   }
 
   .p-stat-val {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 800;
     color: var(--brown-dark);
   }
@@ -537,6 +536,15 @@
     margin-bottom: 16px;
     box-shadow: var(--shadow-sm);
     overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .topic-card.is-overdue {
+    border-left: 5px solid #C62828;
+  }
+
+  .topic-card.is-due-soon {
+    border-left: 5px solid #C07000;
   }
 
   .topic-header {
@@ -620,13 +628,46 @@
     font-family: 'JetBrains Mono', monospace;
   }
 
+  .target-date-val.overdue {
+    color: #C62828;
+    font-weight: 800;
+  }
+
+  .target-date-val.due-soon {
+    color: #C07000;
+    font-weight: 800;
+  }
+
+  /* Status Tags with Red / Yellow Warnings */
   .status-tag {
     font-size: 11px;
     font-weight: 700;
-    padding: 3px 9px;
+    padding: 4px 10px;
     border-radius: var(--radius-full);
     text-transform: uppercase;
     letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .status-tag.overdue {
+    background: #FFEBEE;
+    color: #C62828;
+    border: 1px solid #FFCDD2;
+    animation: alert-glow 2s infinite;
+  }
+
+  .status-tag.due-soon {
+    background: #FFF8E1;
+    color: #C07000;
+    border: 1px solid #FFE082;
+  }
+
+  @keyframes alert-glow {
+    0% { box-shadow: 0 0 0 rgba(198, 40, 40, 0); }
+    50% { box-shadow: 0 0 8px rgba(198, 40, 40, 0.35); }
+    100% { box-shadow: 0 0 0 rgba(198, 40, 40, 0); }
   }
 
   .status-tag.ahead { background: #E8F5E9; color: #2D7A4D; }
@@ -1043,7 +1084,7 @@
   <header>
     <div class="brand">
       <h1><span class="logo-icon">✨</span> Rani & Swaroop DSA Tracker</h1>
-      <p>Target Deadline: <strong>October 15, 2026</strong> • Real-Time Dual Partner Live Sync 🎯</p>
+      <p>Target Deadline: <strong>October 15, 2026</strong> • Real-Time Dynamic Deadline Buffer 🎯</p>
     </div>
     
     <div class="header-actions">
@@ -1078,7 +1119,7 @@
       </div>
     </div>
     <div class="deadline-highlight-badge">
-      <span>⚡ Fixed Oct 15 Finish: Early completions add extra practice buffer to remaining topics!</span>
+      <span>🚨 Overdue = Auto-extends target without compressing subsequent topics!</span>
     </div>
   </div>
 
@@ -1091,7 +1132,7 @@
           <div class="partner-avatar swaroop">🦊</div>
           <div>
             <div class="partner-name">Swaroop's Progress</div>
-            <div style="font-size:11.5px; color:var(--text-muted);">Partner Target & Streak</div>
+            <div style="font-size:11.5px; color:var(--text-muted);" id="swaroop-schedule-status">Projected Finish Date</div>
           </div>
         </div>
         <span class="partner-status-badge" id="swaroop-status-badge" style="background:var(--swaroop-bg); color:var(--swaroop-color);">Active User</span>
@@ -1107,8 +1148,8 @@
           <div class="p-stat-lbl">Streak</div>
         </div>
         <div class="p-stat-item">
-          <div class="p-stat-val" id="swaroop-finish">Oct 15, 2026</div>
-          <div class="p-stat-lbl">Final Finish</div>
+          <div class="p-stat-val" id="swaroop-finish" style="font-size:13.5px;">Oct 15, 2026</div>
+          <div class="p-stat-lbl">Live Projected Finish</div>
         </div>
       </div>
 
@@ -1128,7 +1169,7 @@
           <div class="partner-avatar rani">🌸</div>
           <div>
             <div class="partner-name">Rani's Progress</div>
-            <div style="font-size:11.5px; color:var(--text-muted);">Partner Target & Streak</div>
+            <div style="font-size:11.5px; color:var(--text-muted);" id="rani-schedule-status">Projected Finish Date</div>
           </div>
         </div>
         <span class="partner-status-badge" id="rani-status-badge" style="background:var(--rani-bg); color:var(--rani-color);">Partner</span>
@@ -1144,8 +1185,8 @@
           <div class="p-stat-lbl">Streak</div>
         </div>
         <div class="p-stat-item">
-          <div class="p-stat-val" id="rani-finish">Oct 15, 2026</div>
-          <div class="p-stat-lbl">Final Finish</div>
+          <div class="p-stat-val" id="rani-finish" style="font-size:13.5px;">Oct 15, 2026</div>
+          <div class="p-stat-lbl">Live Projected Finish</div>
         </div>
       </div>
 
@@ -1161,7 +1202,7 @@
 
   <!-- Navigation Tabs -->
   <div class="nav-tabs">
-    <button class="tab-btn active" data-tab="sheet-view">📋 Dual Practice Sheet & Dynamic Buffer Targets</button>
+    <button class="tab-btn active" data-tab="sheet-view">📋 Dual Practice Sheet & Urgency Trackers</button>
     <button class="tab-btn" data-tab="calendar-view">📅 Joint Activity Calendar & Daily Check-in</button>
   </div>
 
@@ -1183,7 +1224,7 @@
 
     <!-- Cascade Notice -->
     <div class="cascade-banner">
-      <div>⚡ <strong>Adaptive Buffer Expansion:</strong> The final sheet date is fixed at <strong>Oct 15</strong>. Whenever you complete a topic early, the saved days automatically expand the practice time allocated to all remaining harder topics!</div>
+      <div>⚡ <strong>Adaptive Color-Coded Deadline Alert:</strong> 🟢 <strong>Green</strong> = Completed • 🟡 <strong>Yellow</strong> = Due within 1 Day / Today • 🔴 <strong>Red</strong> = Overdue deadline (automatically shifts overall finish date forward to keep later topics healthy!)</div>
     </div>
 
     <div id="topics-container"></div>
@@ -1603,7 +1644,6 @@ function initFirebase() {
     const db = firebase.database();
     firebaseDbRef = db.ref('dsa_tracker_live');
 
-    // Attach real-time listener: fires whenever Rani or Swaroop makes a change!
     firebaseDbRef.on('value', (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -1619,7 +1659,6 @@ function initFirebase() {
         saveLocalBackup();
         render();
       } else {
-        // Initial push if cloud database is empty
         saveState();
       }
       isFirebaseConnected = true;
@@ -1667,7 +1706,7 @@ function saveAndConnectFirebase() {
     alert('Firebase Configuration saved! Reconnecting...');
     location.reload();
   } catch (e) {
-    alert('Invalid JSON format for Firebase config. Please check quotes and commas.');
+    alert('Invalid JSON format for Firebase config.');
   }
 }
 
@@ -1713,10 +1752,16 @@ function computeTopicPoints(probs) {
   return pts;
 }
 
-// ADAPTIVE BUFFER ALLOCATION ALGORITHM:
+// ADAPTIVE DYNAMIC DEADLINE ALGORITHM:
+// Handles:
+// 1. Early topic completion -> Saved buffer expands remaining topics to finish by Oct 15
+// 2. Overdue topic -> Extends overall deadline dynamically without squeezing downstream topics!
 function calculateScheduleForUser(userName) {
   const userObj = appState.users[userName] || { progress: {} };
-  const finalDeadline = parseDate(appState.targetDeadline);
+  const targetDeadline = parseDate(appState.targetDeadline);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
   let scheduleMap = [];
 
   let completedTopics = [];
@@ -1725,7 +1770,7 @@ function calculateScheduleForUser(userName) {
   DATA.forEach(([topic, probs], idx) => {
     const pts = computeTopicPoints(probs);
     const completedProbs = probs.filter(([,,num]) => userObj.progress[slug(topic, num)]?.done);
-    const isDone = completedProbs.length === probs.length;
+    const isDone = (completedProbs.length === probs.length && probs.length > 0);
 
     let actualCompletionDate = null;
     if (isDone) {
@@ -1753,6 +1798,9 @@ function calculateScheduleForUser(userName) {
     else incompleteTopics.push(topicData);
   });
 
+  const totalSheetPoints = DATA.reduce((sum, [, probs]) => sum + computeTopicPoints(probs), 0);
+  const totalSheetDays = Math.max(17, Math.round((targetDeadline.getTime() - parseDate(appState.startDate).getTime()) / (1000 * 3600 * 24)));
+
   let lastCompletedDate = parseDate(appState.startDate);
   completedTopics.forEach(t => {
     if (t.actualCompletionDate && t.actualCompletionDate > lastCompletedDate) {
@@ -1760,20 +1808,19 @@ function calculateScheduleForUser(userName) {
     }
   });
 
-  const remainingDaysTotal = Math.max(incompleteTopics.length, Math.round((finalDeadline.getTime() - lastCompletedDate.getTime()) / (1000 * 3600 * 24)));
-  const remainingPoints = incompleteTopics.reduce((sum, t) => sum + t.pts, 0) || 1;
+  // Base schedule start
+  let runningDate = new Date(lastCompletedDate);
 
-  const totalSheetPoints = DATA.reduce((sum, [, probs]) => sum + computeTopicPoints(probs), 0);
-  const totalSheetDays = Math.max(17, Math.round((finalDeadline.getTime() - parseDate(appState.startDate).getTime()) / (1000 * 3600 * 24)));
+  let hasOverdueTopic = false;
+  let overdueExtensionDays = 0;
 
-  let runningDate = parseDate(appState.startDate);
-
+  // Process all topics
   DATA.forEach(([topic, probs], idx) => {
     const pts = computeTopicPoints(probs);
     const completedProbs = probs.filter(([,,num]) => userObj.progress[slug(topic, num)]?.done);
-    const isDone = completedProbs.length === probs.length;
+    const isDone = (completedProbs.length === probs.length && probs.length > 0);
 
-    const baseDays = (pts / totalSheetPoints) * totalSheetDays;
+    const baseDays = Math.max(1, Math.round(((pts / totalSheetPoints) * totalSheetDays) * 10) / 10);
 
     if (isDone) {
       let actualDate = null;
@@ -1791,28 +1838,62 @@ function calculateScheduleForUser(userName) {
         totalProbs: probs.length,
         doneCount: completedProbs.length,
         isDone: true,
-        estDays: Math.round(baseDays * 10) / 10,
+        urgencyStatus: 'done', // done
+        estDays: baseDays,
         targetEndDate: actualDate,
         isExpanded: false,
-        extraBufferDays: 0
+        extraBufferDays: 0,
+        daysDifference: 0
       });
 
       runningDate = new Date(actualDate);
     } else {
-      const allocatedDays = Math.max(1, (pts / remainingPoints) * remainingDaysTotal);
-      const extraBuffer = Math.round((allocatedDays - baseDays) * 10) / 10;
+      // Calculate remaining days from current running date to targetDeadline
+      const remainingDaysTotal = Math.max(incompleteTopics.length, Math.round((targetDeadline.getTime() - runningDate.getTime()) / (1000 * 3600 * 24)));
+      const remainingPoints = incompleteTopics.reduce((sum, t) => sum + t.pts, 0) || 1;
+
+      let allocatedDays = Math.max(1, Math.round(((pts / remainingPoints) * remainingDaysTotal) * 10) / 10);
       
       const topicStartDate = new Date(runningDate);
-      const topicEndDate = addDays(topicStartDate, Math.max(1, Math.round(allocatedDays)));
+      let topicEndDate = addDays(topicStartDate, Math.max(1, Math.round(allocatedDays)));
+
+      // Calculate days difference relative to TODAY
+      const targetMidnight = new Date(topicEndDate);
+      targetMidnight.setHours(0, 0, 0, 0);
+      const diffFromToday = Math.round((targetMidnight.getTime() - today.getTime()) / (1000 * 3600 * 24));
+
+      let urgencyStatus = 'ontrack'; // ontrack | due-soon | overdue
+
+      if (diffFromToday < 0) {
+        // Topic has passed deadline without completion!
+        urgencyStatus = 'overdue';
+        hasOverdueTopic = true;
+        
+        // Auto-extend running date to today so future topics don't get squeezed!
+        const delayDays = Math.abs(diffFromToday);
+        overdueExtensionDays += delayDays;
+        
+        // Shift running date to today
+        runningDate = new Date(today);
+        topicEndDate = new Date(today);
+      } else if (diffFromToday === 0) {
+        urgencyStatus = 'due-today';
+      } else if (diffFromToday === 1) {
+        urgencyStatus = 'due-soon';
+      }
+
+      const extraBuffer = Math.round((allocatedDays - baseDays) * 10) / 10;
 
       scheduleMap.push({
         topic,
         totalProbs: probs.length,
         doneCount: completedProbs.length,
         isDone: false,
-        estDays: Math.round(allocatedDays * 10) / 10,
-        baseDays: Math.round(baseDays * 10) / 10,
-        targetEndDate: (idx === DATA.length - 1) ? finalDeadline : topicEndDate,
+        urgencyStatus,
+        daysDifference: diffFromToday,
+        estDays: allocatedDays,
+        baseDays: baseDays,
+        targetEndDate: topicEndDate,
         isExpanded: extraBuffer > 0.2,
         extraBufferDays: extraBuffer
       });
@@ -1821,7 +1902,10 @@ function calculateScheduleForUser(userName) {
     }
   });
 
-  return scheduleMap;
+  const projectedFinalDate = new Date(runningDate);
+  const finalProjectedFinish = (projectedFinalDate > targetDeadline) ? projectedFinalDate : targetDeadline;
+
+  return { scheduleMap, hasOverdueTopic, overdueExtensionDays, finalProjectedFinish };
 }
 
 function computeUserStats(userName) {
@@ -1856,10 +1940,10 @@ function computeUserStats(userName) {
     } else { break; }
   }
 
-  const sched = calculateScheduleForUser(userName);
-  const estFinish = formatPrettyDate(parseDate(appState.targetDeadline));
+  const { scheduleMap, hasOverdueTopic, finalProjectedFinish } = calculateScheduleForUser(userName);
+  const estFinish = formatPrettyDate(finalProjectedFinish);
 
-  return { totalProbs, solvedProbs, streak, estFinish, activityDates, sched };
+  return { totalProbs, solvedProbs, streak, estFinish, activityDates, sched: scheduleMap, hasOverdueTopic, finalProjectedFinish };
 }
 
 // MAIN RENDER
@@ -1869,14 +1953,34 @@ function render() {
 
   document.getElementById('swaroop-solved').textContent = `${swaroopStats.solvedProbs} / ${swaroopStats.totalProbs}`;
   document.getElementById('swaroop-streak').textContent = `${swaroopStats.streak} 🔥`;
-  document.getElementById('swaroop-finish').textContent = swaroopStats.estFinish;
+  
+  const sFinishEl = document.getElementById('swaroop-finish');
+  sFinishEl.textContent = swaroopStats.estFinish;
+  if (swaroopStats.hasOverdueTopic) {
+    sFinishEl.style.color = '#C62828';
+    document.getElementById('swaroop-schedule-status').textContent = '⚠️ Extended (Overdue Topic)';
+  } else {
+    sFinishEl.style.color = 'var(--brown-dark)';
+    document.getElementById('swaroop-schedule-status').textContent = '🎯 Target On Track';
+  }
+
   const sPct = swaroopStats.totalProbs ? Math.round(swaroopStats.solvedProbs / swaroopStats.totalProbs * 100) : 0;
   document.getElementById('swaroop-pct').textContent = sPct + '%';
   document.getElementById('swaroop-bar').style.width = sPct + '%';
 
   document.getElementById('rani-solved').textContent = `${raniStats.solvedProbs} / ${raniStats.totalProbs}`;
   document.getElementById('rani-streak').textContent = `${raniStats.streak} 🔥`;
-  document.getElementById('rani-finish').textContent = raniStats.estFinish;
+  
+  const rFinishEl = document.getElementById('rani-finish');
+  rFinishEl.textContent = raniStats.estFinish;
+  if (raniStats.hasOverdueTopic) {
+    rFinishEl.style.color = '#C62828';
+    document.getElementById('rani-schedule-status').textContent = '⚠️ Extended (Overdue Topic)';
+  } else {
+    rFinishEl.style.color = 'var(--brown-dark)';
+    document.getElementById('rani-schedule-status').textContent = '🎯 Target On Track';
+  }
+
   const rPct = raniStats.totalProbs ? Math.round(raniStats.solvedProbs / raniStats.totalProbs * 100) : 0;
   document.getElementById('rani-pct').textContent = rPct + '%';
   document.getElementById('rani-bar').style.width = rPct + '%';
@@ -1916,13 +2020,30 @@ function render() {
     const isTopicOpen = openTopics.has(topic) || (q.length > 0);
 
     const card = document.createElement('div');
-    card.className = `topic-card ${isTopicOpen ? 'open' : ''}`;
+    
+    let cardStatusClass = '';
+    if (activeSched.urgencyStatus === 'overdue') cardStatusClass = 'is-overdue';
+    else if (activeSched.urgencyStatus === 'due-soon' || activeSched.urgencyStatus === 'due-today') cardStatusClass = 'is-due-soon';
+
+    card.className = `topic-card ${cardStatusClass} ${isTopicOpen ? 'open' : ''}`;
 
     const targetDateStr = formatPrettyDate(activeSched.targetEndDate);
 
     let statusTagHTML = '';
+    let targetDateClass = '';
+
     if (activeSched.isDone) {
       statusTagHTML = `<span class="status-tag done">✓ Completed</span>`;
+    } else if (activeSched.urgencyStatus === 'overdue') {
+      const daysAgo = Math.abs(activeSched.daysDifference);
+      statusTagHTML = `<span class="status-tag overdue">🚨 Overdue (${daysAgo}d ago)</span>`;
+      targetDateClass = 'overdue';
+    } else if (activeSched.urgencyStatus === 'due-today') {
+      statusTagHTML = `<span class="status-tag due-soon">⚠️ Due Today!</span>`;
+      targetDateClass = 'due-soon';
+    } else if (activeSched.urgencyStatus === 'due-soon') {
+      statusTagHTML = `<span class="status-tag due-soon">⚠️ Due in 1 Day!</span>`;
+      targetDateClass = 'due-soon';
     } else if (activeSched.isExpanded && activeSched.extraBufferDays > 0) {
       statusTagHTML = `<span class="status-tag expanded">⏱️ +${activeSched.extraBufferDays}d Buffer (${activeSched.estDays}d)</span>`;
     } else {
@@ -1957,7 +2078,7 @@ function render() {
         <div class="topic-schedule-meta">
           <div class="target-date-box">
             <span class="target-date-label">Target Date</span>
-            <span class="target-date-val">${targetDateStr}</span>
+            <span class="target-date-val ${targetDateClass}">${targetDateStr}</span>
           </div>
           ${statusTagHTML}
           <span class="topic-chevron">▶</span>
