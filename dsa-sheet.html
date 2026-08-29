@@ -1039,7 +1039,7 @@
       <!-- Live Cloud Status Pill -->
       <div class="cloud-status-badge" id="cloud-status-badge" onclick="openFirebaseConfigModal()" title="Click to configure or view Live Firebase Cloud Sync">
         <span class="status-dot disconnected" id="cloud-status-dot"></span>
-        <span id="cloud-status-text">Cloud Sync: Local</span>
+        <span id="cloud-status-text">Cloud Sync: Connecting...</span>
         <span style="font-size:12px; opacity:0.8;">⚙️</span>
       </div>
 
@@ -1206,7 +1206,7 @@
   </div>
 
   <footer>
-    DSA Practice Sheet for Rani & Swaroop • Real-Time Firebase Cloud Sync Enabled 🚀
+    DSA Practice Sheet for Rani & Swaroop • Real-Time Firebase Cloud Sync Active 🚀
   </footer>
 </div>
 
@@ -1243,26 +1243,25 @@
 <div class="modal-overlay" id="firebase-modal">
   <div class="modal-box">
     <div class="modal-head">
-      <h3>🔥 Connect Real-Time Firebase Sync</h3>
+      <h3>🔥 Firebase Realtime Cloud Sync Settings</h3>
       <button class="close-modal" onclick="closeModal('firebase-modal')">&times;</button>
     </div>
     
     <div class="guide-step">
-      <strong>Quick 60-Second Setup:</strong><br>
-      1. Go to <a href="https://console.firebase.google.com/" target="_blank" rel="noopener" style="color:var(--swaroop-color); font-weight:700;">console.firebase.google.com</a> &amp; create a free project.<br>
-      2. Click <strong>Web (&lt;/&gt;)</strong> to register app &amp; copy your <code>firebaseConfig</code>.<br>
-      3. In Firebase left menu &rarr; <strong>Build &rarr; Realtime Database</strong> &rarr; Create Database &rarr; Start in <strong>Test mode</strong> (rules: <code>".read": true, ".write": true</code>).<br>
-      4. Paste your <code>firebaseConfig</code> object or Database URL below and click <strong>Save &amp; Connect</strong>!
+      <strong>Your Active Cloud Database:</strong><br>
+      Connected to project: <code>dsa4mpsb</code><br>
+      Realtime Database URL: <code>https://dsa4mpsb-default-rtdb.firebaseio.com</code><br>
+      <small style="color:var(--text-muted);">Make sure your Firebase Realtime Database rules in console are set to <code>".read": true, ".write": true</code>.</small>
     </div>
 
     <label style="font-size:12px; font-weight:700; color:var(--brown-dark); display:block; margin-top:8px;">
-      Paste <code>firebaseConfig</code> JSON:
+      Firebase Config JSON (Already Pre-Configured!):
     </label>
-    <textarea class="sync-textarea" id="firebase-config-area" placeholder='{\n  "apiKey": "AIzaSy...",\n  "authDomain": "...",\n  "databaseURL": "https://your-app-default-rtdb.firebaseio.com",\n  "projectId": "...",\n  "appId": "..."\n}'></textarea>
+    <textarea class="sync-textarea" id="firebase-config-area"></textarea>
 
     <div class="modal-btn-row">
-      <button class="sync-btn" onclick="disconnectFirebase()" style="color:#C62828;">Disconnect Cloud</button>
-      <button class="filter-btn active" onclick="saveAndConnectFirebase()">🚀 Save &amp; Connect Cloud</button>
+      <button class="sync-btn" onclick="disconnectFirebase()" style="color:#C62828;">Reset to Default</button>
+      <button class="filter-btn active" onclick="saveAndConnectFirebase()">🚀 Save &amp; Reconnect</button>
     </div>
   </div>
 </div>
@@ -1470,6 +1469,18 @@ const DATA = [
   ]]
 ];
 
+// USER'S PRE-CONFIGURED FIREBASE CONFIG
+const DEFAULT_FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAsd4a1d9WoIps_wbWtfMNTh77ar3TE6uM",
+  authDomain: "dsa4mpsb.firebaseapp.com",
+  databaseURL: "https://dsa4mpsb-default-rtdb.firebaseio.com",
+  projectId: "dsa4mpsb",
+  storageBucket: "dsa4mpsb.firebasestorage.app",
+  messagingSenderId: "477999510300",
+  appId: "1:477999510300:web:c0f4a4d7721e5854cc80d9",
+  measurementId: "G-KBBQSNFH93"
+};
+
 // STATE STORAGE FOR BOTH USERS (RANI & SWAROOP)
 let appState = {
   activeUser: 'Swaroop',
@@ -1534,7 +1545,7 @@ function loadState() {
   document.getElementById('schedule-deadline-input').value = appState.targetDeadline;
   updateActiveUserUI();
 
-  // Try initializing Firebase
+  // Initialize Firebase live cloud connection
   initFirebase();
 }
 
@@ -1568,14 +1579,13 @@ function saveState(skipCloud) {
 
 // FIREBASE INITIALIZATION & REALTIME LISTENER
 function initFirebase() {
-  const rawConfig = localStorage.getItem('dsa_firebase_config');
-  if (!rawConfig) {
-    updateCloudStatusBadge(false, 'Cloud: Local Mode');
-    return;
+  let config = DEFAULT_FIREBASE_CONFIG;
+  const customConfig = localStorage.getItem('dsa_firebase_config');
+  if (customConfig) {
+    try { config = JSON.parse(customConfig); } catch (e) {}
   }
 
   try {
-    const config = JSON.parse(rawConfig);
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
@@ -1597,17 +1607,20 @@ function initFirebase() {
         }
         saveLocalBackup();
         render();
+      } else {
+        // Initial push if cloud database is empty
+        saveState();
       }
       isFirebaseConnected = true;
       updateCloudStatusBadge(true, '🟢 Live Cloud Sync');
     }, (error) => {
-      console.error('Firebase read error:', error);
-      updateCloudStatusBadge(false, 'Cloud: Sync Error');
+      console.warn('Firebase connection check:', error.message);
+      updateCloudStatusBadge(false, 'Cloud: Rules Pending');
     });
 
   } catch (err) {
     console.error('Firebase initialization error:', err);
-    updateCloudStatusBadge(false, 'Cloud: Config Error');
+    updateCloudStatusBadge(false, 'Cloud: Local Mode');
   }
 }
 
@@ -1619,13 +1632,13 @@ function updateCloudStatusBadge(connected, text) {
     label.textContent = text || '🟢 Live Cloud Sync';
   } else {
     dot.className = 'status-dot disconnected';
-    label.textContent = text || 'Cloud: Local Mode';
+    label.textContent = text || 'Cloud: Pending Rules';
   }
 }
 
 function openFirebaseConfigModal() {
-  const saved = localStorage.getItem('dsa_firebase_config') || '';
-  document.getElementById('firebase-config-area').value = saved;
+  const config = localStorage.getItem('dsa_firebase_config') || JSON.stringify(DEFAULT_FIREBASE_CONFIG, null, 2);
+  document.getElementById('firebase-config-area').value = config;
   document.getElementById('firebase-modal').classList.add('open');
 }
 
@@ -1640,15 +1653,15 @@ function saveAndConnectFirebase() {
     const config = JSON.parse(raw);
     localStorage.setItem('dsa_firebase_config', JSON.stringify(config, null, 2));
     closeModal('firebase-modal');
-    alert('Firebase Configuration saved! Connecting live sync...');
+    alert('Firebase Configuration saved! Reconnecting...');
     location.reload();
   } catch (e) {
-    alert('Invalid JSON format for Firebase config. Please check for missing quotes or brackets.');
+    alert('Invalid JSON format for Firebase config. Please check quotes and commas.');
   }
 }
 
 function disconnectFirebase() {
-  if (confirm('Disconnect Firebase cloud sync and return to local storage mode?')) {
+  if (confirm('Reset to the default dsa4mpsb project?')) {
     localStorage.removeItem('dsa_firebase_config');
     closeModal('firebase-modal');
     location.reload();
