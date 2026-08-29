@@ -630,6 +630,7 @@
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
+    align-items: center;
   }
 
   .filter-btn {
@@ -650,6 +651,26 @@
     border-color: var(--brown-dark);
   }
 
+  .reset-order-btn {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    color: var(--brown-medium);
+    padding: 7px 12px;
+    border-radius: var(--radius-full);
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+  }
+
+  .reset-order-btn:hover {
+    background: #EFE4D8;
+    color: var(--brown-dark);
+  }
+
   /* Dynamic Prepone Banner */
   .cascade-banner {
     background: var(--bg-alt);
@@ -665,7 +686,7 @@
     gap: 12px;
   }
 
-  /* Topic Accordion Card */
+  /* Topic Accordion Card with Drag-and-Drop */
   .topic-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -673,7 +694,8 @@
     margin-bottom: 16px;
     box-shadow: var(--shadow-sm);
     overflow: hidden;
-    transition: border-color 0.2s;
+    transition: transform 0.15s ease, border-color 0.2s, box-shadow 0.2s;
+    user-select: none;
   }
 
   .topic-card.is-overdue {
@@ -684,13 +706,28 @@
     border-left: 5px solid #C07000;
   }
 
+  .topic-card.dragging {
+    opacity: 0.4;
+    transform: scale(0.98);
+    border: 2px dashed var(--accent);
+  }
+
+  .topic-card.drag-over-top {
+    border-top: 3px solid var(--accent);
+    box-shadow: 0 -4px 12px rgba(217, 107, 39, 0.2);
+  }
+
+  .topic-card.drag-over-bottom {
+    border-bottom: 3px solid var(--accent);
+    box-shadow: 0 4px 12px rgba(217, 107, 39, 0.2);
+  }
+
   .topic-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 14px 20px;
     cursor: pointer;
-    user-select: none;
     background: var(--card-subtle);
     gap: 12px;
     flex-wrap: wrap;
@@ -703,8 +740,54 @@
   .topic-title-group {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
+  }
+
+  /* Drag handle & Order Controls */
+  .topic-reorder-controls {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: var(--bg-alt);
+    padding: 3px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .drag-handle {
+    cursor: grab;
+    color: var(--text-light);
+    font-size: 15px;
+    padding: 0 4px;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.15s;
+  }
+
+  .drag-handle:hover {
+    color: var(--accent);
+  }
+
+  .drag-handle:active {
+    cursor: grabbing;
+  }
+
+  .move-topic-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 10px;
+    cursor: pointer;
+    padding: 2px 3px;
+    line-height: 1;
+    border-radius: 3px;
+    transition: all 0.15s;
+  }
+
+  .move-topic-btn:hover {
+    background: #E8DEC8;
+    color: var(--brown-dark);
   }
 
   .topic-master-checks {
@@ -841,6 +924,7 @@
     font-size: 13.5px;
     background: var(--card);
     transition: background 0.15s;
+    user-select: text;
   }
 
   .problem-row:last-child {
@@ -1384,12 +1468,13 @@
         <button class="filter-btn" data-filter="Hard">Hard</button>
         <button class="filter-btn" data-filter="unsolved-me">My Unsolved</button>
         <button class="filter-btn" data-filter="both-done">Both Solved</button>
+        <button class="reset-order-btn" onclick="resetTopicOrder()" title="Reset topic order to standard NeetCode curriculum">🔄 Reset Order</button>
       </div>
     </div>
 
     <!-- Cascade Notice -->
     <div class="cascade-banner">
-      <div>⚡ <strong>Adaptive Color-Coded Deadline Alert:</strong> 🟢 <strong>Green</strong> = Completed • 🟡 <strong>Yellow</strong> = Due within 1 Day / Today • 🔴 <strong>Red</strong> = Overdue deadline (automatically shifts overall finish date forward to keep later topics healthy!)</div>
+      <div>⚡ <strong>Drag & Reorder Enabled:</strong> Drag topic cards by the <strong>⋮⋮ handle</strong> or click <strong>▲ / ▼</strong> to adjust topic sequence. The adaptive schedule will automatically rebalance based on your customized topic order!</div>
     </div>
 
     <div id="topics-container"></div>
@@ -1567,8 +1652,8 @@ function cycleNextQuote() {
   renderQuote();
 }
 
-// Full Question Bank Across 18 Major Topics with exact LeetCode problem links
-const DATA = [
+// Master Raw Question Bank Across 18 Major Topics with exact LeetCode problem links
+const RAW_DATA = [
   ["Arrays & Hashing", [
     ["Easy","Two Sum","1","https://leetcode.com/problems/two-sum/"],
     ["Easy","Contains Duplicate","217","https://leetcode.com/problems/contains-duplicate/"],
@@ -1686,7 +1771,7 @@ const DATA = [
     ["Medium","Combination Sum II","40","https://leetcode.com/problems/combination-sum-ii/"],
     ["Medium","Word Search","79","https://leetcode.com/problems/word-search/"],
     ["Medium","Palindrome Partitioning","131","https://leetcode.com/problems/palindrome-partitioning/"],
-    ["Letter Combinations of a Phone Number","17","https://leetcode.com/problems/letter-combinations-of-a-phone-number/"],
+    ["Medium","Letter Combinations of a Phone Number","17","https://leetcode.com/problems/letter-combinations-of-a-phone-number/"],
     ["Hard","N-Queens","51","https://leetcode.com/problems/n-queens/"]
   ]],
 
@@ -1769,6 +1854,9 @@ const DATA = [
   ]]
 ];
 
+const RAW_DATA_MAP = new Map(RAW_DATA);
+const DEFAULT_TOPIC_ORDER = RAW_DATA.map(([t]) => t);
+
 // USER'S PRE-CONFIGURED FIREBASE CONFIG
 const DEFAULT_FIREBASE_CONFIG = {
   apiKey: "AIzaSyAsd4a1d9WoIps_wbWtfMNTh77ar3TE6uM",
@@ -1789,6 +1877,7 @@ let appState = {
   calendarCurrentDate: new Date(2026, 7, 30),
   startDate: '2026-08-30',
   targetDeadline: '2026-10-15',
+  topicOrder: [...DEFAULT_TOPIC_ORDER],
   users: {
     Swaroop: { progress: {} },
     Rani: { progress: {} }
@@ -1798,6 +1887,7 @@ let appState = {
 let openTopics = new Set(["Arrays & Hashing"]);
 let firebaseDbRef = null;
 let isFirebaseConnected = false;
+let draggedTopicName = null;
 
 // FIREWORKS & CELEBRATION PARTICLE ENGINE
 const canvas = document.getElementById('fireworks-canvas');
@@ -1934,6 +2024,30 @@ function formatPrettyDate(dateObj) {
   return dateObj.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
 }
 
+// Get the active ordered data list based on user rearrangement
+function getOrderedData() {
+  const result = [];
+  const added = new Set();
+  
+  if (Array.isArray(appState.topicOrder)) {
+    appState.topicOrder.forEach(topicName => {
+      if (RAW_DATA_MAP.has(topicName)) {
+        result.push([topicName, RAW_DATA_MAP.get(topicName)]);
+        added.add(topicName);
+      }
+    });
+  }
+
+  // Fallback in case any topics were missing from customized order
+  DEFAULT_TOPIC_ORDER.forEach(topicName => {
+    if (!added.has(topicName) && RAW_DATA_MAP.has(topicName)) {
+      result.push([topicName, RAW_DATA_MAP.get(topicName)]);
+    }
+  });
+
+  return result;
+}
+
 // STORAGE & FIREBASE SYNC
 function loadState() {
   try {
@@ -1944,6 +2058,7 @@ function loadState() {
       if (parsed.activeUser) appState.activeUser = parsed.activeUser;
       if (parsed.startDate) appState.startDate = parsed.startDate;
       if (parsed.targetDeadline) appState.targetDeadline = parsed.targetDeadline;
+      if (parsed.topicOrder && Array.isArray(parsed.topicOrder)) appState.topicOrder = parsed.topicOrder;
       if (parsed.openTopics && Array.isArray(parsed.openTopics)) {
         openTopics = new Set(parsed.openTopics);
       }
@@ -1964,6 +2079,7 @@ function saveLocalBackup() {
       activeUser: appState.activeUser,
       startDate: appState.startDate,
       targetDeadline: appState.targetDeadline,
+      topicOrder: appState.topicOrder,
       users: appState.users,
       openTopics: Array.from(openTopics)
     }));
@@ -1977,6 +2093,7 @@ function saveState(skipCloud) {
     firebaseDbRef.set({
       startDate: appState.startDate,
       targetDeadline: appState.targetDeadline,
+      topicOrder: appState.topicOrder,
       users: appState.users,
       updatedAt: new Date().toISOString()
     }).catch(err => {
@@ -2011,6 +2128,9 @@ function initFirebase() {
         if (data.targetDeadline) {
           appState.targetDeadline = data.targetDeadline;
           document.getElementById('schedule-deadline-input').value = data.targetDeadline;
+        }
+        if (data.topicOrder && Array.isArray(data.topicOrder)) {
+          appState.topicOrder = data.topicOrder;
         }
         saveLocalBackup();
         render();
@@ -2139,6 +2259,31 @@ function updateCountdownBadge() {
   }
 }
 
+// REORDERING TOPICS
+function moveTopic(topicName, direction) {
+  const idx = appState.topicOrder.indexOf(topicName);
+  if (idx < 0) return;
+
+  const targetIdx = idx + direction;
+  if (targetIdx < 0 || targetIdx >= appState.topicOrder.length) return;
+
+  const newOrder = [...appState.topicOrder];
+  const [removed] = newOrder.splice(idx, 1);
+  newOrder.splice(targetIdx, 0, removed);
+
+  appState.topicOrder = newOrder;
+  saveState();
+  render();
+}
+
+function resetTopicOrder() {
+  if (confirm('Reset topic sequence back to default NeetCode order?')) {
+    appState.topicOrder = [...DEFAULT_TOPIC_ORDER];
+    saveState();
+    render();
+  }
+}
+
 // ADAPTIVE DYNAMIC DEADLINE ALGORITHM:
 function calculateScheduleForUser(userName) {
   const userObj = appState.users[userName] || { progress: {} };
@@ -2146,12 +2291,13 @@ function calculateScheduleForUser(userName) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
+  const currentOrderedData = getOrderedData();
   let scheduleMap = [];
 
   let completedTopics = [];
   let incompleteTopics = [];
 
-  DATA.forEach(([topic, probs], idx) => {
+  currentOrderedData.forEach(([topic, probs], idx) => {
     const pts = computeTopicPoints(probs);
     const completedProbs = probs.filter(([,,num]) => userObj.progress[slug(topic, num)]?.done);
     const isDone = (completedProbs.length === probs.length && probs.length > 0);
@@ -2182,7 +2328,7 @@ function calculateScheduleForUser(userName) {
     else incompleteTopics.push(topicData);
   });
 
-  const totalSheetPoints = DATA.reduce((sum, [, probs]) => sum + computeTopicPoints(probs), 0);
+  const totalSheetPoints = currentOrderedData.reduce((sum, [, probs]) => sum + computeTopicPoints(probs), 0);
   const totalSheetDays = Math.max(17, Math.round((targetDeadline.getTime() - parseDate(appState.startDate).getTime()) / (1000 * 3600 * 24)));
 
   let lastCompletedDate = parseDate(appState.startDate);
@@ -2196,7 +2342,7 @@ function calculateScheduleForUser(userName) {
   let hasOverdueTopic = false;
   let overdueExtensionDays = 0;
 
-  DATA.forEach(([topic, probs], idx) => {
+  currentOrderedData.forEach(([topic, probs], idx) => {
     const pts = computeTopicPoints(probs);
     const completedProbs = probs.filter(([,,num]) => userObj.progress[slug(topic, num)]?.done);
     const isDone = (completedProbs.length === probs.length && probs.length > 0);
@@ -2290,7 +2436,9 @@ function computeUserStats(userName) {
   let solvedProbs = 0;
   let activityDates = {};
 
-  DATA.forEach(([topic, probs]) => {
+  const currentOrderedData = getOrderedData();
+
+  currentOrderedData.forEach(([topic, probs]) => {
     probs.forEach(([,,num]) => {
       totalProbs++;
       const item = userObj.progress[slug(topic, num)];
@@ -2369,8 +2517,9 @@ function render() {
   topicsContainer.innerHTML = '';
 
   const q = appState.searchQuery.toLowerCase();
+  const currentOrderedData = getOrderedData();
 
-  DATA.forEach(([topic, probs], idx) => {
+  currentOrderedData.forEach(([topic, probs], idx) => {
     const sSched = swaroopStats.sched[idx];
     const rSched = raniStats.sched[idx];
     const activeSched = activeStats.sched[idx];
@@ -2398,6 +2547,9 @@ function render() {
     const isTopicOpen = openTopics.has(topic) || (q.length > 0);
 
     const card = document.createElement('div');
+    card.setAttribute('draggable', 'true');
+    card.dataset.topic = topic;
+    card.dataset.index = idx;
     
     let cardStatusClass = '';
     if (activeSched.urgencyStatus === 'overdue') cardStatusClass = 'is-overdue';
@@ -2434,6 +2586,13 @@ function render() {
     card.innerHTML = `
       <div class="topic-header">
         <div class="topic-title-group">
+          <!-- Topic Reorder Grip & Arrows -->
+          <div class="topic-reorder-controls" onclick="event.stopPropagation()">
+            <span class="drag-handle" title="Drag to rearrange topic sequence">⋮⋮</span>
+            <button class="move-topic-btn" onclick="moveTopic('${topic}', -1)" title="Move topic up" ${idx === 0 ? 'disabled style="opacity:0.3;"' : ''}>▲</button>
+            <button class="move-topic-btn" onclick="moveTopic('${topic}', 1)" title="Move topic down" ${idx === currentOrderedData.length - 1 ? 'disabled style="opacity:0.3;"' : ''}>▼</button>
+          </div>
+
           <!-- Topic Master Checkboxes for Swaroop & Rani -->
           <div class="topic-master-checks" title="Mark entire topic complete">
             <label class="user-check-wrap swaroop" title="Mark whole topic for Swaroop">
@@ -2465,6 +2624,66 @@ function render() {
       <div class="problems-list"></div>
     `;
 
+    // HTML5 Drag & Drop Listeners
+    card.addEventListener('dragstart', (e) => {
+      draggedTopicName = topic;
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', topic);
+    });
+
+    card.addEventListener('dragend', () => {
+      card.classList.remove('dragging');
+      document.querySelectorAll('.topic-card').forEach(c => {
+        c.classList.remove('drag-over-top', 'drag-over-bottom');
+      });
+      draggedTopicName = null;
+    });
+
+    card.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      if (!draggedTopicName || draggedTopicName === topic) return;
+      
+      const rect = card.getBoundingClientRect();
+      const midY = rect.top + rect.height / 2;
+      
+      card.classList.remove('drag-over-top', 'drag-over-bottom');
+      if (e.clientY < midY) {
+        card.classList.add('drag-over-top');
+      } else {
+        card.classList.add('drag-over-bottom');
+      }
+    });
+
+    card.addEventListener('dragleave', () => {
+      card.classList.remove('drag-over-top', 'drag-over-bottom');
+    });
+
+    card.addEventListener('drop', (e) => {
+      e.preventDefault();
+      card.classList.remove('drag-over-top', 'drag-over-bottom');
+      if (!draggedTopicName || draggedTopicName === topic) return;
+
+      const fromIdx = appState.topicOrder.indexOf(draggedTopicName);
+      let toIdx = appState.topicOrder.indexOf(topic);
+      if (fromIdx < 0 || toIdx < 0) return;
+
+      const rect = card.getBoundingClientRect();
+      const midY = rect.top + rect.height / 2;
+      if (e.clientY >= midY && fromIdx < toIdx) {
+      } else if (e.clientY >= midY && fromIdx > toIdx) {
+        toIdx += 1;
+      }
+
+      const newOrder = [...appState.topicOrder];
+      const [removed] = newOrder.splice(fromIdx, 1);
+      newOrder.splice(toIdx, 0, removed);
+
+      appState.topicOrder = newOrder;
+      saveState();
+      render();
+    });
+
     // Set indeterminate states
     const sMaster = card.querySelector('.topic-master-check[data-user="Swaroop"]');
     if (sMaster && sSched.doneCount > 0 && sSched.doneCount < probs.length) {
@@ -2485,7 +2704,7 @@ function render() {
         const isChecked = e.target.checked;
         const todayStr = formatDate(new Date());
 
-        const targetTopicData = DATA.find(([t]) => t === top);
+        const targetTopicData = RAW_DATA.find(([t]) => t === top);
         if (targetTopicData) {
           const [, pList] = targetTopicData;
           pList.forEach(([,, num]) => {
@@ -2509,7 +2728,7 @@ function render() {
     });
 
     card.querySelector('.topic-header').onclick = (e) => {
-      if (e.target.closest('.topic-master-checks')) return;
+      if (e.target.closest('.topic-master-checks') || e.target.closest('.topic-reorder-controls')) return;
       if (openTopics.has(topic)) {
         openTopics.delete(topic);
         card.classList.remove('open');
@@ -2572,7 +2791,7 @@ function render() {
             appState.users[user].progress[k] = { done: false, date: null };
           }
 
-          const targetTopicData = DATA.find(([t]) => t === topic);
+          const targetTopicData = RAW_DATA.find(([t]) => t === topic);
           if (isChecked && targetTopicData) {
             const [, pList] = targetTopicData;
             const completedCount = pList.filter(([,, n]) => appState.users[user].progress[slug(topic, n)]?.done).length;
@@ -2626,6 +2845,7 @@ function renderCalendar(swaroopStats, raniStats) {
   }
 
   const todayStr = formatDate(new Date());
+  const currentOrderedData = getOrderedData();
 
   for (let d = 1; d <= daysInMonth; d++) {
     const cellDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
@@ -2637,7 +2857,7 @@ function renderCalendar(swaroopStats, raniStats) {
     let rCount = 0;
     let details = { swaroop: [], rani: [] };
 
-    DATA.forEach(([topic, probs]) => {
+    currentOrderedData.forEach(([topic, probs]) => {
       probs.forEach(([diff, title, num, link]) => {
         const k = slug(topic, num);
         const sIt = appState.users.Swaroop.progress[k];
@@ -2675,9 +2895,11 @@ function renderActivityLog() {
   logContainer.innerHTML = '';
 
   let entries = [];
+  const currentOrderedData = getOrderedData();
+
   ['Swaroop', 'Rani'].forEach(u => {
     const uObj = appState.users[u];
-    DATA.forEach(([topic, probs]) => {
+    currentOrderedData.forEach(([topic, probs]) => {
       probs.forEach(([diff, title, num, link]) => {
         const item = uObj.progress[slug(topic, num)];
         if (item && item.done && item.date) {
@@ -2767,6 +2989,7 @@ document.getElementById('open-sync-btn').addEventListener('click', () => {
   document.getElementById('sync-code-area').value = JSON.stringify({
     startDate: appState.startDate,
     targetDeadline: appState.targetDeadline,
+    topicOrder: appState.topicOrder,
     users: appState.users
   }, null, 2);
   document.getElementById('sync-modal').classList.add('open');
@@ -2776,6 +2999,7 @@ function copySyncData() {
   const code = JSON.stringify({
     startDate: appState.startDate,
     targetDeadline: appState.targetDeadline,
+    topicOrder: appState.topicOrder,
     users: appState.users
   });
   navigator.clipboard.writeText(code).then(() => {
@@ -2795,6 +3019,9 @@ function mergeSyncData() {
     if (parsed.users && parsed.users.Swaroop && parsed.users.Rani) {
       appState.users.Swaroop.progress = { ...appState.users.Swaroop.progress, ...parsed.users.Swaroop.progress };
       appState.users.Rani.progress = { ...appState.users.Rani.progress, ...parsed.users.Rani.progress };
+      if (parsed.topicOrder && Array.isArray(parsed.topicOrder)) {
+        appState.topicOrder = parsed.topicOrder;
+      }
       saveState();
       render();
       closeModal('sync-modal');
@@ -2837,7 +3064,7 @@ document.getElementById('search-input').addEventListener('input', (e) => {
 });
 
 document.getElementById('diff-filters').addEventListener('click', (e) => {
-  if (e.target.tagName !== 'BUTTON') return;
+  if (e.target.tagName !== 'BUTTON' || e.target.classList.contains('reset-order-btn')) return;
   document.querySelectorAll('#diff-filters .filter-btn').forEach(b => b.classList.remove('active'));
   e.target.classList.add('active');
   appState.currentFilter = e.target.dataset.filter;
