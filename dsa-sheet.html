@@ -6,7 +6,7 @@
 <title>DSA Tracker — Rani & Swaroop Dual Partner Sheet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
 
 <!-- Firebase Compat CDN -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -393,6 +393,29 @@
     color: var(--brown-dark);
     cursor: pointer;
     outline: none;
+  }
+
+  /* Sleek Countdown Badge */
+  .countdown-badge {
+    background: linear-gradient(135deg, #3D261D, #6E473B);
+    color: #FFFFFF;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(61, 38, 29, 0.15);
+    border: 1.5px solid #FFE082;
+    transition: all 0.2s;
+  }
+
+  .countdown-val {
+    color: #FFE082;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14.5px;
   }
 
   .deadline-highlight-badge {
@@ -1209,6 +1232,13 @@
     </div>
     
     <div class="header-actions">
+      <!-- Live Countdown Chip in Header -->
+      <div class="countdown-badge" id="header-countdown-badge" title="Days remaining until October 15, 2026">
+        <span style="font-size:14px;">⏳</span>
+        <span class="countdown-val" id="countdown-days-val">--</span>
+        <span id="countdown-days-lbl">Days Left</span>
+      </div>
+
       <!-- Live Cloud Status Pill -->
       <div class="cloud-status-badge" id="cloud-status-badge" onclick="openFirebaseConfigModal()" title="Click to configure or view Live Firebase Cloud Sync">
         <span class="status-dot disconnected" id="cloud-status-dot"></span>
@@ -1857,7 +1887,6 @@ function triggerCelebration(topicName, userName) {
     toast.classList.remove('show');
   }, 4000);
 
-  // Spawn multiple firework bursts across the screen
   const w = window.innerWidth;
   const h = window.innerHeight;
 
@@ -2079,6 +2108,37 @@ function computeTopicPoints(probs) {
   return pts;
 }
 
+// COUNTDOWN TIMER ENGINE
+function updateCountdownBadge() {
+  const target = parseDate(appState.targetDeadline);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const diffTime = target.getTime() - today.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  const valEl = document.getElementById('countdown-days-val');
+  const lblEl = document.getElementById('countdown-days-lbl');
+  const badgeEl = document.getElementById('header-countdown-badge');
+
+  if (diffDays > 0) {
+    valEl.textContent = diffDays;
+    lblEl.textContent = diffDays === 1 ? 'Day Left' : 'Days Left';
+    badgeEl.style.background = 'linear-gradient(135deg, #3D261D, #6E473B)';
+    badgeEl.style.borderColor = '#FFE082';
+  } else if (diffDays === 0) {
+    valEl.textContent = '0';
+    lblEl.textContent = 'Days (Due Today!)';
+    badgeEl.style.background = '#C07000';
+    badgeEl.style.borderColor = '#FFE082';
+  } else {
+    valEl.textContent = Math.abs(diffDays);
+    lblEl.textContent = 'Days Overdue';
+    badgeEl.style.background = '#C62828';
+    badgeEl.style.borderColor = '#FFCDD2';
+  }
+}
+
 // ADAPTIVE DYNAMIC DEADLINE ALGORITHM:
 function calculateScheduleForUser(userName) {
   const userObj = appState.users[userName] || { progress: {} };
@@ -2264,6 +2324,8 @@ function computeUserStats(userName) {
 
 // MAIN RENDER
 function render() {
+  updateCountdownBadge();
+
   const swaroopStats = computeUserStats('Swaroop');
   const raniStats = computeUserStats('Rani');
 
@@ -2510,7 +2572,6 @@ function render() {
             appState.users[user].progress[k] = { done: false, date: null };
           }
 
-          // Check if this action completed the entire topic!
           const targetTopicData = DATA.find(([t]) => t === topic);
           if (isChecked && targetTopicData) {
             const [, pList] = targetTopicData;
