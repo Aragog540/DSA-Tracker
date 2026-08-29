@@ -650,12 +650,29 @@
   .user-check-wrap.swaroop input { accent-color: var(--swaroop-color); }
   .user-check-wrap.rani input { accent-color: var(--rani-color); }
 
-  .problem-num {
+  /* Hyperlinked Question Number */
+  .problem-num-link {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--text-light);
-    width: 38px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    width: 48px;
     flex-shrink: 0;
+    text-decoration: none;
+    background: var(--bg-alt);
+    padding: 2px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: all 0.15s ease;
+    display: inline-block;
+  }
+
+  .problem-num-link:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: var(--accent-border);
+    transform: translateY(-1px);
   }
 
   .problem-title {
@@ -666,11 +683,25 @@
   .problem-title a {
     color: var(--brown-dark);
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
   }
 
   .problem-title a:hover {
     color: var(--accent);
     text-decoration: underline;
+  }
+
+  .problem-title a span.link-arrow {
+    font-size: 11px;
+    opacity: 0.5;
+    transition: transform 0.15s;
+  }
+
+  .problem-title a:hover span.link-arrow {
+    opacity: 1;
+    transform: translate(1px, -1px);
   }
 
   /* Hardness Badges */
@@ -1141,7 +1172,7 @@
 </div>
 
 <script>
-// Comprehensive Expanded Question Bank Across 18 Major Topics
+// Comprehensive Expanded Question Bank Across 18 Major Topics with exact LeetCode problem links
 const DATA = [
   ["Arrays & Hashing", [
     ["Easy","Two Sum","1","https://leetcode.com/problems/two-sum/"],
@@ -1260,7 +1291,7 @@ const DATA = [
     ["Medium","Combination Sum II","40","https://leetcode.com/problems/combination-sum-ii/"],
     ["Medium","Word Search","79","https://leetcode.com/problems/word-search/"],
     ["Medium","Palindrome Partitioning","131","https://leetcode.com/problems/palindrome-partitioning/"],
-    ["Medium","Letter Combinations of a Phone Number","17","https://leetcode.com/problems/letter-combinations-of-a-phone-number/"],
+    ["Letter Combinations of a Phone Number","17","https://leetcode.com/problems/letter-combinations-of-a-phone-number/"],
     ["Hard","N-Queens","51","https://leetcode.com/problems/n-queens/"]
   ]],
 
@@ -1447,7 +1478,6 @@ function computeTopicPoints(probs) {
 }
 
 // ADAPTIVE BUFFER ALLOCATION ALGORITHM:
-// ANCHORS FINAL DEADLINE TO OCT 15. EARLY FINISH EXPANDS DAYS FOR REMAINING TOPICS!
 function calculateScheduleForUser(userName) {
   const userObj = appState.users[userName] || { progress: {} };
   const finalDeadline = parseDate(appState.targetDeadline);
@@ -1707,8 +1737,12 @@ function render() {
           </label>
         </div>
 
-        <span class="problem-num">#${num}</span>
-        <span class="problem-title"><a href="${link}" target="_blank" rel="noopener">${title}</a></span>
+        <a href="${link}" target="_blank" rel="noopener" class="problem-num-link" title="Open LeetCode #${num}">#${num}</a>
+        <span class="problem-title">
+          <a href="${link}" target="_blank" rel="noopener" title="Solve #${num} on LeetCode">
+            ${title} <span class="link-arrow">↗</span>
+          </a>
+        </span>
         <span class="diff-badge ${diff}">${diff}</span>
 
         <div class="status-badges-group">
@@ -1785,18 +1819,18 @@ function renderCalendar(swaroopStats, raniStats) {
     let details = { swaroop: [], rani: [] };
 
     DATA.forEach(([topic, probs]) => {
-      probs.forEach(([diff, title, num]) => {
+      probs.forEach(([diff, title, num, link]) => {
         const k = slug(topic, num);
         const sIt = appState.users.Swaroop.progress[k];
         const rIt = appState.users.Rani.progress[k];
 
         if (sIt && sIt.done && sIt.date === cellDateStr) {
           sCount++;
-          details.swaroop.push({ topic, title, num, diff });
+          details.swaroop.push({ topic, title, num, diff, link });
         }
         if (rIt && rIt.done && rIt.date === cellDateStr) {
           rCount++;
-          details.rani.push({ topic, title, num, diff });
+          details.rani.push({ topic, title, num, diff, link });
         }
       });
     });
@@ -1825,10 +1859,10 @@ function renderActivityLog() {
   ['Swaroop', 'Rani'].forEach(u => {
     const uObj = appState.users[u];
     DATA.forEach(([topic, probs]) => {
-      probs.forEach(([diff, title, num]) => {
+      probs.forEach(([diff, title, num, link]) => {
         const item = uObj.progress[slug(topic, num)];
         if (item && item.done && item.date) {
-          entries.push({ user: u, topic, title, num, diff, date: item.date });
+          entries.push({ user: u, topic, title, num, diff, link, date: item.date });
         }
       });
     });
@@ -1847,7 +1881,9 @@ function renderActivityLog() {
     item.className = 'log-item';
     item.innerHTML = `
       <div class="log-date">📅 ${e.date} • <strong style="color:${isS ? 'var(--swaroop-color)' : 'var(--rani-color)'}">${isS ? '🦊 Swaroop' : '🌸 Rani'}</strong></div>
-      <div class="log-desc">Solved <strong>#${e.num} ${e.title}</strong></div>
+      <div class="log-desc">
+        Solved <a href="${e.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); font-weight:700; text-decoration:none;">#${e.num} ${e.title} ↗</a>
+      </div>
       <span style="font-size:10.5px; color:var(--text-muted); background:var(--bg-alt); padding:2px 6px; border-radius:4px; margin-top:4px; display:inline-block;">${e.topic}</span>
     `;
     logContainer.appendChild(item);
@@ -1875,8 +1911,10 @@ function showDayModal(dateStr, details) {
         ${sLen === 0 ? '<div style="font-size:12px; color:var(--text-light);">No problems solved.</div>' : `
           <ul style="list-style:none;">
             ${details.swaroop.map(it => `
-              <li style="font-size:12.5px; padding:4px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between;">
-                <span>#${it.num} ${it.title}</span>
+              <li style="font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between; align-items:center;">
+                <a href="${it.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); text-decoration:none; font-weight:600;">
+                  #${it.num} ${it.title} <span style="font-size:10px; opacity:0.6;">↗</span>
+                </a>
                 <span class="diff-badge ${it.diff}">${it.diff}</span>
               </li>
             `).join('')}
@@ -1889,8 +1927,10 @@ function showDayModal(dateStr, details) {
         ${rLen === 0 ? '<div style="font-size:12px; color:var(--text-light);">No problems solved.</div>' : `
           <ul style="list-style:none;">
             ${details.rani.map(it => `
-              <li style="font-size:12.5px; padding:4px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between;">
-                <span>#${it.num} ${it.title}</span>
+              <li style="font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between; align-items:center;">
+                <a href="${it.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); text-decoration:none; font-weight:600;">
+                  #${it.num} ${it.title} <span style="font-size:10px; opacity:0.6;">↗</span>
+                </a>
                 <span class="diff-badge ${it.diff}">${it.diff}</span>
               </li>
             `).join('')}
