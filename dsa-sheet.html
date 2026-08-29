@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DSA Tracker — Rani & Swaroop Dual Partner Sheet</title>
+<title>DSA Tracker — Rani &amp; Swaroop Dual Partner Sheet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
@@ -1311,7 +1311,7 @@
   <!-- Header -->
   <header>
     <div class="brand">
-      <h1><span class="logo-icon">✨</span> Rani & Swaroop DSA Tracker</h1>
+      <h1><span class="logo-icon">✨</span> Rani &amp; Swaroop DSA Tracker</h1>
       <p>Target Deadline: <strong>October 15, 2026</strong> • Real-Time Dynamic Deadline Buffer 🎯</p>
     </div>
     
@@ -1381,7 +1381,7 @@
           <div class="partner-avatar swaroop">🦊</div>
           <div>
             <div class="partner-name">Swaroop's Progress</div>
-            <div style="font-size:11.5px; color:var(--text-muted);" id="swaroop-schedule-status">Projected Finish Date</div>
+            <div style="font-size:11.5px; color:var(--text-muted);" id="swaroop-schedule-status">Target On Track</div>
           </div>
         </div>
         <span class="partner-status-badge" id="swaroop-status-badge" style="background:var(--swaroop-bg); color:var(--swaroop-color);">Active User</span>
@@ -1418,7 +1418,7 @@
           <div class="partner-avatar rani">🌸</div>
           <div>
             <div class="partner-name">Rani's Progress</div>
-            <div style="font-size:11.5px; color:var(--text-muted);" id="rani-schedule-status">Projected Finish Date</div>
+            <div style="font-size:11.5px; color:var(--text-muted);" id="rani-schedule-status">Target On Track</div>
           </div>
         </div>
         <span class="partner-status-badge" id="rani-status-badge" style="background:var(--rani-bg); color:var(--rani-color);">Partner</span>
@@ -1451,8 +1451,8 @@
 
   <!-- Navigation Tabs -->
   <div class="nav-tabs">
-    <button class="tab-btn active" data-tab="sheet-view">📋 Dual Practice Sheet & Urgency Trackers</button>
-    <button class="tab-btn" data-tab="calendar-view">📅 Joint Activity Calendar & Daily Check-in</button>
+    <button class="tab-btn active" data-tab="sheet-view">📋 Dual Practice Sheet &amp; Urgency Trackers</button>
+    <button class="tab-btn" data-tab="calendar-view">📅 Joint Activity Calendar &amp; Daily Check-in</button>
   </div>
 
   <!-- SHEET VIEW -->
@@ -1474,7 +1474,7 @@
 
     <!-- Cascade Notice -->
     <div class="cascade-banner">
-      <div>⚡ <strong>Drag & Reorder Enabled:</strong> Drag topic cards by the <strong>⋮⋮ handle</strong> or click <strong>▲ / ▼</strong> to adjust topic sequence. The adaptive schedule will automatically rebalance based on your customized topic order!</div>
+      <div>⚡ <strong>Drag &amp; Reorder Enabled:</strong> Drag topic cards by the <strong>⋮⋮ handle</strong> or click <strong>▲ / ▼</strong> to adjust topic sequence. The adaptive schedule will automatically rebalance based on your customized topic order!</div>
     </div>
 
     <div id="topics-container"></div>
@@ -1508,7 +1508,7 @@
   </div>
 
   <footer>
-    DSA Practice Sheet for Rani & Swaroop • Real-Time Firebase Cloud Sync Active 🚀
+    DSA Practice Sheet for Rani &amp; Swaroop • Real-Time Firebase Cloud Sync Active 🚀
   </footer>
 </div>
 
@@ -1527,7 +1527,7 @@
 <div class="modal-overlay" id="sync-modal">
   <div class="modal-box">
     <div class="modal-head">
-      <h3>🔄 Offline Backup & Manual Sync</h3>
+      <h3>🔄 Offline Backup &amp; Manual Sync</h3>
       <button class="close-modal" onclick="closeModal('sync-modal')">&times;</button>
     </div>
     <p style="font-size:13px; color:var(--text-muted);">
@@ -2285,17 +2285,23 @@ function resetTopicOrder() {
 }
 
 // ADAPTIVE DYNAMIC DEADLINE ALGORITHM:
+// Correctly apportions the full available timeline (e.g. Aug 30 -> Oct 15 = 46 days)
+// and dynamically expands buffers when topics are finished ahead of time!
 function calculateScheduleForUser(userName) {
   const userObj = appState.users[userName] || { progress: {} };
   const targetDeadline = parseDate(appState.targetDeadline);
+  const startDate = parseDate(appState.startDate);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   const currentOrderedData = getOrderedData();
-  let scheduleMap = [];
+  const totalSheetPoints = currentOrderedData.reduce((sum, [, probs]) => sum + computeTopicPoints(probs), 0) || 1;
+  const totalSheetDays = Math.max(currentOrderedData.length, Math.round((targetDeadline.getTime() - startDate.getTime()) / (1000 * 3600 * 24)));
 
+  // Identify completed topics vs incomplete topics
   let completedTopics = [];
   let incompleteTopics = [];
+  let maxCompletionDate = new Date(startDate);
 
   currentOrderedData.forEach(([topic, probs], idx) => {
     const pts = computeTopicPoints(probs);
@@ -2311,46 +2317,57 @@ function calculateScheduleForUser(userName) {
           if (!maxDate || item.date > maxDate) maxDate = item.date;
         }
       });
-      actualCompletionDate = maxDate ? parseDate(maxDate) : new Date();
+      actualCompletionDate = maxDate ? parseDate(maxDate) : new Date(startDate);
+      if (actualCompletionDate > maxCompletionDate) {
+        maxCompletionDate = new Date(actualCompletionDate);
+      }
     }
 
-    const topicData = {
+    const baseDays = Math.max(1, ((pts / totalSheetPoints) * totalSheetDays));
+
+    const topicMeta = {
       idx,
       topic,
       probs,
       pts,
       doneCount: completedProbs.length,
       isDone,
-      actualCompletionDate
+      actualCompletionDate,
+      baseDays
     };
 
-    if (isDone) completedTopics.push(topicData);
-    else incompleteTopics.push(topicData);
-  });
-
-  const totalSheetPoints = currentOrderedData.reduce((sum, [, probs]) => sum + computeTopicPoints(probs), 0);
-  const totalSheetDays = Math.max(17, Math.round((targetDeadline.getTime() - parseDate(appState.startDate).getTime()) / (1000 * 3600 * 24)));
-
-  let lastCompletedDate = parseDate(appState.startDate);
-  completedTopics.forEach(t => {
-    if (t.actualCompletionDate && t.actualCompletionDate > lastCompletedDate) {
-      lastCompletedDate = new Date(t.actualCompletionDate);
+    if (isDone) {
+      completedTopics.push(topicMeta);
+    } else {
+      incompleteTopics.push(topicMeta);
     }
   });
 
-  let runningDate = new Date(lastCompletedDate);
+  // Calculate available days remaining for the incomplete topics
+  const startForIncomplete = (completedTopics.length > 0) ? maxCompletionDate : startDate;
+  const daysRemainingToTarget = Math.max(incompleteTopics.length, Math.round((targetDeadline.getTime() - startForIncomplete.getTime()) / (1000 * 3600 * 24)));
+  const totalIncompletePoints = incompleteTopics.reduce((sum, t) => sum + t.pts, 0) || 1;
+
+  // Pre-calculate allocated days upfront for each incomplete topic
+  const allocatedDaysMap = new Map();
+  incompleteTopics.forEach(t => {
+    const allocated = Math.max(1, ((t.pts / totalIncompletePoints) * daysRemainingToTarget));
+    allocatedDaysMap.set(t.topic, allocated);
+  });
+
+  // Generate continuous timeline
+  let runningDate = new Date(startDate);
+  let scheduleMap = [];
   let hasOverdueTopic = false;
   let overdueExtensionDays = 0;
 
-  currentOrderedData.forEach(([topic, probs], idx) => {
+  currentOrderedData.forEach(([topic, probs]) => {
     const pts = computeTopicPoints(probs);
     const completedProbs = probs.filter(([,,num]) => userObj.progress[slug(topic, num)]?.done);
     const isDone = (completedProbs.length === probs.length && probs.length > 0);
-
     const baseDays = Math.max(1, Math.round(((pts / totalSheetPoints) * totalSheetDays) * 10) / 10);
 
     if (isDone) {
-      let actualDate = null;
       let maxDateStr = null;
       probs.forEach(([,,num]) => {
         const item = userObj.progress[slug(topic, num)];
@@ -2358,7 +2375,7 @@ function calculateScheduleForUser(userName) {
           if (!maxDateStr || item.date > maxDateStr) maxDateStr = item.date;
         }
       });
-      actualDate = maxDateStr ? parseDate(maxDateStr) : runningDate;
+      const actualDate = maxDateStr ? parseDate(maxDateStr) : runningDate;
 
       scheduleMap.push({
         topic,
@@ -2367,21 +2384,22 @@ function calculateScheduleForUser(userName) {
         isDone: true,
         urgencyStatus: 'done',
         estDays: baseDays,
+        baseDays: baseDays,
         targetEndDate: actualDate,
         isExpanded: false,
         extraBufferDays: 0,
         daysDifference: 0
       });
 
-      runningDate = new Date(actualDate);
+      if (actualDate > runningDate) {
+        runningDate = new Date(actualDate);
+      }
     } else {
-      const remainingDaysTotal = Math.max(incompleteTopics.length, Math.round((targetDeadline.getTime() - runningDate.getTime()) / (1000 * 3600 * 24)));
-      const remainingPoints = incompleteTopics.reduce((sum, t) => sum + t.pts, 0) || 1;
+      const allocated = allocatedDaysMap.get(topic) || baseDays;
+      const allocatedDaysRounded = Math.max(1, Math.round(allocated * 10) / 10);
 
-      let allocatedDays = Math.max(1, Math.round(((pts / remainingPoints) * remainingDaysTotal) * 10) / 10);
-      
       const topicStartDate = new Date(runningDate);
-      let topicEndDate = addDays(topicStartDate, Math.max(1, Math.round(allocatedDays)));
+      let topicEndDate = addDays(topicStartDate, Math.max(1, Math.round(allocatedDaysRounded)));
 
       const targetMidnight = new Date(topicEndDate);
       targetMidnight.setHours(0, 0, 0, 0);
@@ -2392,10 +2410,9 @@ function calculateScheduleForUser(userName) {
       if (diffFromToday < 0) {
         urgencyStatus = 'overdue';
         hasOverdueTopic = true;
-        
         const delayDays = Math.abs(diffFromToday);
         overdueExtensionDays += delayDays;
-        
+
         runningDate = new Date(today);
         topicEndDate = new Date(today);
       } else if (diffFromToday === 0) {
@@ -2404,7 +2421,7 @@ function calculateScheduleForUser(userName) {
         urgencyStatus = 'due-soon';
       }
 
-      const extraBuffer = Math.round((allocatedDays - baseDays) * 10) / 10;
+      const extraBuffer = Math.round((allocatedDaysRounded - baseDays) * 10) / 10;
 
       scheduleMap.push({
         topic,
@@ -2413,10 +2430,10 @@ function calculateScheduleForUser(userName) {
         isDone: false,
         urgencyStatus,
         daysDifference: diffFromToday,
-        estDays: allocatedDays,
+        estDays: allocatedDaysRounded,
         baseDays: baseDays,
         targetEndDate: topicEndDate,
-        isExpanded: extraBuffer > 0.2,
+        isExpanded: extraBuffer > 0.3,
         extraBufferDays: extraBuffer
       });
 
@@ -2574,8 +2591,8 @@ function render() {
     } else if (activeSched.urgencyStatus === 'due-soon') {
       statusTagHTML = `<span class="status-tag due-soon">⚠️ Due in 1 Day!</span>`;
       targetDateClass = 'due-soon';
-    } else if (activeSched.isExpanded && activeSched.extraBufferDays > 0) {
-      statusTagHTML = `<span class="status-tag expanded">⏱️ +${activeSched.extraBufferDays}d Buffer (${activeSched.estDays}d)</span>`;
+    } else if (activeSched.isExpanded && activeSched.extraBufferDays > 0.3) {
+      statusTagHTML = `<span class="status-tag expanded">⏱️ +${activeSched.extraBufferDays}d Buffer (${Math.round(activeSched.estDays)}d)</span>`;
     } else {
       statusTagHTML = `<span class="status-tag ontrack">${Math.round(activeSched.estDays)} Days</span>`;
     }
