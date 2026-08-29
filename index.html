@@ -1241,7 +1241,7 @@ const DATA = [
     ["Easy","Linked List Cycle","141","https://leetcode.com/problems/linked-list-cycle/"],
     ["Medium","Reorder List","143","https://leetcode.com/problems/reorder-list/"],
     ["Medium","Remove Nth Node From End of List","19","https://leetcode.com/problems/remove-nth-node-from-end-of-list/"],
-    ["Medium","Copy List with Random Pointer","138","https://leetcode.com/problems/copy-list-with-random-pointer/"],
+    ["Medium","Copy List with Random Pointer","138","https://leetcode.com/problems/copy-list-with-remove-pointer/"],
     ["Medium","Add Two Numbers","2","https://leetcode.com/problems/add-two-numbers/"],
     ["Medium","Find the Duplicate Number","287","https://leetcode.com/problems/find-the-duplicate-number/"],
     ["Medium","LRU Cache","146","https://leetcode.com/problems/lru-cache/"],
@@ -1388,6 +1388,9 @@ let appState = {
   }
 };
 
+// Track which accordions the user has opened/expanded
+let openTopics = new Set(["Arrays & Hashing"]);
+
 function slug(topic, num) {
   return (topic + '-' + num).toLowerCase().replace(/[^a-z0-9]+/g, '-');
 }
@@ -1424,6 +1427,9 @@ function loadState() {
       if (parsed.activeUser) appState.activeUser = parsed.activeUser;
       if (parsed.startDate) appState.startDate = parsed.startDate;
       if (parsed.targetDeadline) appState.targetDeadline = parsed.targetDeadline;
+      if (parsed.openTopics && Array.isArray(parsed.openTopics)) {
+        openTopics = new Set(parsed.openTopics);
+      }
     }
   } catch (e) { console.error('Load failed', e); }
 
@@ -1438,7 +1444,8 @@ function saveState() {
       activeUser: appState.activeUser,
       startDate: appState.startDate,
       targetDeadline: appState.targetDeadline,
-      users: appState.users
+      users: appState.users,
+      openTopics: Array.from(openTopics)
     }));
   } catch (e) { console.error('Save failed', e); }
 }
@@ -1677,8 +1684,11 @@ function render() {
 
     if (matchingProbs.length === 0 && (q || appState.currentFilter !== 'all')) return;
 
+    // Maintain whether this topic accordion should stay open
+    const isTopicOpen = openTopics.has(topic) || (q.length > 0);
+
     const card = document.createElement('div');
-    card.className = `topic-card ${activeSched.isDone ? 'open' : ''}`;
+    card.className = `topic-card ${isTopicOpen ? 'open' : ''}`;
 
     const targetDateStr = formatPrettyDate(activeSched.targetEndDate);
 
@@ -1712,7 +1722,17 @@ function render() {
       <div class="problems-list"></div>
     `;
 
-    card.querySelector('.topic-header').onclick = () => card.classList.toggle('open');
+    card.querySelector('.topic-header').onclick = () => {
+      if (openTopics.has(topic)) {
+        openTopics.delete(topic);
+        card.classList.remove('open');
+      } else {
+        openTopics.add(topic);
+        card.classList.add('open');
+      }
+      saveState();
+    };
+
     const listEl = card.querySelector('.problems-list');
 
     matchingProbs.forEach(([diff, title, num, link]) => {
@@ -1756,6 +1776,9 @@ function render() {
           const user = e.target.dataset.user;
           const k = e.target.dataset.key;
           const isChecked = e.target.checked;
+
+          // Keep current topic explicitly open
+          openTopics.add(topic);
 
           if (isChecked) {
             appState.users[user].progress[k] = { done: true, date: formatDate(new Date()) };
