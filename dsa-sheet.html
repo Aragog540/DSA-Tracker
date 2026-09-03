@@ -503,12 +503,18 @@
 
   .partner-stats-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
     margin: 14px 0 12px;
     background: var(--bg-alt);
     padding: 10px 12px;
     border-radius: var(--radius-sm);
+  }
+
+  @media (max-width: 600px) {
+    .partner-stats-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .p-stat-item {
@@ -1054,6 +1060,90 @@
   .solved-pill.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); border: 1px solid var(--swaroop-border); }
   .solved-pill.rani { background: var(--rani-bg); color: var(--rani-color); border: 1px solid var(--rani-border); }
 
+  /* Mark for Review Styles */
+  .problem-review-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .review-check-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg-alt);
+    color: var(--text-muted);
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+
+  .review-check-wrap:hover {
+    background: #FFF8E1;
+    border-color: #FFE082;
+    color: var(--medium-color);
+  }
+
+  .review-check-wrap input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    accent-color: #D97706;
+  }
+
+  .review-check-wrap.swaroop input[type="checkbox"] {
+    accent-color: var(--swaroop-color);
+  }
+
+  .review-check-wrap.rani input[type="checkbox"] {
+    accent-color: var(--rani-color);
+  }
+
+  .review-check-wrap.active.swaroop {
+    background: #FFF0E6;
+    border-color: #FDBA74;
+    color: var(--swaroop-color);
+  }
+
+  .review-check-wrap.active.rani {
+    background: #FFF0F5;
+    border-color: #F9A8D4;
+    color: var(--rani-color);
+  }
+
+  .review-pill {
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .review-pill.swaroop {
+    background: #FFF0E6;
+    color: var(--swaroop-color);
+    border: 1px solid var(--swaroop-border);
+  }
+
+  .review-pill.rani {
+    background: #FFF0F5;
+    color: var(--rani-color);
+    border: 1px solid var(--rani-border);
+  }
+
+  .problem-row.is-marked-review {
+    background: #FFFDF7;
+    border-left: 3px solid #D97706;
+  }
+
   /* CALENDAR VIEW */
   .calendar-section {
     display: grid;
@@ -1393,12 +1483,16 @@
           <div class="p-stat-lbl">Solved</div>
         </div>
         <div class="p-stat-item">
+          <div class="p-stat-val" id="swaroop-review">0 🔖</div>
+          <div class="p-stat-lbl">For Review</div>
+        </div>
+        <div class="p-stat-item">
           <div class="p-stat-val" id="swaroop-streak">0 🔥</div>
           <div class="p-stat-lbl">Streak</div>
         </div>
         <div class="p-stat-item">
-          <div class="p-stat-val" id="swaroop-finish" style="font-size:13.5px;">Oct 15, 2026</div>
-          <div class="p-stat-lbl">Live Projected Finish</div>
+          <div class="p-stat-val" id="swaroop-finish" style="font-size:13px;">Oct 15, 2026</div>
+          <div class="p-stat-lbl">Projected Finish</div>
         </div>
       </div>
 
@@ -1430,12 +1524,16 @@
           <div class="p-stat-lbl">Solved</div>
         </div>
         <div class="p-stat-item">
+          <div class="p-stat-val" id="rani-review">0 🔖</div>
+          <div class="p-stat-lbl">For Review</div>
+        </div>
+        <div class="p-stat-item">
           <div class="p-stat-val" id="rani-streak">0 🔥</div>
           <div class="p-stat-lbl">Streak</div>
         </div>
         <div class="p-stat-item">
-          <div class="p-stat-val" id="rani-finish" style="font-size:13.5px;">Oct 15, 2026</div>
-          <div class="p-stat-lbl">Live Projected Finish</div>
+          <div class="p-stat-val" id="rani-finish" style="font-size:13px;">Oct 15, 2026</div>
+          <div class="p-stat-lbl">Projected Finish</div>
         </div>
       </div>
 
@@ -1467,6 +1565,7 @@
         <button class="filter-btn" data-filter="Medium">Medium</button>
         <button class="filter-btn" data-filter="Hard">Hard</button>
         <button class="filter-btn" data-filter="unsolved-me">My Unsolved</button>
+        <button class="filter-btn" data-filter="for-review">🔖 For Review</button>
         <button class="filter-btn" data-filter="both-done">Both Solved</button>
         <button class="reset-order-btn" onclick="resetTopicOrder()" title="Reset topic order to standard NeetCode curriculum">🔄 Reset Order</button>
       </div>
@@ -2451,6 +2550,7 @@ function computeUserStats(userName) {
   const userObj = appState.users[userName] || { progress: {} };
   let totalProbs = 0;
   let solvedProbs = 0;
+  let reviewProbs = 0;
   let activityDates = {};
 
   const currentOrderedData = getOrderedData();
@@ -2462,6 +2562,9 @@ function computeUserStats(userName) {
       if (item && item.done) {
         solvedProbs++;
         if (item.date) activityDates[item.date] = (activityDates[item.date] || 0) + 1;
+      }
+      if (item && item.review) {
+        reviewProbs++;
       }
     });
   });
@@ -2484,7 +2587,7 @@ function computeUserStats(userName) {
   const { scheduleMap, hasOverdueTopic, finalProjectedFinish } = calculateScheduleForUser(userName);
   const estFinish = formatPrettyDate(finalProjectedFinish);
 
-  return { totalProbs, solvedProbs, streak, estFinish, activityDates, sched: scheduleMap, hasOverdueTopic, finalProjectedFinish };
+  return { totalProbs, solvedProbs, reviewProbs, streak, estFinish, activityDates, sched: scheduleMap, hasOverdueTopic, finalProjectedFinish };
 }
 
 // MAIN RENDER
@@ -2495,6 +2598,7 @@ function render() {
   const raniStats = computeUserStats('Rani');
 
   document.getElementById('swaroop-solved').textContent = `${swaroopStats.solvedProbs} / ${swaroopStats.totalProbs}`;
+  document.getElementById('swaroop-review').textContent = `${swaroopStats.reviewProbs} 🔖`;
   document.getElementById('swaroop-streak').textContent = `${swaroopStats.streak} 🔥`;
   
   const sFinishEl = document.getElementById('swaroop-finish');
@@ -2512,6 +2616,7 @@ function render() {
   document.getElementById('swaroop-bar').style.width = sPct + '%';
 
   document.getElementById('rani-solved').textContent = `${raniStats.solvedProbs} / ${raniStats.totalProbs}`;
+  document.getElementById('rani-review').textContent = `${raniStats.reviewProbs} 🔖`;
   document.getElementById('rani-streak').textContent = `${raniStats.streak} 🔥`;
   
   const rFinishEl = document.getElementById('rani-finish');
@@ -2542,9 +2647,14 @@ function render() {
     const activeSched = activeStats.sched[idx];
 
     const matchingProbs = probs.filter(([diff, title, num]) => {
-      const sDone = !!appState.users.Swaroop.progress[slug(topic, num)]?.done;
-      const rDone = !!appState.users.Rani.progress[slug(topic, num)]?.done;
+      const sItem = appState.users.Swaroop.progress[slug(topic, num)] || {};
+      const rItem = appState.users.Rani.progress[slug(topic, num)] || {};
+      const sDone = !!sItem.done;
+      const rDone = !!rItem.done;
+      const sReview = !!sItem.review;
+      const rReview = !!rItem.review;
       const myDone = appState.activeUser === 'Swaroop' ? sDone : rDone;
+      const myReview = appState.activeUser === 'Swaroop' ? sReview : rReview;
 
       const matchesSearch = !q || title.toLowerCase().includes(q) || topic.toLowerCase().includes(q) || num.includes(q);
       
@@ -2553,6 +2663,8 @@ function render() {
         matchesFilter = (diff === appState.currentFilter);
       } else if (appState.currentFilter === 'unsolved-me') {
         matchesFilter = !myDone;
+      } else if (appState.currentFilter === 'for-review') {
+        matchesFilter = myReview;
       } else if (appState.currentFilter === 'both-done') {
         matchesFilter = (sDone && rDone);
       }
@@ -2726,10 +2838,15 @@ function render() {
           const [, pList] = targetTopicData;
           pList.forEach(([,, num]) => {
             const k = slug(top, num);
+            if (!appState.users[user].progress[k]) {
+              appState.users[user].progress[k] = { done: false, date: null, review: false };
+            }
             if (isChecked) {
-              appState.users[user].progress[k] = { done: true, date: todayStr };
+              appState.users[user].progress[k].done = true;
+              appState.users[user].progress[k].date = todayStr;
             } else {
-              appState.users[user].progress[k] = { done: false, date: null };
+              appState.users[user].progress[k].done = false;
+              appState.users[user].progress[k].date = null;
             }
           });
         }
@@ -2764,18 +2881,21 @@ function render() {
       const rItem = appState.users.Rani.progress[key] || {};
       const isSDone = !!sItem.done;
       const isRDone = !!rItem.done;
+      const isSReview = !!sItem.review;
+      const isRReview = !!rItem.review;
+      const isMyReview = appState.activeUser === 'Swaroop' ? isSReview : isRReview;
 
       const row = document.createElement('div');
-      row.className = 'problem-row';
+      row.className = `problem-row ${isMyReview ? 'is-marked-review' : ''}`;
 
       row.innerHTML = `
-        <div class="partner-checkboxes">
-          <label class="user-check-wrap swaroop" title="Swaroop">
-            <input type="checkbox" ${isSDone ? 'checked' : ''} data-user="Swaroop" data-key="${key}">
+        <div class="partner-checkboxes" title="Mark problem as completed">
+          <label class="user-check-wrap swaroop" title="Mark solved for Swaroop">
+            <input type="checkbox" class="prob-check" ${isSDone ? 'checked' : ''} data-user="Swaroop" data-key="${key}" data-type="done">
             <span>🦊 S</span>
           </label>
-          <label class="user-check-wrap rani" title="Rani">
-            <input type="checkbox" ${isRDone ? 'checked' : ''} data-user="Rani" data-key="${key}">
+          <label class="user-check-wrap rani" title="Mark solved for Rani">
+            <input type="checkbox" class="prob-check" ${isRDone ? 'checked' : ''} data-user="Rani" data-key="${key}" data-type="done">
             <span>🌸 R</span>
           </label>
         </div>
@@ -2788,33 +2908,52 @@ function render() {
         </span>
         <span class="diff-badge ${diff}">${diff}</span>
 
+        <div class="problem-review-group" title="Mark for review / revisit later">
+          <label class="review-check-wrap swaroop ${isSReview ? 'active' : ''}" title="Swaroop: Mark for Review">
+            <input type="checkbox" class="prob-check" ${isSReview ? 'checked' : ''} data-user="Swaroop" data-key="${key}" data-type="review">
+            <span>🔖 S Rev</span>
+          </label>
+          <label class="review-check-wrap rani ${isRReview ? 'active' : ''}" title="Rani: Mark for Review">
+            <input type="checkbox" class="prob-check" ${isRReview ? 'checked' : ''} data-user="Rani" data-key="${key}" data-type="review">
+            <span>🔖 R Rev</span>
+          </label>
+        </div>
+
         <div class="status-badges-group">
           ${isSDone ? `<span class="solved-pill swaroop">🦊 ${sItem.date ? sItem.date.slice(5) : '✓'}</span>` : ''}
           ${isRDone ? `<span class="solved-pill rani">🌸 ${rItem.date ? rItem.date.slice(5) : '✓'}</span>` : ''}
+          ${isSReview ? `<span class="review-pill swaroop" title="Marked for review by Swaroop">🔖 S Rev</span>` : ''}
+          ${isRReview ? `<span class="review-pill rani" title="Marked for review by Rani">🔖 R Rev</span>` : ''}
         </div>
       `;
 
-      row.querySelectorAll('input[type="checkbox"]').forEach(input => {
+      row.querySelectorAll('input.prob-check').forEach(input => {
         input.addEventListener('change', (e) => {
           const user = e.target.dataset.user;
           const k = e.target.dataset.key;
+          const type = e.target.dataset.type;
           const isChecked = e.target.checked;
 
           openTopics.add(topic);
 
-          if (isChecked) {
-            appState.users[user].progress[k] = { done: true, date: formatDate(new Date()) };
-          } else {
-            appState.users[user].progress[k] = { done: false, date: null };
+          if (!appState.users[user].progress[k]) {
+            appState.users[user].progress[k] = { done: false, date: null, review: false };
           }
 
-          const targetTopicData = RAW_DATA.find(([t]) => t === topic);
-          if (isChecked && targetTopicData) {
-            const [, pList] = targetTopicData;
-            const completedCount = pList.filter(([,, n]) => appState.users[user].progress[slug(topic, n)]?.done).length;
-            if (completedCount === pList.length) {
-              triggerCelebration(topic, user);
+          if (type === 'done') {
+            appState.users[user].progress[k].done = isChecked;
+            appState.users[user].progress[k].date = isChecked ? formatDate(new Date()) : null;
+
+            const targetTopicData = RAW_DATA.find(([t]) => t === topic);
+            if (isChecked && targetTopicData) {
+              const [, pList] = targetTopicData;
+              const completedCount = pList.filter(([,, n]) => appState.users[user].progress[slug(topic, n)]?.done).length;
+              if (completedCount === pList.length) {
+                triggerCelebration(topic, user);
+              }
             }
+          } else if (type === 'review') {
+            appState.users[user].progress[k].review = isChecked;
           }
           
           saveState();
