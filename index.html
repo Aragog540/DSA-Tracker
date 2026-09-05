@@ -2098,6 +2098,17 @@ function updateAndDrawParticles() {
   }
 }
 
+function playRaniCompletionSound() {
+  try {
+    const audio = new Audio('completion.mp3');
+    audio.play().catch(e => {
+      console.warn('Audio play notice:', e);
+    });
+  } catch (err) {
+    console.warn('Audio playback error:', err);
+  }
+}
+
 function triggerCelebration(topicName, userName) {
   const toast = document.getElementById('celebration-toast');
   const toastText = document.getElementById('celebration-toast-text');
@@ -2105,6 +2116,10 @@ function triggerCelebration(topicName, userName) {
   const userIcon = userName === 'Swaroop' ? '🦊' : '🌸';
   toastText.innerHTML = `<strong>${userIcon} ${userName}</strong> completed <strong>${topicName}</strong>! 🎉✨`;
   toast.classList.add('show');
+
+  if (userName === 'Rani') {
+    playRaniCompletionSound();
+  }
 
   setTimeout(() => {
     toast.classList.remove('show');
