@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DSA Tracker — Rani &amp; Swaroop Dual Partner Sheet</title>
+<title>DSA &amp; SQL Tracker — Rani &amp; Swaroop Dual Partner Sheet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
 
 <!-- Firebase Compat CDN -->
@@ -247,200 +247,163 @@
   .cloud-status-badge {
     background: var(--bg-alt);
     border: 1px solid var(--border);
-    padding: 7px 14px;
+    padding: 6px 12px;
     border-radius: var(--radius-full);
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 700;
-    color: var(--brown-dark);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     cursor: pointer;
     transition: all 0.2s;
   }
 
   .cloud-status-badge:hover {
-    border-color: var(--accent);
-    background: #EFE8DC;
+    background: #EAE2D5;
   }
 
   .status-dot {
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    display: inline-block;
   }
 
   .status-dot.connected {
     background: #2D7A4D;
-    box-shadow: 0 0 8px rgba(45, 122, 77, 0.7);
-    animation: pulse-green 2s infinite;
+    box-shadow: 0 0 6px rgba(45, 122, 77, 0.6);
   }
 
   .status-dot.disconnected {
-    background: #C07000;
+    background: #C62828;
   }
 
-  @keyframes pulse-green {
-    0% { transform: scale(0.95); opacity: 0.8; }
-    50% { transform: scale(1.15); opacity: 1; }
-    100% { transform: scale(0.95); opacity: 0.8; }
-  }
-
-  /* User Switcher Toolbar */
-  .user-toggle-container {
+  /* Header Countdown Badge */
+  .header-countdown {
+    background: linear-gradient(135deg, #3D261D, #6E473B);
+    color: #FFFFFF;
+    padding: 10px 18px;
+    border-radius: var(--radius);
     display: flex;
     align-items: center;
-    background: var(--bg-alt);
-    padding: 4px;
-    border-radius: var(--radius-full);
+    gap: 12px;
+    border: 1px solid #FFE082;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .countdown-days {
+    font-size: 22px;
+    font-weight: 800;
+    color: #FFE082;
+    line-height: 1;
+  }
+
+  .countdown-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+  }
+
+  /* User Switcher */
+  .user-switch-card {
+    background: var(--card-subtle);
     border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 6px;
+    display: inline-flex;
     gap: 4px;
   }
 
   .user-btn {
-    padding: 8px 18px;
-    border-radius: var(--radius-full);
-    font-size: 13px;
-    font-weight: 700;
     border: none;
     background: transparent;
-    color: var(--text-muted);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.2s ease;
-  }
-
-  .user-btn.active-swaroop {
-    background: var(--swaroop-color);
-    color: white;
-    box-shadow: 0 2px 8px rgba(217, 107, 39, 0.35);
-  }
-
-  .user-btn.active-rani {
-    background: var(--rani-color);
-    color: white;
-    box-shadow: 0 2px 8px rgba(217, 78, 107, 0.35);
-  }
-
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .sync-btn {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    color: var(--brown-dark);
-    padding: 8px 14px;
-    border-radius: var(--radius-sm);
-    font-size: 12.5px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 6px;
+    color: var(--text-muted);
     transition: all 0.2s;
   }
 
-  .sync-btn:hover {
-    border-color: var(--border-hover);
-    background: #EFE8DC;
+  .user-btn:hover {
+    color: var(--text-main);
   }
 
-  /* Schedule Configuration Toolbar */
-  .schedule-config-bar {
+  .user-btn.active-swaroop {
+    background: var(--swaroop-bg);
+    color: var(--swaroop-color);
+    border: 1px solid var(--swaroop-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .user-btn.active-rani {
+    background: var(--rani-bg);
+    color: var(--rani-color);
+    border: 1px solid var(--rani-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Schedule Configuration Strip */
+  .schedule-strip {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 14px 20px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     box-shadow: var(--shadow-sm);
   }
 
-  .date-group {
+  .schedule-inputs {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     flex-wrap: wrap;
   }
 
-  .date-item {
+  .schedule-input-group {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--brown-dark);
-  }
-
-  .date-item input[type="date"] {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    padding: 6px 10px;
-    border-radius: var(--radius-sm);
-    font-family: inherit;
-    font-weight: 700;
-    color: var(--brown-dark);
-    cursor: pointer;
-    outline: none;
-  }
-
-  /* Sleek Countdown Badge */
-  .countdown-badge {
-    background: linear-gradient(135deg, #3D261D, #6E473B);
-    color: #FFFFFF;
-    padding: 6px 14px;
-    border-radius: var(--radius-full);
-    display: inline-flex;
     align-items: center;
     gap: 6px;
     font-size: 12.5px;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(61, 38, 29, 0.15);
-    border: 1.5px solid #FFE082;
-    transition: all 0.2s;
+    font-weight: 600;
+    color: var(--brown-dark);
   }
 
-  .countdown-val {
-    color: #FFE082;
-    font-weight: 800;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14.5px;
+  .schedule-input-group input[type="date"] {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-family: inherit;
+    font-size: 12.5px;
+    color: var(--text-main);
+    font-weight: 600;
+    outline: none;
   }
 
-  .deadline-highlight-badge {
-    background: #FFF3E0;
-    border: 1px solid #FFE0B2;
-    color: #D96B27;
-    font-size: 12px;
-    font-weight: 800;
-    padding: 4px 12px;
-    border-radius: var(--radius-full);
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  .schedule-input-group input[type="date"]:focus {
+    border-color: var(--accent);
   }
 
-  /* Partner Comparison Dashboard */
-  .partner-grid {
+  /* Dual Dashboard Cards */
+  .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 20px;
     margin-bottom: 24px;
   }
 
-  @media (max-width: 768px) {
-    .partner-grid {
+  @media (max-width: 840px) {
+    .dashboard-grid {
       grid-template-columns: 1fr;
     }
   }
@@ -556,6 +519,7 @@
     gap: 10px;
     border-bottom: 2px solid var(--border);
     margin-bottom: 24px;
+    overflow-x: auto;
   }
 
   .tab-btn {
@@ -572,6 +536,7 @@
     align-items: center;
     gap: 8px;
     transition: all 0.2s;
+    white-space: nowrap;
   }
 
   .tab-btn:hover {
@@ -651,10 +616,15 @@
     transition: all 0.2s;
   }
 
+  .filter-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text-main);
+  }
+
   .filter-btn.active {
-    background: var(--brown-dark);
+    background: var(--accent);
     color: #FFFFFF;
-    border-color: var(--brown-dark);
+    border-color: var(--accent);
   }
 
   .reset-order-btn {
@@ -663,36 +633,36 @@
     color: var(--brown-medium);
     padding: 7px 12px;
     border-radius: var(--radius-full);
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 700;
     cursor: pointer;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 4px;
     transition: all 0.2s;
   }
 
   .reset-order-btn:hover {
-    background: #EFE4D8;
+    background: #EAE2D5;
     color: var(--brown-dark);
   }
 
-  /* Dynamic Prepone Banner */
+  /* Cascade Notice Banner */
   .cascade-banner {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px 18px;
-    margin-bottom: 20px;
-    font-size: 13px;
-    color: var(--brown-dark);
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFF3CD 100%);
+    border: 1px solid #FFE082;
+    border-radius: var(--radius-sm);
+    padding: 10px 16px;
+    font-size: 12.5px;
+    color: #856404;
+    margin-bottom: 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
   }
 
-  /* Topic Accordion Card with Drag-and-Drop */
+  /* Topic Accordion Card */
   .topic-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -700,61 +670,58 @@
     margin-bottom: 16px;
     box-shadow: var(--shadow-sm);
     overflow: hidden;
-    transition: transform 0.15s ease, border-color 0.2s, box-shadow 0.2s;
-    user-select: none;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   }
 
-  .topic-card.is-overdue {
-    border-left: 5px solid #C62828;
-  }
-
-  .topic-card.is-due-soon {
-    border-left: 5px solid #C07000;
+  .topic-card:hover {
+    border-color: var(--border-hover);
   }
 
   .topic-card.dragging {
     opacity: 0.4;
-    transform: scale(0.98);
     border: 2px dashed var(--accent);
+    transform: scale(0.99);
   }
 
   .topic-card.drag-over-top {
     border-top: 3px solid var(--accent);
-    box-shadow: 0 -4px 12px rgba(217, 107, 39, 0.2);
   }
 
   .topic-card.drag-over-bottom {
     border-bottom: 3px solid var(--accent);
-    box-shadow: 0 4px 12px rgba(217, 107, 39, 0.2);
+  }
+
+  .topic-card.is-overdue {
+    border-left: 4px solid var(--hard-color);
+  }
+
+  .topic-card.is-due-soon {
+    border-left: 4px solid var(--medium-color);
   }
 
   .topic-header {
+    padding: 16px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 20px;
     cursor: pointer;
-    background: var(--card-subtle);
+    background: var(--card);
+    user-select: none;
     gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .topic-header:hover {
-    background: #FAF5EE;
   }
 
   .topic-title-group {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    flex: 1;
     flex-wrap: wrap;
   }
 
-  /* Drag handle & Order Controls */
   .topic-reorder-controls {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
     background: var(--bg-alt);
     padding: 3px 6px;
     border-radius: 6px;
@@ -763,16 +730,10 @@
 
   .drag-handle {
     cursor: grab;
+    font-size: 14px;
     color: var(--text-light);
-    font-size: 15px;
-    padding: 0 4px;
-    display: inline-flex;
-    align-items: center;
-    transition: color 0.15s;
-  }
-
-  .drag-handle:hover {
-    color: var(--accent);
+    padding: 0 2px;
+    user-select: none;
   }
 
   .drag-handle:active {
@@ -782,17 +743,17 @@
   .move-topic-btn {
     background: transparent;
     border: none;
-    color: var(--text-muted);
-    font-size: 10px;
     cursor: pointer;
-    padding: 2px 3px;
-    line-height: 1;
-    border-radius: 3px;
+    font-size: 10px;
+    color: var(--text-muted);
+    padding: 2px 4px;
+    border-radius: 4px;
     transition: all 0.15s;
+    line-height: 1;
   }
 
   .move-topic-btn:hover {
-    background: #E8DEC8;
+    background: var(--border);
     color: var(--brown-dark);
   }
 
@@ -800,137 +761,106 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    background: var(--bg-alt);
-    padding: 3px 8px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
   }
 
   .topic-title {
-    font-size: 15.5px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 800;
     color: var(--brown-dark);
   }
 
   .topic-user-progress-badges {
     display: flex;
+    align-items: center;
     gap: 6px;
+    margin-left: 4px;
   }
 
   .u-badge {
     font-size: 11px;
     font-weight: 700;
-    padding: 2px 8px;
+    padding: 2px 7px;
     border-radius: var(--radius-full);
   }
 
-  .u-badge.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); border: 1px solid var(--swaroop-border); }
-  .u-badge.rani { background: var(--rani-bg); color: var(--rani-color); border: 1px solid var(--rani-border); }
+  .u-badge.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); }
+  .u-badge.rani { background: var(--rani-bg); color: var(--rani-color); }
 
   .topic-schedule-meta {
     display: flex;
     align-items: center;
-    gap: 14px;
-    font-size: 12.5px;
+    gap: 12px;
   }
 
   .target-date-box {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
     text-align: right;
   }
 
   .target-date-label {
-    font-size: 10.5px;
+    font-size: 10px;
+    font-weight: 700;
     color: var(--text-light);
-    font-weight: 600;
     text-transform: uppercase;
+    display: block;
   }
 
   .target-date-val {
+    font-size: 12.5px;
     font-weight: 700;
     color: var(--brown-dark);
-    font-family: 'JetBrains Mono', monospace;
   }
 
   .target-date-val.overdue {
-    color: #C62828;
-    font-weight: 800;
+    color: var(--hard-color);
   }
 
   .target-date-val.due-soon {
-    color: #C07000;
-    font-weight: 800;
+    color: var(--medium-color);
   }
 
-  /* Status Tags with Red / Yellow Warnings */
   .status-tag {
     font-size: 11px;
     font-weight: 700;
-    padding: 4px 10px;
+    padding: 3px 8px;
     border-radius: var(--radius-full);
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+    white-space: nowrap;
   }
 
-  .status-tag.overdue {
-    background: #FFEBEE;
-    color: #C62828;
-    border: 1px solid #FFCDD2;
-    animation: alert-glow 2s infinite;
-  }
-
-  .status-tag.due-soon {
-    background: #FFF8E1;
-    color: #C07000;
-    border: 1px solid #FFE082;
-  }
-
-  @keyframes alert-glow {
-    0% { box-shadow: 0 0 0 rgba(198, 40, 40, 0); }
-    50% { box-shadow: 0 0 8px rgba(198, 40, 40, 0.35); }
-    100% { box-shadow: 0 0 0 rgba(198, 40, 40, 0); }
-  }
-
-  .status-tag.ahead { background: #E8F5E9; color: #2D7A4D; }
-  .status-tag.ontrack { background: #E3F2FD; color: #1565C0; }
-  .status-tag.expanded { background: #FFF3E0; color: #D96B27; border: 1px solid #FFE0B2; }
-  .status-tag.done { background: var(--done-bg); color: var(--done-text); }
+  .status-tag.ontrack { background: var(--bg-alt); color: var(--text-muted); }
+  .status-tag.expanded { background: #E8F0FE; color: #1967D2; }
+  .status-tag.due-soon { background: var(--medium-bg); color: var(--medium-color); border: 1px solid var(--medium-border); }
+  .status-tag.overdue { background: var(--hard-bg); color: var(--hard-color); border: 1px solid var(--hard-border); }
+  .status-tag.done { background: var(--done-bg); color: var(--done-text); border: 1px solid var(--done-border); }
 
   .topic-chevron {
-    color: var(--text-muted);
-    font-size: 13px;
-    transition: transform 0.25s ease;
+    font-size: 12px;
+    color: var(--text-light);
+    transition: transform 0.2s;
   }
 
   .topic-card.open .topic-chevron {
     transform: rotate(90deg);
   }
 
-  /* Problems Table inside Accordion */
   .problems-list {
     display: none;
     border-top: 1px solid var(--border);
+    background: var(--card-subtle);
   }
 
   .topic-card.open .problems-list {
     display: block;
   }
 
+  /* Problem Row */
   .problem-row {
+    padding: 12px 20px;
     display: flex;
     align-items: center;
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--border);
-    gap: 12px;
-    font-size: 13.5px;
-    background: var(--card);
+    justify-content: space-between;
+    gap: 14px;
+    border-bottom: 1px solid #F0E8DC;
     transition: background 0.15s;
-    user-select: text;
   }
 
   .problem-row:last-child {
@@ -938,81 +868,67 @@
   }
 
   .problem-row:hover {
-    background: #FCFAF7;
+    background: #FDF9F3;
   }
 
-  /* Dual Checkboxes */
+  .problem-row.is-marked-review {
+    background: #FFFBF0;
+  }
+
   .partner-checkboxes {
     display: flex;
     align-items: center;
     gap: 8px;
-    flex-shrink: 0;
   }
 
   .user-check-wrap {
     display: flex;
     align-items: center;
     gap: 4px;
+    cursor: pointer;
     font-size: 11.5px;
     font-weight: 700;
-    cursor: pointer;
-    padding: 3px 6px;
+    padding: 4px 8px;
     border-radius: 6px;
-    transition: background 0.15s;
+    border: 1px solid transparent;
+    user-select: none;
   }
 
-  .user-check-wrap:hover {
-    background: var(--bg-alt);
-  }
-
-  .user-check-wrap.swaroop { color: var(--swaroop-color); }
-  .user-check-wrap.rani { color: var(--rani-color); }
+  .user-check-wrap.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); }
+  .user-check-wrap.rani { background: var(--rani-bg); color: var(--rani-color); }
 
   .user-check-wrap input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
     cursor: pointer;
+    accent-color: var(--swaroop-color);
+  }
+  .user-check-wrap.rani input[type="checkbox"] {
+    accent-color: var(--rani-color);
   }
 
-  .user-check-wrap.swaroop input { accent-color: var(--swaroop-color); }
-  .user-check-wrap.rani input { accent-color: var(--rani-color); }
-
-  /* Hyperlinked Question Number */
   .problem-num-link {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 700;
-    color: var(--text-muted);
-    width: 48px;
-    flex-shrink: 0;
+    color: var(--text-light);
     text-decoration: none;
-    background: var(--bg-alt);
-    padding: 2px 6px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    text-align: center;
-    transition: all 0.15s ease;
-    display: inline-block;
+    min-width: 48px;
   }
 
   .problem-num-link:hover {
-    background: var(--accent-light);
     color: var(--accent);
-    border-color: var(--accent-border);
-    transform: translateY(-1px);
   }
 
   .problem-title {
     flex: 1;
-    font-weight: 500;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-main);
   }
 
   .problem-title a {
-    color: var(--brown-dark);
+    color: inherit;
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+    transition: color 0.15s;
   }
 
   .problem-title a:hover {
@@ -1020,35 +936,64 @@
     text-decoration: underline;
   }
 
-  .problem-title a span.link-arrow {
+  .link-arrow {
     font-size: 11px;
     opacity: 0.5;
-    transition: transform 0.15s;
+    margin-left: 3px;
   }
 
-  .problem-title a:hover span.link-arrow {
-    opacity: 1;
-    transform: translate(1px, -1px);
-  }
-
-  /* Hardness Badges */
   .diff-badge {
     font-size: 11px;
     font-weight: 700;
-    padding: 3px 9px;
+    padding: 2px 8px;
     border-radius: var(--radius-full);
-    text-transform: uppercase;
-    flex-shrink: 0;
+    min-width: 60px;
+    text-align: center;
   }
 
   .diff-badge.Easy { background: var(--easy-bg); color: var(--easy-color); border: 1px solid var(--easy-border); }
   .diff-badge.Medium { background: var(--medium-bg); color: var(--medium-color); border: 1px solid var(--medium-border); }
   .diff-badge.Hard { background: var(--hard-bg); color: var(--hard-color); border: 1px solid var(--hard-border); }
 
+  .problem-review-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .review-check-wrap {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--text-light);
+    cursor: pointer;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 3px 6px;
+    border-radius: 4px;
+    user-select: none;
+    transition: all 0.15s;
+  }
+
+  .review-check-wrap.active {
+    background: #FFF3CD;
+    color: #856404;
+    border-color: #FFE082;
+  }
+
+  .review-check-wrap input {
+    cursor: pointer;
+    accent-color: #C07000;
+  }
+
   .status-badges-group {
     display: flex;
+    align-items: center;
     gap: 4px;
-    flex-shrink: 0;
+    min-width: 140px;
+    justify-content: flex-end;
   }
 
   .solved-pill {
@@ -1057,98 +1002,25 @@
     padding: 2px 6px;
     border-radius: 4px;
   }
-  .solved-pill.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); border: 1px solid var(--swaroop-border); }
-  .solved-pill.rani { background: var(--rani-bg); color: var(--rani-color); border: 1px solid var(--rani-border); }
 
-  /* Mark for Review Styles */
-  .problem-review-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .review-check-wrap {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
-    padding: 3px 8px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    background: var(--bg-alt);
-    color: var(--text-muted);
-    transition: all 0.15s ease;
-    user-select: none;
-  }
-
-  .review-check-wrap:hover {
-    background: #FFF8E1;
-    border-color: #FFE082;
-    color: var(--medium-color);
-  }
-
-  .review-check-wrap input[type="checkbox"] {
-    width: 14px;
-    height: 14px;
-    cursor: pointer;
-    accent-color: #D97706;
-  }
-
-  .review-check-wrap.swaroop input[type="checkbox"] {
-    accent-color: var(--swaroop-color);
-  }
-
-  .review-check-wrap.rani input[type="checkbox"] {
-    accent-color: var(--rani-color);
-  }
-
-  .review-check-wrap.active.swaroop {
-    background: #FFF0E6;
-    border-color: #FDBA74;
-    color: var(--swaroop-color);
-  }
-
-  .review-check-wrap.active.rani {
-    background: #FFF0F5;
-    border-color: #F9A8D4;
-    color: var(--rani-color);
-  }
+  .solved-pill.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); }
+  .solved-pill.rani { background: var(--rani-bg); color: var(--rani-color); }
 
   .review-pill {
     font-size: 10px;
-    font-weight: 800;
+    font-weight: 700;
     padding: 2px 6px;
     border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
+    background: #FFF3CD;
+    color: #856404;
+    border: 1px solid #FFE082;
   }
 
-  .review-pill.swaroop {
-    background: #FFF0E6;
-    color: var(--swaroop-color);
-    border: 1px solid var(--swaroop-border);
-  }
-
-  .review-pill.rani {
-    background: #FFF0F5;
-    color: var(--rani-color);
-    border: 1px solid var(--rani-border);
-  }
-
-  .problem-row.is-marked-review {
-    background: #FFFDF7;
-    border-left: 3px solid #D97706;
-  }
-
-  /* CALENDAR VIEW */
+  /* Calendar Section */
   .calendar-section {
     display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 24px;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
   }
 
   @media (max-width: 900px) {
@@ -1161,7 +1033,7 @@
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 24px;
+    padding: 20px;
     box-shadow: var(--shadow-sm);
   }
 
@@ -1169,7 +1041,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   .calendar-header h2 {
@@ -1181,54 +1053,59 @@
   .month-nav-btn {
     background: var(--bg-alt);
     border: 1px solid var(--border);
-    color: var(--brown-dark);
-    padding: 6px 14px;
+    padding: 6px 12px;
     border-radius: var(--radius-sm);
+    font-size: 12px;
     font-weight: 700;
+    color: var(--brown-dark);
     cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .month-nav-btn:hover {
+    background: #EAE2D5;
   }
 
   .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
+    gap: 6px;
   }
 
   .day-name {
     text-align: center;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     color: var(--text-light);
-    padding-bottom: 8px;
-    text-transform: uppercase;
+    padding-bottom: 6px;
   }
 
   .calendar-day {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1;
+    background: var(--bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     padding: 6px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: var(--card-subtle);
     cursor: pointer;
-    transition: all 0.15s;
-    min-height: 70px;
+    transition: all 0.2s;
+    position: relative;
   }
 
   .calendar-day:hover {
     border-color: var(--accent);
-    transform: scale(1.02);
-  }
-
-  .calendar-day.other-month {
-    opacity: 0.3;
-    cursor: default;
+    background: #FFFDF9;
   }
 
   .calendar-day.today {
-    border: 2px solid var(--brown-dark);
+    border: 2px solid var(--accent);
+    background: #FFF8F0;
+  }
+
+  .calendar-day.other-month {
+    opacity: 0.35;
   }
 
   .day-num {
@@ -1245,19 +1122,18 @@
   }
 
   .day-u-pill {
-    font-size: 9.5px;
+    font-size: 9px;
     font-weight: 800;
     padding: 1px 4px;
-    border-radius: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    border-radius: 3px;
+    line-height: 1.2;
+    text-align: center;
   }
 
-  .day-u-pill.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); border: 1px solid var(--swaroop-border); }
-  .day-u-pill.rani { background: var(--rani-bg); color: var(--rani-color); border: 1px solid var(--rani-border); }
+  .day-u-pill.swaroop { background: var(--swaroop-bg); color: var(--swaroop-color); }
+  .day-u-pill.rani { background: var(--rani-bg); color: var(--rani-color); }
 
-  /* Activity Sidebar */
+  /* Activity Log Sidebar */
   .activity-sidebar {
     display: flex;
     flex-direction: column;
@@ -1270,46 +1146,51 @@
     border-radius: var(--radius);
     padding: 20px;
     box-shadow: var(--shadow-sm);
+    flex: 1;
   }
 
   .activity-card h3 {
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--brown-dark);
     margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
   }
 
   .log-item {
     padding: 10px 0;
-    border-bottom: 1px dashed var(--border);
+    border-bottom: 1px solid var(--border);
+    font-size: 12.5px;
   }
-  .log-item:last-child { border-bottom: none; }
+
+  .log-item:last-child {
+    border-bottom: none;
+  }
 
   .log-date {
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
-    color: var(--text-muted);
+    color: var(--text-light);
+    margin-bottom: 2px;
   }
 
   .log-desc {
-    font-size: 12.5px;
-    color: var(--brown-dark);
-    margin-top: 2px;
+    color: var(--text-main);
   }
 
   /* Modals */
   .modal-overlay {
-    display: none;
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(45, 33, 24, 0.45);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(45, 33, 24, 0.5);
     backdrop-filter: blur(4px);
-    z-index: 1000;
+    display: none;
     align-items: center;
     justify-content: center;
+    z-index: 10000;
+    padding: 20px;
   }
 
   .modal-overlay.open {
@@ -1318,12 +1199,12 @@
 
   .modal-box {
     background: var(--card);
-    border: 1px solid var(--border);
     border-radius: var(--radius);
-    width: 92%;
-    max-width: 560px;
+    max-width: 540px;
+    width: 100%;
     padding: 24px;
     box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
     max-height: 90vh;
     overflow-y: auto;
   }
@@ -1344,126 +1225,166 @@
   .close-modal {
     background: transparent;
     border: none;
-    font-size: 22px;
+    font-size: 20px;
     cursor: pointer;
-    color: var(--text-muted);
+    color: var(--text-light);
   }
 
   .sync-textarea {
     width: 100%;
-    height: 140px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    padding: 10px;
+    height: 130px;
+    background: var(--bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    background: var(--bg-alt);
-    color: var(--brown-dark);
-    margin: 10px 0 16px;
-    resize: none;
+    padding: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    margin: 12px 0;
+    resize: vertical;
+    outline: none;
   }
 
   .modal-btn-row {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 8px;
+    margin-top: 14px;
   }
 
-  .guide-step {
+  .sync-btn {
     background: var(--bg-alt);
     border: 1px solid var(--border);
+    padding: 8px 16px;
     border-radius: var(--radius-sm);
-    padding: 10px 14px;
-    font-size: 12px;
-    margin-bottom: 12px;
+    font-size: 13px;
+    font-weight: 700;
     color: var(--brown-dark);
-    line-height: 1.6;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .sync-btn:hover {
+    background: #EAE2D5;
   }
 
   footer {
-    margin-top: 40px;
     text-align: center;
-    font-size: 12.5px;
+    font-size: 12px;
     color: var(--text-light);
+    margin-top: 40px;
+  }
+
+  .guide-step {
+    background: var(--bg);
+    border-left: 3px solid var(--swaroop-color);
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 4px;
+    font-size: 12.5px;
+    color: var(--text-main);
+  }
+
+  .guide-step code {
+    background: #EAE2D5;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--brown-dark);
   }
 </style>
 </head>
 <body>
 
-<canvas id="fireworks-canvas"></canvas>
-
+<!-- Celebration Toast -->
 <div class="celebration-toast" id="celebration-toast">
   <span style="font-size:24px;">🎉</span>
-  <div id="celebration-toast-text">Awesome job! Topic Complete!</div>
+  <span id="celebration-toast-text">Topic Completed!</span>
 </div>
+
+<!-- Fullscreen Celebration Fireworks Canvas -->
+<canvas id="fireworks-canvas"></canvas>
 
 <div class="container">
   <!-- Header -->
   <header>
     <div class="brand">
-      <h1><span class="logo-icon">✨</span> Rani &amp; Swaroop DSA Tracker</h1>
-      <p>Target Deadline: <strong>October 15, 2026</strong> • Real-Time Dynamic Deadline Buffer 🎯</p>
+      <h1>
+        <span class="logo-icon">⚡</span>
+        Dual DSA &amp; SQL Mastery Tracker
+      </h1>
+      <p>Synchronized study platform for Rani &amp; Swaroop • LeetCode &amp; NeetCode Trackers</p>
     </div>
-    
-    <div class="header-actions">
-      <!-- Live Countdown Chip in Header -->
-      <div class="countdown-badge" id="header-countdown-badge" title="Days remaining until October 15, 2026">
-        <span style="font-size:14px;">⏳</span>
-        <span class="countdown-val" id="countdown-days-val">--</span>
-        <span id="countdown-days-lbl">Days Left</span>
+
+    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+      <!-- Realtime Firebase Connection Badge -->
+      <div class="cloud-status-badge" onclick="openFirebaseConfigModal()" title="Click to view or edit Firebase sync settings">
+        <span class="status-dot disconnected" id="cloud-status-dot"></span>
+        <span id="cloud-status-text">Cloud Sync: Checking...</span>
       </div>
 
-      <!-- Live Cloud Status Pill -->
-      <div class="cloud-status-badge" id="cloud-status-badge" onclick="openFirebaseConfigModal()" title="Click to configure or view Live Firebase Cloud Sync">
-        <span class="status-dot disconnected" id="cloud-status-dot"></span>
-        <span id="cloud-status-text">Cloud Sync: Connecting...</span>
-        <span style="font-size:12px; opacity:0.8;">⚙️</span>
+      <!-- Header Countdown Badge -->
+      <div class="header-countdown" id="header-countdown-badge">
+        <div class="countdown-days" id="countdown-days-val">46</div>
+        <div>
+          <div class="countdown-label" id="countdown-days-lbl">Days Left</div>
+          <div style="font-size:10px; opacity:0.8;" id="countdown-sub-lbl">To DSA Finish</div>
+        </div>
       </div>
+
+      <!-- Backup / Manual Sync Button -->
+      <button class="sync-btn" id="open-sync-btn" title="Offline JSON Backup and Manual Cross-Device Sync">
+        🔄 Backup / Sync
+      </button>
 
       <!-- Active User Switcher -->
-      <div class="user-toggle-container">
-        <span style="font-size:11.5px; font-weight:700; color:var(--text-muted); padding:0 6px;">I am:</span>
-        <button class="user-btn active-swaroop" id="user-btn-swaroop" onclick="setActiveUser('Swaroop')">🦊 Swaroop</button>
-        <button class="user-btn" id="user-btn-rani" onclick="setActiveUser('Rani')">🌸 Rani</button>
+      <div class="user-switch-card">
+        <button class="user-btn active-swaroop" id="user-btn-swaroop" onclick="setActiveUser('Swaroop')">
+          🦊 Swaroop
+        </button>
+        <button class="user-btn" id="user-btn-rani" onclick="setActiveUser('Rani')">
+          🌸 Rani
+        </button>
       </div>
-
-      <button class="sync-btn" id="open-sync-btn">🔄 Backup / Share</button>
     </div>
   </header>
 
-  <!-- Daily Motivational Bhagavad Gita Quote Panel -->
+  <!-- Daily Bhagavad Gita Quote Panel -->
   <div class="quote-panel">
     <div class="quote-content">
       <div class="quote-head">
-        <span class="quote-pill">🕉️ Daily Wisdom</span>
+        <span class="quote-pill">Daily Inspiration</span>
         <span class="quote-ref" id="quote-reference">Bhagavad Gita 2.47</span>
       </div>
       <div class="quote-text" id="quote-body">
         "You have a right to perform your prescribed duty, but you are not entitled to the fruits of action. Never consider yourself the cause of the results of your activities, and never be attached to inaction."
       </div>
     </div>
-    <button class="quote-refresh-btn" onclick="cycleNextQuote()" title="Read next motivational verse">🔄</button>
+    <button class="quote-refresh-btn" onclick="cycleNextQuote()" title="Read next inspiration quote">
+      ↻
+    </button>
   </div>
 
-  <!-- Schedule Configuration Toolbar -->
-  <div class="schedule-config-bar">
-    <div class="date-group">
-      <div class="date-item">
+  <!-- Adaptive Timeline Configuration Strip (Sheet-Specific!) -->
+  <div class="schedule-strip">
+    <div class="schedule-inputs">
+      <div class="schedule-input-group">
+        <span id="schedule-sheet-tag" style="background:#FFE8D6; color:#D96B27; padding:2px 8px; border-radius:4px; font-weight:800; font-size:11px;">📋 DSA SCHEDULE</span>
         <span>📅 Start Date:</span>
-        <input type="date" id="schedule-start-input">
+        <input type="date" id="schedule-start-input" value="2026-08-30">
       </div>
-      <div class="date-item">
+      <div class="schedule-input-group">
         <span>🎯 Target Deadline:</span>
-        <input type="date" id="schedule-deadline-input">
+        <input type="date" id="schedule-deadline-input" value="2026-10-15">
       </div>
     </div>
-    <div class="deadline-highlight-badge">
-      <span>🚨 Overdue = Auto-extends target without compressing subsequent topics!</span>
+    <div id="schedule-hint-text" style="font-size:11.5px; color:var(--text-muted);">
+      ⚡ Dynamic timeline re-allocates time buffers automatically across your ordered topics!
     </div>
   </div>
 
-  <!-- Partner Comparison Cards -->
-  <div class="partner-grid">
+  <!-- Dual Dashboard Cards (Updates based on Active Sheet / Tab!) -->
+  <div class="dashboard-grid">
     <!-- Swaroop Card -->
     <div class="partner-card is-active-user" id="card-swaroop">
       <div class="partner-head">
@@ -1479,12 +1400,12 @@
 
       <div class="partner-stats-row">
         <div class="p-stat-item">
-          <div class="p-stat-val" id="swaroop-solved">0 / 0</div>
-          <div class="p-stat-lbl">Solved</div>
+          <div class="p-stat-val" id="swaroop-solved">0 / 150</div>
+          <div class="p-stat-lbl" id="swaroop-solved-lbl">Solved</div>
         </div>
         <div class="p-stat-item">
           <div class="p-stat-val" id="swaroop-review">0 🔖</div>
-          <div class="p-stat-lbl">For Review</div>
+          <div class="p-stat-lbl" id="swaroop-review-lbl">For Review</div>
         </div>
         <div class="p-stat-item">
           <div class="p-stat-val" id="swaroop-streak">0 🔥</div>
@@ -1497,7 +1418,7 @@
       </div>
 
       <div style="display:flex; justify-content:space-between; font-size:11.5px; font-weight:700; color:var(--brown-dark);">
-        <span>Completion</span>
+        <span id="swaroop-pct-lbl">DSA Completion</span>
         <span id="swaroop-pct">0%</span>
       </div>
       <div class="partner-progress-track">
@@ -1520,12 +1441,12 @@
 
       <div class="partner-stats-row">
         <div class="p-stat-item">
-          <div class="p-stat-val" id="rani-solved">0 / 0</div>
-          <div class="p-stat-lbl">Solved</div>
+          <div class="p-stat-val" id="rani-solved">0 / 150</div>
+          <div class="p-stat-lbl" id="rani-solved-lbl">Solved</div>
         </div>
         <div class="p-stat-item">
           <div class="p-stat-val" id="rani-review">0 🔖</div>
-          <div class="p-stat-lbl">For Review</div>
+          <div class="p-stat-lbl" id="rani-review-lbl">For Review</div>
         </div>
         <div class="p-stat-item">
           <div class="p-stat-val" id="rani-streak">0 🔥</div>
@@ -1538,7 +1459,7 @@
       </div>
 
       <div style="display:flex; justify-content:space-between; font-size:11.5px; font-weight:700; color:var(--brown-dark);">
-        <span>Completion</span>
+        <span id="rani-pct-lbl">DSA Completion</span>
         <span id="rani-pct">0%</span>
       </div>
       <div class="partner-progress-track">
@@ -1550,14 +1471,15 @@
   <!-- Navigation Tabs -->
   <div class="nav-tabs">
     <button class="tab-btn active" data-tab="sheet-view">📋 Dual Practice Sheet &amp; Urgency Trackers</button>
+    <button class="tab-btn" data-tab="sql-view">🗄️ LeetCode SQL 50 Practice</button>
     <button class="tab-btn" data-tab="calendar-view">📅 Joint Activity Calendar &amp; Daily Check-in</button>
   </div>
 
-  <!-- SHEET VIEW -->
+  <!-- DSA SHEET VIEW -->
   <div class="view-pane active" id="sheet-view">
     <div class="controls-bar">
       <div class="search-box">
-        <input type="text" id="search-input" placeholder="Search problem or topic...">
+        <input type="text" id="search-input" placeholder="Search DSA problem or topic...">
       </div>
       <div class="filter-group" id="diff-filters">
         <button class="filter-btn active" data-filter="all">All</button>
@@ -1577,6 +1499,32 @@
     </div>
 
     <div id="topics-container"></div>
+  </div>
+
+  <!-- SQL 50 VIEW -->
+  <div class="view-pane" id="sql-view">
+    <div class="controls-bar">
+      <div class="search-box">
+        <input type="text" id="sql-search-input" placeholder="Search SQL problem or topic...">
+      </div>
+      <div class="filter-group" id="sql-diff-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Easy">Easy</button>
+        <button class="filter-btn" data-filter="Medium">Medium</button>
+        <button class="filter-btn" data-filter="Hard">Hard</button>
+        <button class="filter-btn" data-filter="unsolved-me">My Unsolved</button>
+        <button class="filter-btn" data-filter="for-review">🔖 For Review</button>
+        <button class="filter-btn" data-filter="both-done">Both Solved</button>
+        <button class="reset-order-btn" onclick="resetSqlTopicOrder()" title="Reset SQL topic order to official LeetCode curriculum">🔄 Reset Order</button>
+      </div>
+    </div>
+
+    <!-- Cascade Notice -->
+    <div class="cascade-banner">
+      <div>⚡ <strong>LeetCode SQL 50 Study Plan:</strong> Drag SQL topic cards by the <strong>⋮⋮ handle</strong> or click <strong>▲ / ▼</strong> to customize topic order. Full dual tracking, urgency dates, and direct problem links included!</div>
+    </div>
+
+    <div id="sql-topics-container"></div>
   </div>
 
   <!-- CALENDAR VIEW -->
@@ -1607,7 +1555,7 @@
   </div>
 
   <footer>
-    DSA Practice Sheet for Rani &amp; Swaroop • Real-Time Firebase Cloud Sync Active 🚀
+    DSA &amp; SQL Practice Sheet for Rani &amp; Swaroop • Real-Time Firebase Cloud Sync Active 🚀
   </footer>
 </div>
 
@@ -1953,8 +1901,85 @@ const RAW_DATA = [
   ]]
 ];
 
+// LeetCode Official SQL 50 Study Plan Raw Question Bank across 7 Core Topics
+const SQL_RAW_DATA = [
+  ["Select", [
+    ["Easy","Recyclable and Low Fat Products","1757","https://leetcode.com/problems/recyclable-and-low-fat-products/"],
+    ["Easy","Find Customer Referee","584","https://leetcode.com/problems/find-customer-referee/"],
+    ["Easy","Big Countries","595","https://leetcode.com/problems/big-countries/"],
+    ["Easy","Article Views I","1148","https://leetcode.com/problems/article-views-i/"],
+    ["Easy","Invalid Tweets","1683","https://leetcode.com/problems/invalid-tweets/"]
+  ]],
+
+  ["Basic Joins", [
+    ["Easy","Replace Employee ID With The Unique Identifier","1378","https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/"],
+    ["Easy","Product Sales Analysis I","1068","https://leetcode.com/problems/product-sales-analysis-i/"],
+    ["Easy","Customer Who Visited but Did Not Make Any Transactions","1581","https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/"],
+    ["Easy","Rising Temperature","197","https://leetcode.com/problems/rising-temperature/"],
+    ["Easy","Average Time of Process per Machine","1661","https://leetcode.com/problems/average-time-of-process-per-machine/"],
+    ["Easy","Employee Bonus","577","https://leetcode.com/problems/employee-bonus/"],
+    ["Easy","Students and Examinations","1280","https://leetcode.com/problems/students-and-examinations/"],
+    ["Medium","Managers with at Least 5 Direct Reports","570","https://leetcode.com/problems/managers-with-at-least-5-direct-reports/"],
+    ["Medium","Confirmation Rate","1934","https://leetcode.com/problems/confirmation-rate/"]
+  ]],
+
+  ["Basic Aggregate Functions", [
+    ["Easy","Not Boring Movies","620","https://leetcode.com/problems/not-boring-movies/"],
+    ["Easy","Average Selling Price","1251","https://leetcode.com/problems/average-selling-price/"],
+    ["Easy","Project Employees I","1075","https://leetcode.com/problems/project-employees-i/"],
+    ["Easy","Percentage of Users Attended a Contest","1633","https://leetcode.com/problems/percentage-of-users-attended-a-contest/"],
+    ["Easy","Queries Quality and Percentage","1211","https://leetcode.com/problems/queries-quality-and-percentage/"],
+    ["Medium","Monthly Transactions I","1193","https://leetcode.com/problems/monthly-transactions-i/"],
+    ["Medium","Immediate Food Delivery II","1174","https://leetcode.com/problems/immediate-food-delivery-ii/"],
+    ["Medium","Game Play Analysis IV","550","https://leetcode.com/problems/game-play-analysis-iv/"]
+  ]],
+
+  ["Sorting and Grouping", [
+    ["Easy","Number of Unique Subjects Taught by Each Teacher","2356","https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/"],
+    ["Easy","User Activity for the Past 30 Days I","1141","https://leetcode.com/problems/user-activity-for-the-past-30-days-i/"],
+    ["Medium","Product Sales Analysis III","1070","https://leetcode.com/problems/product-sales-analysis-iii/"],
+    ["Easy","Classes More Than 5 Students","596","https://leetcode.com/problems/classes-more-than-5-students/"],
+    ["Easy","Find Followers Count","1729","https://leetcode.com/problems/find-followers-count/"],
+    ["Easy","Biggest Single Number","619","https://leetcode.com/problems/biggest-single-number/"],
+    ["Medium","Customers Who Bought All Products","1045","https://leetcode.com/problems/customers-who-bought-all-products/"]
+  ]],
+
+  ["Advanced Select and Joins", [
+    ["Easy","The Number of Employees Which Report to Each Employee","1731","https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/"],
+    ["Easy","Primary Department for Each Employee","1789","https://leetcode.com/problems/primary-department-for-each-employee/"],
+    ["Easy","Triangle Judgement","610","https://leetcode.com/problems/triangle-judgement/"],
+    ["Medium","Consecutive Numbers","180","https://leetcode.com/problems/consecutive-numbers/"],
+    ["Medium","Product Price at a Given Date","1164","https://leetcode.com/problems/product-price-at-a-given-date/"],
+    ["Medium","Last Person to Fit in the Bus","1204","https://leetcode.com/problems/last-person-to-fit-in-the-bus/"],
+    ["Medium","Count Salary Categories","1907","https://leetcode.com/problems/count-salary-categories/"]
+  ]],
+
+  ["Subqueries", [
+    ["Easy","Employees Whose Manager Left the Company","1978","https://leetcode.com/problems/employees-whose-manager-left-the-company/"],
+    ["Medium","Exchange Seats","626","https://leetcode.com/problems/exchange-seats/"],
+    ["Medium","Movie Rating","1341","https://leetcode.com/problems/movie-rating/"],
+    ["Medium","Restaurant Growth","1321","https://leetcode.com/problems/restaurant-growth/"],
+    ["Medium","Friend Requests II: Who Has the Most Friends","602","https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/"],
+    ["Medium","Investments in 2016","585","https://leetcode.com/problems/investments-in-2016/"],
+    ["Hard","Department Top Three Salaries","185","https://leetcode.com/problems/department-top-three-salaries/"]
+  ]],
+
+  ["Advanced String Functions / Regex / Clause", [
+    ["Easy","Fix Names in a Table","1667","https://leetcode.com/problems/fix-names-in-a-table/"],
+    ["Easy","Patients With a Condition","1527","https://leetcode.com/problems/patients-with-a-condition/"],
+    ["Easy","Delete Duplicate Emails","196","https://leetcode.com/problems/delete-duplicate-emails/"],
+    ["Medium","Second Highest Salary","176","https://leetcode.com/problems/second-highest-salary/"],
+    ["Easy","Group Sold Products By The Date","1484","https://leetcode.com/problems/group-sold-products-by-the-date/"],
+    ["Easy","List the Products Ordered in a Period","1327","https://leetcode.com/problems/list-the-products-ordered-in-a-period/"],
+    ["Easy","Find Users With Valid E-Mails","1517","https://leetcode.com/problems/find-users-with-valid-e-mails/"]
+  ]]
+];
+
 const RAW_DATA_MAP = new Map(RAW_DATA);
 const DEFAULT_TOPIC_ORDER = RAW_DATA.map(([t]) => t);
+
+const SQL_RAW_DATA_MAP = new Map(SQL_RAW_DATA);
+const DEFAULT_SQL_TOPIC_ORDER = SQL_RAW_DATA.map(([t]) => t);
 
 // USER'S PRE-CONFIGURED FIREBASE CONFIG
 const DEFAULT_FIREBASE_CONFIG = {
@@ -1970,13 +1995,19 @@ const DEFAULT_FIREBASE_CONFIG = {
 
 // STATE STORAGE FOR BOTH USERS (RANI & SWAROOP)
 let appState = {
+  activeTab: 'sheet-view',
   activeUser: 'Swaroop',
   currentFilter: 'all',
   searchQuery: '',
+  sqlFilter: 'all',
+  sqlSearchQuery: '',
   calendarCurrentDate: new Date(2026, 7, 30),
   startDate: '2026-08-30',
   targetDeadline: '2026-10-15',
+  sqlStartDate: '2026-08-30',
+  sqlTargetDeadline: '2026-09-30',
   topicOrder: [...DEFAULT_TOPIC_ORDER],
+  sqlTopicOrder: [...DEFAULT_SQL_TOPIC_ORDER],
   users: {
     Swaroop: { progress: {} },
     Rani: { progress: {} }
@@ -1984,9 +2015,11 @@ let appState = {
 };
 
 let openTopics = new Set(["Arrays & Hashing"]);
+let openSqlTopics = new Set(["Select"]);
 let firebaseDbRef = null;
 let isFirebaseConnected = false;
 let draggedTopicName = null;
+let draggedSqlTopicName = null;
 
 // FIREWORKS & CELEBRATION PARTICLE ENGINE
 const canvas = document.getElementById('fireworks-canvas');
@@ -2101,6 +2134,10 @@ function slug(topic, num) {
   return (topic + '-' + num).toLowerCase().replace(/[^a-z0-9]+/g, '-');
 }
 
+function sqlSlug(topic, num) {
+  return 'sql-' + slug(topic, num);
+}
+
 function formatDate(d) {
   const yyyy = d.getFullYear();
   const mm = String(d.getMonth() + 1).padStart(2, '0');
@@ -2123,7 +2160,7 @@ function formatPrettyDate(dateObj) {
   return dateObj.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
 }
 
-// Get the active ordered data list based on user rearrangement
+// Get active ordered data list for DSA
 function getOrderedData() {
   const result = [];
   const added = new Set();
@@ -2137,10 +2174,32 @@ function getOrderedData() {
     });
   }
 
-  // Fallback in case any topics were missing from customized order
   DEFAULT_TOPIC_ORDER.forEach(topicName => {
     if (!added.has(topicName) && RAW_DATA_MAP.has(topicName)) {
       result.push([topicName, RAW_DATA_MAP.get(topicName)]);
+    }
+  });
+
+  return result;
+}
+
+// Get active ordered data list for SQL 50
+function getSqlOrderedData() {
+  const result = [];
+  const added = new Set();
+  
+  if (Array.isArray(appState.sqlTopicOrder)) {
+    appState.sqlTopicOrder.forEach(topicName => {
+      if (SQL_RAW_DATA_MAP.has(topicName)) {
+        result.push([topicName, SQL_RAW_DATA_MAP.get(topicName)]);
+        added.add(topicName);
+      }
+    });
+  }
+
+  DEFAULT_SQL_TOPIC_ORDER.forEach(topicName => {
+    if (!added.has(topicName) && SQL_RAW_DATA_MAP.has(topicName)) {
+      result.push([topicName, SQL_RAW_DATA_MAP.get(topicName)]);
     }
   });
 
@@ -2157,17 +2216,21 @@ function loadState() {
       if (parsed.activeUser) appState.activeUser = parsed.activeUser;
       if (parsed.startDate) appState.startDate = parsed.startDate;
       if (parsed.targetDeadline) appState.targetDeadline = parsed.targetDeadline;
+      if (parsed.sqlStartDate) appState.sqlStartDate = parsed.sqlStartDate;
+      if (parsed.sqlTargetDeadline) appState.sqlTargetDeadline = parsed.sqlTargetDeadline;
       if (parsed.topicOrder && Array.isArray(parsed.topicOrder)) appState.topicOrder = parsed.topicOrder;
+      if (parsed.sqlTopicOrder && Array.isArray(parsed.sqlTopicOrder)) appState.sqlTopicOrder = parsed.sqlTopicOrder;
       if (parsed.openTopics && Array.isArray(parsed.openTopics)) {
         openTopics = new Set(parsed.openTopics);
+      }
+      if (parsed.openSqlTopics && Array.isArray(parsed.openSqlTopics)) {
+        openSqlTopics = new Set(parsed.openSqlTopics);
       }
     }
   } catch (e) { console.error('Local load failed', e); }
 
-  document.getElementById('schedule-start-input').value = appState.startDate;
-  document.getElementById('schedule-deadline-input').value = appState.targetDeadline;
   updateActiveUserUI();
-
+  updateScheduleStripUI();
   initDailyQuote();
   initFirebase();
 }
@@ -2178,9 +2241,13 @@ function saveLocalBackup() {
       activeUser: appState.activeUser,
       startDate: appState.startDate,
       targetDeadline: appState.targetDeadline,
+      sqlStartDate: appState.sqlStartDate,
+      sqlTargetDeadline: appState.sqlTargetDeadline,
       topicOrder: appState.topicOrder,
+      sqlTopicOrder: appState.sqlTopicOrder,
       users: appState.users,
-      openTopics: Array.from(openTopics)
+      openTopics: Array.from(openTopics),
+      openSqlTopics: Array.from(openSqlTopics)
     }));
   } catch (e) { console.error('Local backup failed', e); }
 }
@@ -2192,7 +2259,10 @@ function saveState(skipCloud) {
     firebaseDbRef.set({
       startDate: appState.startDate,
       targetDeadline: appState.targetDeadline,
+      sqlStartDate: appState.sqlStartDate,
+      sqlTargetDeadline: appState.sqlTargetDeadline,
       topicOrder: appState.topicOrder,
+      sqlTopicOrder: appState.sqlTopicOrder,
       users: appState.users,
       updatedAt: new Date().toISOString()
     }).catch(err => {
@@ -2220,18 +2290,15 @@ function initFirebase() {
       const data = snapshot.val();
       if (data) {
         if (data.users) appState.users = data.users;
-        if (data.startDate) {
-          appState.startDate = data.startDate;
-          document.getElementById('schedule-start-input').value = data.startDate;
-        }
-        if (data.targetDeadline) {
-          appState.targetDeadline = data.targetDeadline;
-          document.getElementById('schedule-deadline-input').value = data.targetDeadline;
-        }
-        if (data.topicOrder && Array.isArray(data.topicOrder)) {
-          appState.topicOrder = data.topicOrder;
-        }
+        if (data.startDate) appState.startDate = data.startDate;
+        if (data.targetDeadline) appState.targetDeadline = data.targetDeadline;
+        if (data.sqlStartDate) appState.sqlStartDate = data.sqlStartDate;
+        if (data.sqlTargetDeadline) appState.sqlTargetDeadline = data.sqlTargetDeadline;
+        if (data.topicOrder && Array.isArray(data.topicOrder)) appState.topicOrder = data.topicOrder;
+        if (data.sqlTopicOrder && Array.isArray(data.sqlTopicOrder)) appState.sqlTopicOrder = data.sqlTopicOrder;
+        
         saveLocalBackup();
+        updateScheduleStripUI();
         render();
       } else {
         saveState();
@@ -2316,6 +2383,30 @@ function updateActiveUserUI() {
   document.documentElement.style.setProperty('--accent-border', isSwaroop ? 'var(--swaroop-border)' : 'var(--rani-border)');
 }
 
+function updateScheduleStripUI() {
+  const isSql = appState.activeTab === 'sql-view';
+  const tagEl = document.getElementById('schedule-sheet-tag');
+  const startInput = document.getElementById('schedule-start-input');
+  const deadlineInput = document.getElementById('schedule-deadline-input');
+  const hintText = document.getElementById('schedule-hint-text');
+
+  if (isSql) {
+    tagEl.textContent = '🗄️ SQL 50 SCHEDULE';
+    tagEl.style.background = '#E8F0FE';
+    tagEl.style.color = '#1967D2';
+    startInput.value = appState.sqlStartDate || '2026-08-30';
+    deadlineInput.value = appState.sqlTargetDeadline || '2026-09-30';
+    hintText.textContent = '⚡ Dedicated SQL 50 timeline re-allocates days across 7 SQL topics!';
+  } else {
+    tagEl.textContent = '📋 DSA SCHEDULE';
+    tagEl.style.background = '#FFE8D6';
+    tagEl.style.color = '#D96B27';
+    startInput.value = appState.startDate || '2026-08-30';
+    deadlineInput.value = appState.targetDeadline || '2026-10-15';
+    hintText.textContent = '⚡ Dedicated DSA timeline re-allocates days across 18 DSA topics!';
+  }
+}
+
 // HARDNESS POINTS
 function computeTopicPoints(probs) {
   let pts = 0;
@@ -2327,9 +2418,11 @@ function computeTopicPoints(probs) {
   return pts;
 }
 
-// COUNTDOWN TIMER ENGINE
+// COUNTDOWN TIMER ENGINE (Reflects Active Sheet Target)
 function updateCountdownBadge() {
-  const target = parseDate(appState.targetDeadline);
+  const isSql = appState.activeTab === 'sql-view';
+  const activeDeadlineStr = isSql ? (appState.sqlTargetDeadline || '2026-09-30') : (appState.targetDeadline || '2026-10-15');
+  const target = parseDate(activeDeadlineStr);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -2338,7 +2431,10 @@ function updateCountdownBadge() {
 
   const valEl = document.getElementById('countdown-days-val');
   const lblEl = document.getElementById('countdown-days-lbl');
+  const subLblEl = document.getElementById('countdown-sub-lbl');
   const badgeEl = document.getElementById('header-countdown-badge');
+
+  subLblEl.textContent = isSql ? 'To SQL Finish' : 'To DSA Finish';
 
   if (diffDays > 0) {
     valEl.textContent = diffDays;
@@ -2376,42 +2472,66 @@ function moveTopic(topicName, direction) {
 }
 
 function resetTopicOrder() {
-  if (confirm('Reset topic sequence back to default NeetCode order?')) {
+  if (confirm('Reset DSA topic sequence back to default NeetCode order?')) {
     appState.topicOrder = [...DEFAULT_TOPIC_ORDER];
     saveState();
     render();
   }
 }
 
-// ADAPTIVE DYNAMIC DEADLINE ALGORITHM:
-// Correctly apportions the full available timeline (e.g. Aug 30 -> Oct 15 = 46 days)
-// and dynamically expands buffers when topics are finished ahead of time!
-function calculateScheduleForUser(userName) {
+function moveSqlTopic(topicName, direction) {
+  const idx = appState.sqlTopicOrder.indexOf(topicName);
+  if (idx < 0) return;
+
+  const targetIdx = idx + direction;
+  if (targetIdx < 0 || targetIdx >= appState.sqlTopicOrder.length) return;
+
+  const newOrder = [...appState.sqlTopicOrder];
+  const [removed] = newOrder.splice(idx, 1);
+  newOrder.splice(targetIdx, 0, removed);
+
+  appState.sqlTopicOrder = newOrder;
+  saveState();
+  render();
+}
+
+function resetSqlTopicOrder() {
+  if (confirm('Reset SQL topic sequence back to official LeetCode order?')) {
+    appState.sqlTopicOrder = [...DEFAULT_SQL_TOPIC_ORDER];
+    saveState();
+    render();
+  }
+}
+
+// ADAPTIVE DYNAMIC DEADLINE ALGORITHM
+function calculateScheduleForUser(userName, dataList, isSql = false) {
   const userObj = appState.users[userName] || { progress: {} };
-  const targetDeadline = parseDate(appState.targetDeadline);
-  const startDate = parseDate(appState.startDate);
+  const targetDeadline = parseDate(isSql ? (appState.sqlTargetDeadline || '2026-09-30') : (appState.targetDeadline || '2026-10-15'));
+  const startDate = parseDate(isSql ? (appState.sqlStartDate || '2026-08-30') : (appState.startDate || '2026-08-30'));
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const currentOrderedData = getOrderedData();
-  const totalSheetPoints = currentOrderedData.reduce((sum, [, probs]) => sum + computeTopicPoints(probs), 0) || 1;
-  const totalSheetDays = Math.max(currentOrderedData.length, Math.round((targetDeadline.getTime() - startDate.getTime()) / (1000 * 3600 * 24)));
+  const totalSheetPoints = dataList.reduce((sum, [, probs]) => sum + computeTopicPoints(probs), 0) || 1;
+  const totalSheetDays = Math.max(dataList.length, Math.round((targetDeadline.getTime() - startDate.getTime()) / (1000 * 3600 * 24)));
 
-  // Identify completed topics vs incomplete topics
   let completedTopics = [];
   let incompleteTopics = [];
   let maxCompletionDate = new Date(startDate);
 
-  currentOrderedData.forEach(([topic, probs], idx) => {
+  dataList.forEach(([topic, probs], idx) => {
     const pts = computeTopicPoints(probs);
-    const completedProbs = probs.filter(([,,num]) => userObj.progress[slug(topic, num)]?.done);
+    const completedProbs = probs.filter(([,,num]) => {
+      const k = isSql ? sqlSlug(topic, num) : slug(topic, num);
+      return userObj.progress[k]?.done;
+    });
     const isDone = (completedProbs.length === probs.length && probs.length > 0);
 
     let actualCompletionDate = null;
     if (isDone) {
       let maxDate = null;
       probs.forEach(([,,num]) => {
-        const item = userObj.progress[slug(topic, num)];
+        const k = isSql ? sqlSlug(topic, num) : slug(topic, num);
+        const item = userObj.progress[k];
         if (item && item.date) {
           if (!maxDate || item.date > maxDate) maxDate = item.date;
         }
@@ -2442,34 +2562,35 @@ function calculateScheduleForUser(userName) {
     }
   });
 
-  // Calculate available days remaining for the incomplete topics
   const startForIncomplete = (completedTopics.length > 0) ? maxCompletionDate : startDate;
   const daysRemainingToTarget = Math.max(incompleteTopics.length, Math.round((targetDeadline.getTime() - startForIncomplete.getTime()) / (1000 * 3600 * 24)));
   const totalIncompletePoints = incompleteTopics.reduce((sum, t) => sum + t.pts, 0) || 1;
 
-  // Pre-calculate allocated days upfront for each incomplete topic
   const allocatedDaysMap = new Map();
   incompleteTopics.forEach(t => {
     const allocated = Math.max(1, ((t.pts / totalIncompletePoints) * daysRemainingToTarget));
     allocatedDaysMap.set(t.topic, allocated);
   });
 
-  // Generate continuous timeline
   let runningDate = new Date(startDate);
   let scheduleMap = [];
   let hasOverdueTopic = false;
   let overdueExtensionDays = 0;
 
-  currentOrderedData.forEach(([topic, probs]) => {
+  dataList.forEach(([topic, probs]) => {
     const pts = computeTopicPoints(probs);
-    const completedProbs = probs.filter(([,,num]) => userObj.progress[slug(topic, num)]?.done);
+    const completedProbs = probs.filter(([,,num]) => {
+      const k = isSql ? sqlSlug(topic, num) : slug(topic, num);
+      return userObj.progress[k]?.done;
+    });
     const isDone = (completedProbs.length === probs.length && probs.length > 0);
     const baseDays = Math.max(1, Math.round(((pts / totalSheetPoints) * totalSheetDays) * 10) / 10);
 
     if (isDone) {
       let maxDateStr = null;
       probs.forEach(([,,num]) => {
-        const item = userObj.progress[slug(topic, num)];
+        const k = isSql ? sqlSlug(topic, num) : slug(topic, num);
+        const item = userObj.progress[k];
         if (item && item.date) {
           if (!maxDateStr || item.date > maxDateStr) maxDateStr = item.date;
         }
@@ -2548,23 +2669,45 @@ function calculateScheduleForUser(userName) {
 
 function computeUserStats(userName) {
   const userObj = appState.users[userName] || { progress: {} };
-  let totalProbs = 0;
-  let solvedProbs = 0;
-  let reviewProbs = 0;
+  let dsaTotal = 0;
+  let dsaSolved = 0;
+  let dsaReview = 0;
+
+  let sqlTotal = 0;
+  let sqlSolved = 0;
+  let sqlReview = 0;
+
   let activityDates = {};
 
   const currentOrderedData = getOrderedData();
+  const currentSqlData = getSqlOrderedData();
 
+  // DSA Stats
   currentOrderedData.forEach(([topic, probs]) => {
     probs.forEach(([,,num]) => {
-      totalProbs++;
+      dsaTotal++;
       const item = userObj.progress[slug(topic, num)];
       if (item && item.done) {
-        solvedProbs++;
+        dsaSolved++;
         if (item.date) activityDates[item.date] = (activityDates[item.date] || 0) + 1;
       }
       if (item && item.review) {
-        reviewProbs++;
+        dsaReview++;
+      }
+    });
+  });
+
+  // SQL Stats
+  currentSqlData.forEach(([topic, probs]) => {
+    probs.forEach(([,,num]) => {
+      sqlTotal++;
+      const item = userObj.progress[sqlSlug(topic, num)];
+      if (item && item.done) {
+        sqlSolved++;
+        if (item.date) activityDates[item.date] = (activityDates[item.date] || 0) + 1;
+      }
+      if (item && item.review) {
+        sqlReview++;
       }
     });
   });
@@ -2584,57 +2727,100 @@ function computeUserStats(userName) {
     } else { break; }
   }
 
-  const { scheduleMap, hasOverdueTopic, finalProjectedFinish } = calculateScheduleForUser(userName);
-  const estFinish = formatPrettyDate(finalProjectedFinish);
+  const dsaSched = calculateScheduleForUser(userName, currentOrderedData, false);
+  const sqlSched = calculateScheduleForUser(userName, currentSqlData, true);
 
-  return { totalProbs, solvedProbs, reviewProbs, streak, estFinish, activityDates, sched: scheduleMap, hasOverdueTopic, finalProjectedFinish };
+  const totalProbs = dsaTotal + sqlTotal;
+  const totalSolved = dsaSolved + sqlSolved;
+  const totalReview = dsaReview + sqlReview;
+
+  return {
+    dsaTotal, dsaSolved, dsaReview,
+    sqlTotal, sqlSolved, sqlReview,
+    totalProbs, totalSolved, totalReview,
+    streak, activityDates,
+    dsaSched, sqlSched
+  };
 }
 
-// MAIN RENDER
+// MAIN RENDER (Reflects Active Sheet Context!)
 function render() {
   updateCountdownBadge();
 
   const swaroopStats = computeUserStats('Swaroop');
   const raniStats = computeUserStats('Rani');
+  const isSql = (appState.activeTab === 'sql-view');
 
-  document.getElementById('swaroop-solved').textContent = `${swaroopStats.solvedProbs} / ${swaroopStats.totalProbs}`;
-  document.getElementById('swaroop-review').textContent = `${swaroopStats.reviewProbs} 🔖`;
+  // Update Swaroop Card
+  const sSolvedVal = isSql ? swaroopStats.sqlSolved : swaroopStats.dsaSolved;
+  const sTotalVal = isSql ? swaroopStats.sqlTotal : swaroopStats.dsaTotal;
+  const sReviewVal = isSql ? swaroopStats.sqlReview : swaroopStats.dsaReview;
+  const sSched = isSql ? swaroopStats.sqlSched : swaroopStats.dsaSched;
+
+  document.getElementById('swaroop-solved').textContent = `${sSolvedVal} / ${sTotalVal}`;
+  document.getElementById('swaroop-solved-lbl').textContent = isSql ? 'SQL 50 Solved' : 'DSA Solved';
+  document.getElementById('swaroop-review').textContent = `${sReviewVal} 🔖`;
+  document.getElementById('swaroop-review-lbl').textContent = isSql ? 'SQL Review' : 'DSA Review';
   document.getElementById('swaroop-streak').textContent = `${swaroopStats.streak} 🔥`;
   
   const sFinishEl = document.getElementById('swaroop-finish');
-  sFinishEl.textContent = swaroopStats.estFinish;
-  if (swaroopStats.hasOverdueTopic) {
-    sFinishEl.style.color = '#C62828';
+  sFinishEl.textContent = formatPrettyDate(sSched.finalProjectedFinish);
+
+  if (sSched.hasOverdueTopic) {
     document.getElementById('swaroop-schedule-status').textContent = '⚠️ Extended (Overdue Topic)';
+    document.getElementById('swaroop-schedule-status').style.color = '#C62828';
+    sFinishEl.style.color = '#C62828';
   } else {
-    sFinishEl.style.color = 'var(--brown-dark)';
     document.getElementById('swaroop-schedule-status').textContent = '🎯 Target On Track';
+    document.getElementById('swaroop-schedule-status').style.color = 'var(--text-muted)';
+    sFinishEl.style.color = 'var(--brown-dark)';
   }
 
-  const sPct = swaroopStats.totalProbs ? Math.round(swaroopStats.solvedProbs / swaroopStats.totalProbs * 100) : 0;
-  document.getElementById('swaroop-pct').textContent = sPct + '%';
+  const sPct = sTotalVal ? Math.round((sSolvedVal / sTotalVal) * 100) : 0;
+  document.getElementById('swaroop-pct-lbl').textContent = isSql ? 'SQL 50 Completion' : 'DSA Completion';
+  document.getElementById('swaroop-pct').textContent = `${sPct}% (${sSolvedVal}/${sTotalVal})`;
   document.getElementById('swaroop-bar').style.width = sPct + '%';
 
-  document.getElementById('rani-solved').textContent = `${raniStats.solvedProbs} / ${raniStats.totalProbs}`;
-  document.getElementById('rani-review').textContent = `${raniStats.reviewProbs} 🔖`;
+  // Update Rani Card
+  const rSolvedVal = isSql ? raniStats.sqlSolved : raniStats.dsaSolved;
+  const rTotalVal = isSql ? raniStats.sqlTotal : raniStats.dsaTotal;
+  const rReviewVal = isSql ? raniStats.sqlReview : raniStats.dsaReview;
+  const rSched = isSql ? raniStats.sqlSched : raniStats.dsaSched;
+
+  document.getElementById('rani-solved').textContent = `${rSolvedVal} / ${rTotalVal}`;
+  document.getElementById('rani-solved-lbl').textContent = isSql ? 'SQL 50 Solved' : 'DSA Solved';
+  document.getElementById('rani-review').textContent = `${rReviewVal} 🔖`;
+  document.getElementById('rani-review-lbl').textContent = isSql ? 'SQL Review' : 'DSA Review';
   document.getElementById('rani-streak').textContent = `${raniStats.streak} 🔥`;
   
   const rFinishEl = document.getElementById('rani-finish');
-  rFinishEl.textContent = raniStats.estFinish;
-  if (raniStats.hasOverdueTopic) {
-    rFinishEl.style.color = '#C62828';
+  rFinishEl.textContent = formatPrettyDate(rSched.finalProjectedFinish);
+
+  if (rSched.hasOverdueTopic) {
     document.getElementById('rani-schedule-status').textContent = '⚠️ Extended (Overdue Topic)';
+    document.getElementById('rani-schedule-status').style.color = '#C62828';
+    rFinishEl.style.color = '#C62828';
   } else {
-    rFinishEl.style.color = 'var(--brown-dark)';
     document.getElementById('rani-schedule-status').textContent = '🎯 Target On Track';
+    document.getElementById('rani-schedule-status').style.color = 'var(--text-muted)';
+    rFinishEl.style.color = 'var(--brown-dark)';
   }
 
-  const rPct = raniStats.totalProbs ? Math.round(raniStats.solvedProbs / raniStats.totalProbs * 100) : 0;
-  document.getElementById('rani-pct').textContent = rPct + '%';
+  const rPct = rTotalVal ? Math.round((rSolvedVal / rTotalVal) * 100) : 0;
+  document.getElementById('rani-pct-lbl').textContent = isSql ? 'SQL 50 Completion' : 'DSA Completion';
+  document.getElementById('rani-pct').textContent = `${rPct}% (${rSolvedVal}/${rTotalVal})`;
   document.getElementById('rani-bar').style.width = rPct + '%';
 
-  const activeStats = appState.activeUser === 'Swaroop' ? swaroopStats : raniStats;
+  // Render Sheets
+  renderDsaSheet(swaroopStats, raniStats);
+  renderSqlSheet(swaroopStats, raniStats);
+  renderCalendar(swaroopStats, raniStats);
+  renderActivityLog();
+}
 
+// RENDER DSA SHEET
+function renderDsaSheet(swaroopStats, raniStats) {
+  const activeStats = appState.activeUser === 'Swaroop' ? swaroopStats : raniStats;
   const topicsContainer = document.getElementById('topics-container');
   topicsContainer.innerHTML = '';
 
@@ -2642,13 +2828,14 @@ function render() {
   const currentOrderedData = getOrderedData();
 
   currentOrderedData.forEach(([topic, probs], idx) => {
-    const sSched = swaroopStats.sched[idx];
-    const rSched = raniStats.sched[idx];
-    const activeSched = activeStats.sched[idx];
+    const sSched = swaroopStats.dsaSched.scheduleMap[idx];
+    const rSched = raniStats.dsaSched.scheduleMap[idx];
+    const activeSched = activeStats.dsaSched.scheduleMap[idx];
 
     const matchingProbs = probs.filter(([diff, title, num]) => {
-      const sItem = appState.users.Swaroop.progress[slug(topic, num)] || {};
-      const rItem = appState.users.Rani.progress[slug(topic, num)] || {};
+      const key = slug(topic, num);
+      const sItem = appState.users.Swaroop.progress[key] || {};
+      const rItem = appState.users.Rani.progress[key] || {};
       const sDone = !!sItem.done;
       const rDone = !!rItem.done;
       const sReview = !!sItem.review;
@@ -2763,7 +2950,7 @@ function render() {
 
     card.addEventListener('dragend', () => {
       card.classList.remove('dragging');
-      document.querySelectorAll('.topic-card').forEach(c => {
+      document.querySelectorAll('#topics-container .topic-card').forEach(c => {
         c.classList.remove('drag-over-top', 'drag-over-bottom');
       });
       draggedTopicName = null;
@@ -2891,11 +3078,11 @@ function render() {
       row.innerHTML = `
         <div class="partner-checkboxes" title="Mark problem as completed">
           <label class="user-check-wrap swaroop" title="Mark solved for Swaroop">
-            <input type="checkbox" class="prob-check" ${isSDone ? 'checked' : ''} data-user="Swaroop" data-key="${key}" data-type="done">
+            <input type="checkbox" class="prob-check" ${isSDone ? 'checked' : ''} data-user="Swaroop" data-key="${key}" data-type="done" data-sheet="dsa" data-topic="${topic}">
             <span>🦊 S</span>
           </label>
           <label class="user-check-wrap rani" title="Mark solved for Rani">
-            <input type="checkbox" class="prob-check" ${isRDone ? 'checked' : ''} data-user="Rani" data-key="${key}" data-type="done">
+            <input type="checkbox" class="prob-check" ${isRDone ? 'checked' : ''} data-user="Rani" data-key="${key}" data-type="done" data-sheet="dsa" data-topic="${topic}">
             <span>🌸 R</span>
           </label>
         </div>
@@ -2910,12 +3097,12 @@ function render() {
 
         <div class="problem-review-group" title="Mark for review / revisit later">
           <label class="review-check-wrap swaroop ${isSReview ? 'active' : ''}" title="Swaroop: Mark for Review">
-            <input type="checkbox" class="prob-check" ${isSReview ? 'checked' : ''} data-user="Swaroop" data-key="${key}" data-type="review">
+            <input type="checkbox" class="prob-check" ${isSReview ? 'checked' : ''} data-user="Swaroop" data-key="${key}" data-type="review" data-sheet="dsa" data-topic="${topic}">
             <span>🔖 S Rev</span>
           </label>
           <label class="review-check-wrap rani ${isRReview ? 'active' : ''}" title="Rani: Mark for Review">
-            <input type="checkbox" class="prob-check" ${isRReview ? 'checked' : ''} data-user="Rani" data-key="${key}" data-type="review">
-            <span>🔖 R Rev</span>
+            <input type="checkbox" class="prob-check" ${isRReview ? 'checked' : ''} data-user="Rani" data-key="${key}" data-type="review" data-sheet="dsa" data-topic="${topic}">
+            <span>🌸 R</span>
           </label>
         </div>
 
@@ -2966,9 +3153,343 @@ function render() {
 
     topicsContainer.appendChild(card);
   });
+}
 
-  renderCalendar(swaroopStats, raniStats);
-  renderActivityLog();
+// RENDER SQL 50 SHEET
+function renderSqlSheet(swaroopStats, raniStats) {
+  const activeStats = appState.activeUser === 'Swaroop' ? swaroopStats : raniStats;
+  const sqlTopicsContainer = document.getElementById('sql-topics-container');
+  sqlTopicsContainer.innerHTML = '';
+
+  const q = appState.sqlSearchQuery.toLowerCase();
+  const currentSqlData = getSqlOrderedData();
+
+  currentSqlData.forEach(([topic, probs], idx) => {
+    const sSched = swaroopStats.sqlSched.scheduleMap[idx];
+    const rSched = raniStats.sqlSched.scheduleMap[idx];
+    const activeSched = activeStats.sqlSched.scheduleMap[idx];
+
+    const matchingProbs = probs.filter(([diff, title, num]) => {
+      const key = sqlSlug(topic, num);
+      const sItem = appState.users.Swaroop.progress[key] || {};
+      const rItem = appState.users.Rani.progress[key] || {};
+      const sDone = !!sItem.done;
+      const rDone = !!rItem.done;
+      const sReview = !!sItem.review;
+      const rReview = !!rItem.review;
+      const myDone = appState.activeUser === 'Swaroop' ? sDone : rDone;
+      const myReview = appState.activeUser === 'Swaroop' ? sReview : rReview;
+
+      const matchesSearch = !q || title.toLowerCase().includes(q) || topic.toLowerCase().includes(q) || num.includes(q);
+      
+      let matchesFilter = true;
+      if (appState.sqlFilter === 'Easy' || appState.sqlFilter === 'Medium' || appState.sqlFilter === 'Hard') {
+        matchesFilter = (diff === appState.sqlFilter);
+      } else if (appState.sqlFilter === 'unsolved-me') {
+        matchesFilter = !myDone;
+      } else if (appState.sqlFilter === 'for-review') {
+        matchesFilter = myReview;
+      } else if (appState.sqlFilter === 'both-done') {
+        matchesFilter = (sDone && rDone);
+      }
+      return matchesSearch && matchesFilter;
+    });
+
+    if (matchingProbs.length === 0 && (q || appState.sqlFilter !== 'all')) return;
+
+    const isTopicOpen = openSqlTopics.has(topic) || (q.length > 0);
+
+    const card = document.createElement('div');
+    card.setAttribute('draggable', 'true');
+    card.dataset.topic = topic;
+    card.dataset.index = idx;
+    
+    let cardStatusClass = '';
+    if (activeSched.urgencyStatus === 'overdue') cardStatusClass = 'is-overdue';
+    else if (activeSched.urgencyStatus === 'due-soon' || activeSched.urgencyStatus === 'due-today') cardStatusClass = 'is-due-soon';
+
+    card.className = `topic-card ${cardStatusClass} ${isTopicOpen ? 'open' : ''}`;
+
+    const targetDateStr = formatPrettyDate(activeSched.targetEndDate);
+
+    let statusTagHTML = '';
+    let targetDateClass = '';
+
+    if (activeSched.isDone) {
+      statusTagHTML = `<span class="status-tag done">✓ Completed</span>`;
+    } else if (activeSched.urgencyStatus === 'overdue') {
+      const daysAgo = Math.abs(activeSched.daysDifference);
+      statusTagHTML = `<span class="status-tag overdue">🚨 Overdue (${daysAgo}d ago)</span>`;
+      targetDateClass = 'overdue';
+    } else if (activeSched.urgencyStatus === 'due-today') {
+      statusTagHTML = `<span class="status-tag due-soon">⚠️ Due Today!</span>`;
+      targetDateClass = 'due-soon';
+    } else if (activeSched.urgencyStatus === 'due-soon') {
+      statusTagHTML = `<span class="status-tag due-soon">⚠️ Due in 1 Day!</span>`;
+      targetDateClass = 'due-soon';
+    } else if (activeSched.isExpanded && activeSched.extraBufferDays > 0.3) {
+      statusTagHTML = `<span class="status-tag expanded">⏱️ +${activeSched.extraBufferDays}d Buffer (${Math.round(activeSched.estDays)}d)</span>`;
+    } else {
+      statusTagHTML = `<span class="status-tag ontrack">${Math.round(activeSched.estDays)} Days</span>`;
+    }
+
+    const isSAllDone = (sSched.doneCount === probs.length && probs.length > 0);
+    const isRAllDone = (rSched.doneCount === probs.length && probs.length > 0);
+
+    card.innerHTML = `
+      <div class="topic-header">
+        <div class="topic-title-group">
+          <!-- Topic Reorder Grip & Arrows -->
+          <div class="topic-reorder-controls" onclick="event.stopPropagation()">
+            <span class="drag-handle" title="Drag to rearrange SQL topic sequence">⋮⋮</span>
+            <button class="move-topic-btn" onclick="moveSqlTopic('${topic}', -1)" title="Move topic up" ${idx === 0 ? 'disabled style="opacity:0.3;"' : ''}>▲</button>
+            <button class="move-topic-btn" onclick="moveSqlTopic('${topic}', 1)" title="Move topic down" ${idx === currentSqlData.length - 1 ? 'disabled style="opacity:0.3;"' : ''}>▼</button>
+          </div>
+
+          <!-- Topic Master Checkboxes for Swaroop & Rani -->
+          <div class="topic-master-checks" title="Mark entire SQL topic complete">
+            <label class="user-check-wrap swaroop" title="Mark whole SQL topic for Swaroop">
+              <input type="checkbox" class="sql-topic-master-check" data-topic="${topic}" data-user="Swaroop" ${isSAllDone ? 'checked' : ''}>
+              <span>🦊 S</span>
+            </label>
+            <label class="user-check-wrap rani" title="Mark whole SQL topic for Rani">
+              <input type="checkbox" class="sql-topic-master-check" data-topic="${topic}" data-user="Rani" ${isRAllDone ? 'checked' : ''}>
+              <span>🌸 R</span>
+            </label>
+          </div>
+
+          <span class="topic-title">🗄️ ${topic}</span>
+
+          <div class="topic-user-progress-badges">
+            <span class="u-badge swaroop">🦊 S: ${sSched.doneCount}/${probs.length}</span>
+            <span class="u-badge rani">🌸 R: ${rSched.doneCount}/${probs.length}</span>
+          </div>
+        </div>
+        <div class="topic-schedule-meta">
+          <div class="target-date-box">
+            <span class="target-date-label">Target Date</span>
+            <span class="target-date-val ${targetDateClass}">${targetDateStr}</span>
+          </div>
+          ${statusTagHTML}
+          <span class="topic-chevron">▶</span>
+        </div>
+      </div>
+      <div class="problems-list"></div>
+    `;
+
+    // HTML5 Drag & Drop Listeners
+    card.addEventListener('dragstart', (e) => {
+      draggedSqlTopicName = topic;
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', topic);
+    });
+
+    card.addEventListener('dragend', () => {
+      card.classList.remove('dragging');
+      document.querySelectorAll('#sql-topics-container .topic-card').forEach(c => {
+        c.classList.remove('drag-over-top', 'drag-over-bottom');
+      });
+      draggedSqlTopicName = null;
+    });
+
+    card.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      if (!draggedSqlTopicName || draggedSqlTopicName === topic) return;
+      
+      const rect = card.getBoundingClientRect();
+      const midY = rect.top + rect.height / 2;
+      
+      card.classList.remove('drag-over-top', 'drag-over-bottom');
+      if (e.clientY < midY) {
+        card.classList.add('drag-over-top');
+      } else {
+        card.classList.add('drag-over-bottom');
+      }
+    });
+
+    card.addEventListener('dragleave', () => {
+      card.classList.remove('drag-over-top', 'drag-over-bottom');
+    });
+
+    card.addEventListener('drop', (e) => {
+      e.preventDefault();
+      card.classList.remove('drag-over-top', 'drag-over-bottom');
+      if (!draggedSqlTopicName || draggedSqlTopicName === topic) return;
+
+      const fromIdx = appState.sqlTopicOrder.indexOf(draggedSqlTopicName);
+      let toIdx = appState.sqlTopicOrder.indexOf(topic);
+      if (fromIdx < 0 || toIdx < 0) return;
+
+      const rect = card.getBoundingClientRect();
+      const midY = rect.top + rect.height / 2;
+      if (e.clientY >= midY && fromIdx < toIdx) {
+      } else if (e.clientY >= midY && fromIdx > toIdx) {
+        toIdx += 1;
+      }
+
+      const newOrder = [...appState.sqlTopicOrder];
+      const [removed] = newOrder.splice(fromIdx, 1);
+      newOrder.splice(toIdx, 0, removed);
+
+      appState.sqlTopicOrder = newOrder;
+      saveState();
+      render();
+    });
+
+    // Set indeterminate states
+    const sMaster = card.querySelector('.sql-topic-master-check[data-user="Swaroop"]');
+    if (sMaster && sSched.doneCount > 0 && sSched.doneCount < probs.length) {
+      sMaster.indeterminate = true;
+    }
+    const rMaster = card.querySelector('.sql-topic-master-check[data-user="Rani"]');
+    if (rMaster && rSched.doneCount > 0 && rSched.doneCount < probs.length) {
+      rMaster.indeterminate = true;
+    }
+
+    // Toggle entire SQL topic on master check
+    card.querySelectorAll('.sql-topic-master-check').forEach(masterInput => {
+      masterInput.addEventListener('click', (e) => e.stopPropagation());
+      masterInput.addEventListener('change', (e) => {
+        e.stopPropagation();
+        const user = e.target.dataset.user;
+        const top = e.target.dataset.topic;
+        const isChecked = e.target.checked;
+        const todayStr = formatDate(new Date());
+
+        const targetTopicData = SQL_RAW_DATA.find(([t]) => t === top);
+        if (targetTopicData) {
+          const [, pList] = targetTopicData;
+          pList.forEach(([,, num]) => {
+            const k = sqlSlug(top, num);
+            if (!appState.users[user].progress[k]) {
+              appState.users[user].progress[k] = { done: false, date: null, review: false };
+            }
+            if (isChecked) {
+              appState.users[user].progress[k].done = true;
+              appState.users[user].progress[k].date = todayStr;
+            } else {
+              appState.users[user].progress[k].done = false;
+              appState.users[user].progress[k].date = null;
+            }
+          });
+        }
+
+        if (isChecked) {
+          triggerCelebration(top, user);
+        }
+
+        openSqlTopics.add(top);
+        saveState();
+        render();
+      });
+    });
+
+    card.querySelector('.topic-header').onclick = (e) => {
+      if (e.target.closest('.topic-master-checks') || e.target.closest('.topic-reorder-controls')) return;
+      if (openSqlTopics.has(topic)) {
+        openSqlTopics.delete(topic);
+        card.classList.remove('open');
+      } else {
+        openSqlTopics.add(topic);
+        card.classList.add('open');
+      }
+      saveLocalBackup();
+    };
+
+    const listEl = card.querySelector('.problems-list');
+
+    matchingProbs.forEach(([diff, title, num, link]) => {
+      const key = sqlSlug(topic, num);
+      const sItem = appState.users.Swaroop.progress[key] || {};
+      const rItem = appState.users.Rani.progress[key] || {};
+      const isSDone = !!sItem.done;
+      const isRDone = !!rItem.done;
+      const isSReview = !!sItem.review;
+      const isRReview = !!rItem.review;
+      const isMyReview = appState.activeUser === 'Swaroop' ? isSReview : isRReview;
+
+      const row = document.createElement('div');
+      row.className = `problem-row ${isMyReview ? 'is-marked-review' : ''}`;
+
+      row.innerHTML = `
+        <div class="partner-checkboxes" title="Mark problem as completed">
+          <label class="user-check-wrap swaroop" title="Mark solved for Swaroop">
+            <input type="checkbox" class="prob-check" ${isSDone ? 'checked' : ''} data-user="Swaroop" data-key="${key}" data-type="done" data-sheet="sql" data-topic="${topic}">
+            <span>🦊 S</span>
+          </label>
+          <label class="user-check-wrap rani" title="Mark solved for Rani">
+            <input type="checkbox" class="prob-check" ${isRDone ? 'checked' : ''} data-user="Rani" data-key="${key}" data-type="done" data-sheet="sql" data-topic="${topic}">
+            <span>🌸 R</span>
+          </label>
+        </div>
+
+        <a href="${link}" target="_blank" rel="noopener" class="problem-num-link" title="Open LeetCode #${num}">#${num}</a>
+        <span class="problem-title">
+          <a href="${link}" target="_blank" rel="noopener" title="Solve #${num} on LeetCode">
+            ${title} <span class="link-arrow">↗</span>
+          </a>
+        </span>
+        <span class="diff-badge ${diff}">${diff}</span>
+
+        <div class="problem-review-group" title="Mark for review / revisit later">
+          <label class="review-check-wrap swaroop ${isSReview ? 'active' : ''}" title="Swaroop: Mark for Review">
+            <input type="checkbox" class="prob-check" ${isSReview ? 'checked' : ''} data-user="Swaroop" data-key="${key}" data-type="review" data-sheet="sql" data-topic="${topic}">
+            <span>🔖 S Rev</span>
+          </label>
+          <label class="review-check-wrap rani ${isRReview ? 'active' : ''}" title="Rani: Mark for Review">
+            <input type="checkbox" class="prob-check" ${isRReview ? 'checked' : ''} data-user="Rani" data-key="${key}" data-type="review" data-sheet="sql" data-topic="${topic}">
+            <span>🌸 R</span>
+          </label>
+        </div>
+
+        <div class="status-badges-group">
+          ${isSDone ? `<span class="solved-pill swaroop">🦊 ${sItem.date ? sItem.date.slice(5) : '✓'}</span>` : ''}
+          ${isRDone ? `<span class="solved-pill rani">🌸 ${rItem.date ? rItem.date.slice(5) : '✓'}</span>` : ''}
+          ${isSReview ? `<span class="review-pill swaroop" title="Marked for review by Swaroop">🔖 S Rev</span>` : ''}
+          ${isRReview ? `<span class="review-pill rani" title="Marked for review by Rani">🔖 R Rev</span>` : ''}
+        </div>
+      `;
+
+      row.querySelectorAll('input.prob-check').forEach(input => {
+        input.addEventListener('change', (e) => {
+          const user = e.target.dataset.user;
+          const k = e.target.dataset.key;
+          const type = e.target.dataset.type;
+          const isChecked = e.target.checked;
+
+          openSqlTopics.add(topic);
+
+          if (!appState.users[user].progress[k]) {
+            appState.users[user].progress[k] = { done: false, date: null, review: false };
+          }
+
+          if (type === 'done') {
+            appState.users[user].progress[k].done = isChecked;
+            appState.users[user].progress[k].date = isChecked ? formatDate(new Date()) : null;
+
+            const targetTopicData = SQL_RAW_DATA.find(([t]) => t === topic);
+            if (isChecked && targetTopicData) {
+              const [, pList] = targetTopicData;
+              const completedCount = pList.filter(([,, n]) => appState.users[user].progress[sqlSlug(topic, n)]?.done).length;
+              if (completedCount === pList.length) {
+                triggerCelebration(topic, user);
+              }
+            }
+          } else if (type === 'review') {
+            appState.users[user].progress[k].review = isChecked;
+          }
+          
+          saveState();
+          render();
+        });
+      });
+
+      listEl.appendChild(row);
+    });
+
+    sqlTopicsContainer.appendChild(card);
+  });
 }
 
 // CALENDAR
@@ -3002,6 +3523,7 @@ function renderCalendar(swaroopStats, raniStats) {
 
   const todayStr = formatDate(new Date());
   const currentOrderedData = getOrderedData();
+  const currentSqlData = getSqlOrderedData();
 
   for (let d = 1; d <= daysInMonth; d++) {
     const cellDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
@@ -3013,6 +3535,7 @@ function renderCalendar(swaroopStats, raniStats) {
     let rCount = 0;
     let details = { swaroop: [], rani: [] };
 
+    // DSA problems on this date
     currentOrderedData.forEach(([topic, probs]) => {
       probs.forEach(([diff, title, num, link]) => {
         const k = slug(topic, num);
@@ -3021,11 +3544,29 @@ function renderCalendar(swaroopStats, raniStats) {
 
         if (sIt && sIt.done && sIt.date === cellDateStr) {
           sCount++;
-          details.swaroop.push({ topic, title, num, diff, link });
+          details.swaroop.push({ sheet: 'DSA', topic, title, num, diff, link });
         }
         if (rIt && rIt.done && rIt.date === cellDateStr) {
           rCount++;
-          details.rani.push({ topic, title, num, diff, link });
+          details.rani.push({ sheet: 'DSA', topic, title, num, diff, link });
+        }
+      });
+    });
+
+    // SQL problems on this date
+    currentSqlData.forEach(([topic, probs]) => {
+      probs.forEach(([diff, title, num, link]) => {
+        const k = sqlSlug(topic, num);
+        const sIt = appState.users.Swaroop.progress[k];
+        const rIt = appState.users.Rani.progress[k];
+
+        if (sIt && sIt.done && sIt.date === cellDateStr) {
+          sCount++;
+          details.swaroop.push({ sheet: 'SQL 50', topic, title, num, diff, link });
+        }
+        if (rIt && rIt.done && rIt.date === cellDateStr) {
+          rCount++;
+          details.rani.push({ sheet: 'SQL 50', topic, title, num, diff, link });
         }
       });
     });
@@ -3052,14 +3593,27 @@ function renderActivityLog() {
 
   let entries = [];
   const currentOrderedData = getOrderedData();
+  const currentSqlData = getSqlOrderedData();
 
   ['Swaroop', 'Rani'].forEach(u => {
     const uObj = appState.users[u];
+    
+    // DSA items
     currentOrderedData.forEach(([topic, probs]) => {
       probs.forEach(([diff, title, num, link]) => {
         const item = uObj.progress[slug(topic, num)];
         if (item && item.done && item.date) {
-          entries.push({ user: u, topic, title, num, diff, link, date: item.date });
+          entries.push({ user: u, sheet: 'DSA', topic, title, num, diff, link, date: item.date });
+        }
+      });
+    });
+
+    // SQL items
+    currentSqlData.forEach(([topic, probs]) => {
+      probs.forEach(([diff, title, num, link]) => {
+        const item = uObj.progress[sqlSlug(topic, num)];
+        if (item && item.done && item.date) {
+          entries.push({ user: u, sheet: 'SQL 50', topic, title, num, diff, link, date: item.date });
         }
       });
     });
@@ -3072,7 +3626,7 @@ function renderActivityLog() {
     return;
   }
 
-  entries.slice(0, 12).forEach(e => {
+  entries.slice(0, 16).forEach(e => {
     const isS = e.user === 'Swaroop';
     const item = document.createElement('div');
     item.className = 'log-item';
@@ -3081,7 +3635,10 @@ function renderActivityLog() {
       <div class="log-desc">
         Solved <a href="${e.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); font-weight:700; text-decoration:none;">#${e.num} ${e.title} ↗</a>
       </div>
-      <span style="font-size:10.5px; color:var(--text-muted); background:var(--bg-alt); padding:2px 6px; border-radius:4px; margin-top:4px; display:inline-block;">${e.topic}</span>
+      <div style="margin-top:4px; display:flex; gap:6px; align-items:center;">
+        <span style="font-size:10px; font-weight:700; color:var(--brown-dark); background:#EAE2D5; padding:1px 5px; border-radius:3px;">${e.sheet}</span>
+        <span style="font-size:10.5px; color:var(--text-muted); background:var(--bg-alt); padding:2px 6px; border-radius:4px;">${e.topic}</span>
+      </div>
     `;
     logContainer.appendChild(item);
   });
@@ -3108,10 +3665,13 @@ function showDayModal(dateStr, details) {
         ${sLen === 0 ? '<div style="font-size:12px; color:var(--text-light);">No problems solved.</div>' : `
           <ul style="list-style:none;">
             ${details.swaroop.map(it => `
-              <li style="font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between; align-items:center;">
-                <a href="${it.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); text-decoration:none; font-weight:600;">
-                  #${it.num} ${it.title} <span style="font-size:10px; opacity:0.6;">↗</span>
-                </a>
+              <li style="font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                <div>
+                  <span style="font-size:10px; font-weight:700; background:#EAE2D5; color:var(--brown-dark); padding:1px 5px; border-radius:3px; margin-right:4px;">${it.sheet}</span>
+                  <a href="${it.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); text-decoration:none; font-weight:600;">
+                    #${it.num} ${it.title} <span style="font-size:10px; opacity:0.6;">↗</span>
+                  </a>
+                </div>
                 <span class="diff-badge ${it.diff}">${it.diff}</span>
               </li>
             `).join('')}
@@ -3124,10 +3684,13 @@ function showDayModal(dateStr, details) {
         ${rLen === 0 ? '<div style="font-size:12px; color:var(--text-light);">No problems solved.</div>' : `
           <ul style="list-style:none;">
             ${details.rani.map(it => `
-              <li style="font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between; align-items:center;">
-                <a href="${it.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); text-decoration:none; font-weight:600;">
-                  #${it.num} ${it.title} <span style="font-size:10px; opacity:0.6;">↗</span>
-                </a>
+              <li style="font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                <div>
+                  <span style="font-size:10px; font-weight:700; background:#EAE2D5; color:var(--brown-dark); padding:1px 5px; border-radius:3px; margin-right:4px;">${it.sheet}</span>
+                  <a href="${it.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); text-decoration:none; font-weight:600;">
+                    #${it.num} ${it.title} <span style="font-size:10px; opacity:0.6;">↗</span>
+                  </a>
+                </div>
                 <span class="diff-badge ${it.diff}">${it.diff}</span>
               </li>
             `).join('')}
@@ -3145,7 +3708,10 @@ document.getElementById('open-sync-btn').addEventListener('click', () => {
   document.getElementById('sync-code-area').value = JSON.stringify({
     startDate: appState.startDate,
     targetDeadline: appState.targetDeadline,
+    sqlStartDate: appState.sqlStartDate,
+    sqlTargetDeadline: appState.sqlTargetDeadline,
     topicOrder: appState.topicOrder,
+    sqlTopicOrder: appState.sqlTopicOrder,
     users: appState.users
   }, null, 2);
   document.getElementById('sync-modal').classList.add('open');
@@ -3155,7 +3721,10 @@ function copySyncData() {
   const code = JSON.stringify({
     startDate: appState.startDate,
     targetDeadline: appState.targetDeadline,
+    sqlStartDate: appState.sqlStartDate,
+    sqlTargetDeadline: appState.sqlTargetDeadline,
     topicOrder: appState.topicOrder,
+    sqlTopicOrder: appState.sqlTopicOrder,
     users: appState.users
   });
   navigator.clipboard.writeText(code).then(() => {
@@ -3175,13 +3744,21 @@ function mergeSyncData() {
     if (parsed.users && parsed.users.Swaroop && parsed.users.Rani) {
       appState.users.Swaroop.progress = { ...appState.users.Swaroop.progress, ...parsed.users.Swaroop.progress };
       appState.users.Rani.progress = { ...appState.users.Rani.progress, ...parsed.users.Rani.progress };
+      if (parsed.startDate) appState.startDate = parsed.startDate;
+      if (parsed.targetDeadline) appState.targetDeadline = parsed.targetDeadline;
+      if (parsed.sqlStartDate) appState.sqlStartDate = parsed.sqlStartDate;
+      if (parsed.sqlTargetDeadline) appState.sqlTargetDeadline = parsed.sqlTargetDeadline;
       if (parsed.topicOrder && Array.isArray(parsed.topicOrder)) {
         appState.topicOrder = parsed.topicOrder;
       }
+      if (parsed.sqlTopicOrder && Array.isArray(parsed.sqlTopicOrder)) {
+        appState.sqlTopicOrder = parsed.sqlTopicOrder;
+      }
       saveState();
+      updateScheduleStripUI();
       render();
       closeModal('sync-modal');
-      alert('Successfully merged Rani & Swaroop progress data!');
+      alert('Successfully merged Rani & Swaroop DSA & SQL progress data!');
     } else {
       alert('Invalid backup data format. Please make sure the JSON contains Swaroop and Rani profiles.');
     }
@@ -3190,7 +3767,7 @@ function mergeSyncData() {
   }
 }
 
-// EVENT LISTENERS
+// EVENT LISTENERS FOR TABS & FILTERS
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', (e) => {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -3198,18 +3775,32 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     
     btn.classList.add('active');
     const tabId = btn.dataset.tab;
-    document.getElementById(tabId).classList.add('active');
+    appState.activeTab = tabId;
+    
+    const targetPane = document.getElementById(tabId);
+    if (targetPane) targetPane.classList.add('active');
+
+    updateScheduleStripUI();
+    render();
   });
 });
 
 document.getElementById('schedule-start-input').addEventListener('change', (e) => {
-  appState.startDate = e.target.value;
+  if (appState.activeTab === 'sql-view') {
+    appState.sqlStartDate = e.target.value;
+  } else {
+    appState.startDate = e.target.value;
+  }
   saveState();
   render();
 });
 
 document.getElementById('schedule-deadline-input').addEventListener('change', (e) => {
-  appState.targetDeadline = e.target.value;
+  if (appState.activeTab === 'sql-view') {
+    appState.sqlTargetDeadline = e.target.value;
+  } else {
+    appState.targetDeadline = e.target.value;
+  }
   saveState();
   render();
 });
@@ -3219,11 +3810,24 @@ document.getElementById('search-input').addEventListener('input', (e) => {
   render();
 });
 
+document.getElementById('sql-search-input').addEventListener('input', (e) => {
+  appState.sqlSearchQuery = e.target.value;
+  render();
+});
+
 document.getElementById('diff-filters').addEventListener('click', (e) => {
   if (e.target.tagName !== 'BUTTON' || e.target.classList.contains('reset-order-btn')) return;
   document.querySelectorAll('#diff-filters .filter-btn').forEach(b => b.classList.remove('active'));
   e.target.classList.add('active');
   appState.currentFilter = e.target.dataset.filter;
+  render();
+});
+
+document.getElementById('sql-diff-filters').addEventListener('click', (e) => {
+  if (e.target.tagName !== 'BUTTON' || e.target.classList.contains('reset-order-btn')) return;
+  document.querySelectorAll('#sql-diff-filters .filter-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  appState.sqlFilter = e.target.dataset.filter;
   render();
 });
 
