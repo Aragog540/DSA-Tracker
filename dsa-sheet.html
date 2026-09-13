@@ -244,96 +244,6 @@
     transform: rotate(180deg);
   }
 
-  /* Sorry Rani Apology Panel */
-  .sorry-panel {
-    background: linear-gradient(135deg, #FFF5F7 0%, #FFE9EF 50%, #FFF0F5 100%);
-    border: 2px solid #F7C6D2;
-    border-left: 6px solid var(--rani-color);
-    border-radius: var(--radius);
-    padding: 22px 28px;
-    margin-bottom: 20px;
-    box-shadow: 0 6px 20px rgba(217, 78, 107, 0.12);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    position: relative;
-    overflow: hidden;
-    animation: gentlePulse 3s ease-in-out infinite alternate;
-  }
-
-  @keyframes gentlePulse {
-    0% {
-      box-shadow: 0 6px 20px rgba(217, 78, 107, 0.12);
-    }
-    100% {
-      box-shadow: 0 8px 28px rgba(217, 78, 107, 0.22);
-    }
-  }
-
-  .sorry-content {
-    flex: 1;
-  }
-
-  .sorry-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-  }
-
-  .sorry-pill {
-    background: #FCE4EC;
-    color: #D94E6B;
-    font-size: 11.5px;
-    font-weight: 800;
-    padding: 3px 12px;
-    border-radius: var(--radius-full);
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    border: 1px solid #F8BBD0;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .sorry-title {
-    font-size: 22px;
-    font-weight: 900;
-    color: #C2185B;
-    letter-spacing: -0.3px;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .sorry-body {
-    font-size: 16px;
-    color: #4A2E35;
-    line-height: 1.6;
-    font-weight: 700;
-  }
-
-  .sorry-body .line {
-    margin-top: 2px;
-  }
-
-  .sorry-side-emoji {
-    font-size: 48px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: sway 2s ease-in-out infinite alternate;
-  }
-
-  @keyframes sway {
-    0% { transform: translateY(-3px) scale(1); }
-    100% { transform: translateY(4px) scale(1.05); }
-  }
-
   /* Cloud Live Sync Status Badge */
   .cloud-status-badge {
     background: var(--bg-alt);
@@ -1555,26 +1465,6 @@
       </div>
     </div>
   </header>
-
-  <!-- Apology Panel for Rani -->
-  <div class="sorry-panel">
-    <div class="sorry-content">
-      <div class="sorry-head">
-        <span class="sorry-pill">💌 Urgent Message for Rani</span>
-      </div>
-      <div class="sorry-title">
-        SORRY RANII 🥺💔
-      </div>
-      <div class="sorry-body">
-        <div class="line">emnei bolchilam 😭😭</div>
-        <div class="line">block kore diyeche</div>
-        <div class="line" style="color:#D94E6B; font-weight:800; font-size:17px; margin-top:4px;">talk to me naa 😭😭</div>
-      </div>
-    </div>
-    <div class="sorry-side-emoji">
-      🌸🥺
-    </div>
-  </div>
 
   <!-- Daily Bhagavad Gita Quote Panel -->
   <div class="quote-panel">
