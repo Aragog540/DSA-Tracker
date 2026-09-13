@@ -1,3 +1,4 @@
+<!-- index.html copy of dsa-sheet.html for instant root hosting on Vercel / Netlify / GitHub Pages -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1292,6 +1293,122 @@
     font-size: 11.5px;
     color: var(--brown-dark);
   }
+
+  /* GATE 2027 Checklist Specific Styles */
+  .gate-banner {
+    background: linear-gradient(135deg, #2D2118 0%, #4A2E20 50%, #6E473B 100%);
+    color: #FFFFFF;
+    border-radius: var(--radius);
+    padding: 18px 24px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid #E8DEC8;
+    flex-wrap: wrap;
+  }
+
+  .gate-banner-title {
+    font-size: 17px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #FFE082;
+    letter-spacing: -0.2px;
+  }
+
+  .gate-banner-sub {
+    font-size: 12.5px;
+    color: #EFE4D8;
+    margin-top: 4px;
+    opacity: 0.9;
+  }
+
+  .gate-inst-pill {
+    background: rgba(255, 224, 130, 0.18);
+    border: 1px solid #FFE082;
+    color: #FFE082;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .gate-code-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--bg-alt);
+    color: var(--brown-dark);
+    padding: 3px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    min-width: 72px;
+    text-align: center;
+  }
+
+  .gate-subtopic-desc {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  .gate-sec-badge {
+    background: linear-gradient(135deg, #FFE8D6, #FFD0B0);
+    color: #D96B27;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 9px;
+    border-radius: var(--radius-full);
+    border: 1px solid #F7D4BD;
+    letter-spacing: 0.3px;
+  }
+
+  .gate-action-btn {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .gate-action-btn:hover {
+    background: #EAE2D5;
+    border-color: var(--border-hover);
+  }
+
+  .gate-sec-progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 140px;
+  }
+
+  .gate-sec-progress-bar {
+    flex: 1;
+    height: 7px;
+    background: var(--bg-alt);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .gate-sec-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--swaroop-color), var(--rani-color));
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+  }
 </style>
 </head>
 <body>
@@ -1472,6 +1589,7 @@
   <div class="nav-tabs">
     <button class="tab-btn active" data-tab="sheet-view">📋 Dual Practice Sheet &amp; Urgency Trackers</button>
     <button class="tab-btn" data-tab="sql-view">🗄️ LeetCode SQL 50 Practice</button>
+    <button class="tab-btn" data-tab="gate-view">🎓 GATE 2027 DA Syllabus Checklist</button>
     <button class="tab-btn" data-tab="calendar-view">📅 Joint Activity Calendar &amp; Daily Check-in</button>
   </div>
 
@@ -1525,6 +1643,40 @@
     </div>
 
     <div id="sql-topics-container"></div>
+  </div>
+
+  <!-- GATE 2027 DA SYLLABUS CHECKLIST VIEW -->
+  <div class="view-pane" id="gate-view">
+    <div class="gate-banner">
+      <div>
+        <div class="gate-banner-title">
+          <span>🎯 GATE 2027 — Data Science &amp; Artificial Intelligence (DA)</span>
+          <span class="gate-inst-pill">IIT Madras | Organizing Institute</span>
+        </div>
+        <div class="gate-banner-sub">
+          Official IIT Madras DA Syllabus Checklist • Dual Progress Tracking for Swaroop &amp; Rani • 80 Master Concepts across 7 Sections
+        </div>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button class="gate-action-btn" onclick="expandAllGateSections()">📂 Expand All</button>
+        <button class="gate-action-btn" onclick="collapseAllGateSections()">📁 Collapse All</button>
+      </div>
+    </div>
+
+    <div class="controls-bar">
+      <div class="search-box">
+        <input type="text" id="gate-search-input" placeholder="Search GATE DA topic, section, or keyword (e.g. SVD, Bayes, PCA)...">
+      </div>
+      <div class="filter-group" id="gate-filters">
+        <button class="filter-btn active" data-filter="all">All Topics</button>
+        <button class="filter-btn" data-filter="unsolved-me">My Uncompleted</button>
+        <button class="filter-btn" data-filter="for-review">🔖 For Revision</button>
+        <button class="filter-btn" data-filter="solved-me">My Completed</button>
+        <button class="filter-btn" data-filter="both-done">Both Completed</button>
+      </div>
+    </div>
+
+    <div id="gate-topics-container"></div>
   </div>
 
   <!-- CALENDAR VIEW -->
@@ -1981,6 +2133,112 @@ const DEFAULT_TOPIC_ORDER = RAW_DATA.map(([t]) => t);
 const SQL_RAW_DATA_MAP = new Map(SQL_RAW_DATA);
 const DEFAULT_SQL_TOPIC_ORDER = SQL_RAW_DATA.map(([t]) => t);
 
+// Official GATE 2027 Data Science & Artificial Intelligence (DA) Syllabus (Organizing Institute: IIT Madras)
+const GATE_RAW_DATA = [
+  ["Section 1: Probability and Statistics", "Prob & Stats", [
+    ["GATE-1.1", "Permutations and Combinations (Counting)", "Fundamental counting principle, combinations, permutations, Pigeonhole principle"],
+    ["GATE-1.2", "Probability Axioms & Sample Space", "Sample space, elementary & compound events, Kolmogorov probability axioms"],
+    ["GATE-1.3", "Independent & Mutually Exclusive Events", "Addition rule, multiplication rule, independence conditions & properties"],
+    ["GATE-1.4", "Marginal, Conditional and Joint Probability", "Joint probability distributions, marginalization, conditional probability definitions"],
+    ["GATE-1.5", "Bayes' Theorem & Law of Total Probability", "Prior, likelihood, posterior computation, Bayesian inference formulations"],
+    ["GATE-1.6", "Conditional Expectation and Variance", "Law of total expectation, law of total variance, conditional moments"],
+    ["GATE-1.7", "Descriptive Statistics: Mean, Median, Mode & Std Dev", "Measures of central tendency, dispersion, variance, standard deviation"],
+    ["GATE-1.8", "Correlation and Covariance", "Pearson correlation coefficient, covariance matrix properties, scatter interpretation"],
+    ["GATE-1.9", "Discrete Random Variables & PMF", "Probability Mass Function, discrete cumulative distribution, expected values"],
+    ["GATE-1.10", "Discrete Distributions: Uniform, Bernoulli, Binomial", "Uniform discrete, Bernoulli trials, Binomial distribution PMF, mean & variance"],
+    ["GATE-1.11", "Continuous Random Variables & PDF", "Probability Density Function, properties, expectation, variance, continuous variables"],
+    ["GATE-1.12", "Continuous Distributions: Uniform, Exponential, Poisson, Normal", "Uniform continuous, Exponential memoryless property, Poisson process, Normal & Standard Normal (Z-score)"],
+    ["GATE-1.13", "Sampling Distributions: t-distribution & Chi-squared", "Student's t-distribution, Chi-squared distribution properties, degrees of freedom"],
+    ["GATE-1.14", "CDF & Conditional PDF", "Cumulative distribution properties, conditional density computations"],
+    ["GATE-1.15", "Central Limit Theorem (CLT)", "Asymptotic normality of sample mean, sampling distributions, conditions"],
+    ["GATE-1.16", "Confidence Intervals", "Point vs interval estimation, Z-interval, t-interval, margin of error"],
+    ["GATE-1.17", "Hypothesis Testing: z-test, t-test, chi-squared test", "Null & alternative hypotheses, p-value, Type I & Type II errors, test statistics"]
+  ]],
+
+  ["Section 2: Linear Algebra", "Linear Algebra", [
+    ["GATE-2.1", "Vector Space and Subspaces", "Vector spaces, subspaces, span, linear combinations, closure properties"],
+    ["GATE-2.2", "Linear Dependence and Independence of Vectors", "Linear dependence tests, basis vectors, dimension of vector spaces"],
+    ["GATE-2.3", "Matrices & Matrix Operations", "Matrix algebra, transpose, trace, symmetric & skew-symmetric matrices"],
+    ["GATE-2.4", "Special Matrices & Properties", "Projection matrix, orthogonal matrix, idempotent matrix, partition matrix & properties"],
+    ["GATE-2.5", "Quadratic Forms", "Matrix representation of quadratic forms, positive definiteness, eigenvalues relation"],
+    ["GATE-2.6", "Systems of Linear Equations & Solutions", "Homogeneous & non-homogeneous systems, existence & uniqueness of solutions"],
+    ["GATE-2.7", "Gaussian Elimination", "Row operations, row echelon form, reduced row echelon form (RREF)"],
+    ["GATE-2.8", "Eigenvalues and Eigenvectors", "Characteristic polynomial, algebraic & geometric multiplicity, spectral properties"],
+    ["GATE-2.9", "Determinant, Rank and Nullity", "Determinant properties, rank-nullity theorem, matrix invertibility"],
+    ["GATE-2.10", "Projections & Orthogonal Projections", "Projection onto subspaces, orthogonal complements, Gram-Schmidt process"],
+    ["GATE-2.11", "LU Decomposition", "Lower/Upper triangular factorization, solving Ax=b via LU decomposition"],
+    ["GATE-2.12", "Singular Value Decomposition (SVD)", "Singular values, left/right singular vectors, low-rank approximation, pseudo-inverse"]
+  ]],
+
+  ["Section 3: Calculus and Optimization", "Calculus & Opt", [
+    ["GATE-3.1", "Functions of a Single Variable", "Domain, range, algebraic & transcendental functions, asymptotic behavior"],
+    ["GATE-3.2", "Limit, Continuity and Differentiability", "Limits, L'Hôpital's rule, continuity conditions, derivative rules & interpretations"],
+    ["GATE-3.3", "Taylor Series & Maclaurin Series", "Polynomial approximations, series convergence, Taylor expansions around a point"],
+    ["GATE-3.4", "Maxima and Minima", "Critical points, first & second derivative tests, inflection points, concavity"],
+    ["GATE-3.5", "Optimization Involving a Single Variable", "Unconstrained single-variable optimization, global vs local extrema, convex functions"]
+  ]],
+
+  ["Section 4: Programming, Data Structures and Algorithms", "Programming & DSA", [
+    ["GATE-4.1", "Programming in Python", "Data types, control flow, functions, OOP in Python, list comprehensions, built-in libraries"],
+    ["GATE-4.2", "Basic Data Structures: Stacks & Queues", "Array/linked implementations, push/pop/enqueue/dequeue, application in expression evaluation"],
+    ["GATE-4.3", "Basic Data Structures: Linked Lists", "Singly, doubly, circular linked lists, pointer manipulation, insertion & deletion"],
+    ["GATE-4.4", "Basic Data Structures: Trees & BST", "Binary trees, BST properties, tree traversals (inorder, preorder, postorder, level order)"],
+    ["GATE-4.5", "Basic Data Structures: Hash Tables", "Hash functions, collision resolution (chaining, open addressing), load factor"],
+    ["GATE-4.6", "Search Algorithms: Linear & Binary Search", "Linear search, binary search on sorted sequences, time & space complexities"],
+    ["GATE-4.7", "Basic Sorting: Selection, Bubble & Insertion Sort", "In-place comparison sorts, stability, best/worst-case complexities"],
+    ["GATE-4.8", "Divide and Conquer: Mergesort & Quicksort", "Recurrence relations, Master Theorem, partitioning strategies, average/worst cases"],
+    ["GATE-4.9", "Introduction to Graph Theory", "Vertices, edges, representations (adjacency matrix, adjacency list), directed & undirected"],
+    ["GATE-4.10", "Graph Algorithms: Traversals (BFS & DFS)", "Breadth-First Search, Depth-First Search, connected components, cycle detection"],
+    ["GATE-4.11", "Graph Algorithms: Shortest Path", "Dijkstra's algorithm, shortest path properties, priority queue implementation"]
+  ]],
+
+  ["Section 5: Database Management and Warehousing", "DBMS & Warehouse", [
+    ["GATE-5.1", "ER-Model (Entity-Relationship)", "Entities, attributes, relationships, cardinality ratios, ER-to-relational schema mapping"],
+    ["GATE-5.2", "Relational Model: Relational Algebra", "Selection, projection, Cartesian product, join operations, set operations, division"],
+    ["GATE-5.3", "Relational Model: Tuple Relational Calculus", "TRC syntax, safe expressions, domain calculus, relational completeness"],
+    ["GATE-5.4", "SQL (DDL, DML, Joins, Aggregations)", "Schema definition, queries, inner/outer joins, GROUP BY, HAVING, subqueries"],
+    ["GATE-5.5", "Integrity Constraints", "Domain constraints, primary key, foreign key, referential integrity, check constraints"],
+    ["GATE-5.6", "Normal Forms (1NF, 2NF, 3NF, BCNF)", "Functional dependencies, candidate keys, lossless join, dependency preservation"],
+    ["GATE-5.7", "File Organization & Indexing", "Heap files, sequential files, B-trees, B+ trees indexing structures, hashing"],
+    ["GATE-5.8", "Data Types & Data Transformation", "Normalization (min-max, z-score), discretization, binning, sampling, data compression"],
+    ["GATE-5.9", "Data Warehouse Modelling: Schemas", "Multidimensional data models, Star schema, Snowflake schema, Fact constellation"],
+    ["GATE-5.10", "Concept Hierarchies & OLAP Operations", "Roll-up, drill-down, slice, dice, pivot operations on data cubes"],
+    ["GATE-5.11", "Measures: Categorization and Computations", "Additive measures, semi-additive measures, non-additive measures"]
+  ]],
+
+  ["Section 6: Machine Learning", "Machine Learning", [
+    ["GATE-6.1", "Supervised Learning: Regression vs Classification", "Problem formulations, target variables, loss functions (MSE, Cross-entropy)"],
+    ["GATE-6.2", "Simple Linear Regression & Multiple Linear Regression", "Ordinary Least Squares (OLS), normal equations, regression coefficients, R-squared"],
+    ["GATE-6.3", "Ridge Regression (L2 Regularization)", "Shrinkage methods, L2 penalty term, bias-variance tradeoff in regularization"],
+    ["GATE-6.4", "Logistic Regression", "Sigmoid activation, log-odds, maximum likelihood estimation, binary/multiclass classification"],
+    ["GATE-6.5", "k-Nearest Neighbour (k-NN)", "Distance metrics (Euclidean, Manhattan), choosing optimal k, decision boundaries"],
+    ["GATE-6.6", "Naive Bayes Classifier", "Conditional independence assumption, prior/likelihood calculations, Laplace smoothing"],
+    ["GATE-6.7", "Linear Discriminant Analysis (LDA)", "Fisher's linear discriminant, between-class & within-class scatter matrices"],
+    ["GATE-6.8", "Support Vector Machine (SVM)", "Maximum margin hyperplane, support vectors, soft margin, slack variables, kernel trick"],
+    ["GATE-6.9", "Decision Trees", "Information gain, entropy, Gini impurity, splitting criteria, tree pruning"],
+    ["GATE-6.10", "Bias-Variance Trade-off", "Underfitting vs overfitting, decomposition of expected prediction error"],
+    ["GATE-6.11", "Cross-Validation Methods", "Leave-One-Out (LOO), k-fold cross-validation, stratified sampling, train-test splits"],
+    ["GATE-6.12", "Multi-Layer Perceptron (MLP) & Neural Networks", "Feed-forward architectures, activation functions (ReLU, Sigmoid), backpropagation, gradient descent"],
+    ["GATE-6.13", "Unsupervised Learning: Clustering Algorithms", "k-Means clustering, centroid updates, k-Medoids, objective convergence"],
+    ["GATE-6.14", "Hierarchical Clustering: Top-Down & Bottom-Up", "Agglomerative (bottom-up), Divisive (top-down), dendrogram construction"],
+    ["GATE-6.15", "Linkage Methods in Clustering", "Single-linkage, complete-linkage, average-linkage, multiple-linkage metrics"],
+    ["GATE-6.16", "Dimensionality Reduction & PCA", "Principal Component Analysis, covariance eigendecomposition, explained variance ratio"]
+  ]],
+
+  ["Section 7: AI (Artificial Intelligence)", "AI", [
+    ["GATE-7.1", "Uninformed Search Algorithms", "Breadth-First Search (BFS), Depth-First Search (DFS), Uniform Cost Search (UCS)"],
+    ["GATE-7.2", "Informed (Heuristic) Search", "Greedy Best-First Search, A* Search, heuristic admissibility and consistency"],
+    ["GATE-7.3", "Adversarial Search & Game Playing", "Minimax algorithm, game trees, evaluation functions, Alpha-Beta pruning"],
+    ["GATE-7.4", "Propositional Logic", "Syntax, semantics, truth tables, inference rules, validity, satisfiability, resolution"],
+    ["GATE-7.5", "Predicate Logic (First-Order Logic)", "Quantifiers (universal, existential), predicates, unification, clause normal form"],
+    ["GATE-7.6", "Reasoning Under Uncertainty: Conditional Independence", "Bayesian Networks, Directed Acyclic Graphs (DAG), d-separation properties"],
+    ["GATE-7.7", "Exact Inference in Probabilistic Models", "Variable elimination algorithm, factor operations, computational complexity"],
+    ["GATE-7.8", "Approximate Inference through Sampling", "Monte Carlo sampling, Rejection sampling, Likelihood weighting, Gibbs sampling / MCMC"]
+  ]]
+];
+
+const GATE_RAW_DATA_MAP = new Map(GATE_RAW_DATA.map(([sec, tag, items]) => [sec, { tag, items }]));
+
 // USER'S PRE-CONFIGURED FIREBASE CONFIG
 const DEFAULT_FIREBASE_CONFIG = {
   apiKey: "AIzaSyAsd4a1d9WoIps_wbWtfMNTh77ar3TE6uM",
@@ -2001,6 +2259,8 @@ let appState = {
   searchQuery: '',
   sqlFilter: 'all',
   sqlSearchQuery: '',
+  gateFilter: 'all',
+  gateSearchQuery: '',
   calendarCurrentDate: new Date(2026, 7, 30),
   startDate: '2026-08-30',
   targetDeadline: '2026-10-15',
@@ -2016,6 +2276,7 @@ let appState = {
 
 let openTopics = new Set(["Arrays & Hashing"]);
 let openSqlTopics = new Set(["Select"]);
+let openGateTopics = new Set(GATE_RAW_DATA.map(([sec]) => sec));
 let firebaseDbRef = null;
 let isFirebaseConnected = false;
 let draggedTopicName = null;
@@ -2153,6 +2414,10 @@ function sqlSlug(topic, num) {
   return 'sql-' + slug(topic, num);
 }
 
+function gateSlug(sec, code) {
+  return 'gate-' + (code || '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+}
+
 function formatDate(d) {
   const yyyy = d.getFullYear();
   const mm = String(d.getMonth() + 1).padStart(2, '0');
@@ -2241,6 +2506,11 @@ function loadState() {
       if (parsed.openSqlTopics && Array.isArray(parsed.openSqlTopics)) {
         openSqlTopics = new Set(parsed.openSqlTopics);
       }
+      if (parsed.openGateTopics && Array.isArray(parsed.openGateTopics)) {
+        openGateTopics = new Set(parsed.openGateTopics);
+      } else {
+        openGateTopics = new Set(GATE_RAW_DATA.map(([sec]) => sec));
+      }
     }
   } catch (e) { console.error('Local load failed', e); }
 
@@ -2262,7 +2532,8 @@ function saveLocalBackup() {
       sqlTopicOrder: appState.sqlTopicOrder,
       users: appState.users,
       openTopics: Array.from(openTopics),
-      openSqlTopics: Array.from(openSqlTopics)
+      openSqlTopics: Array.from(openSqlTopics),
+      openGateTopics: Array.from(openGateTopics)
     }));
   } catch (e) { console.error('Local backup failed', e); }
 }
@@ -2400,25 +2671,42 @@ function updateActiveUserUI() {
 
 function updateScheduleStripUI() {
   const isSql = appState.activeTab === 'sql-view';
+  const isGate = appState.activeTab === 'gate-view';
   const tagEl = document.getElementById('schedule-sheet-tag');
   const startInput = document.getElementById('schedule-start-input');
   const deadlineInput = document.getElementById('schedule-deadline-input');
   const hintText = document.getElementById('schedule-hint-text');
 
-  if (isSql) {
-    tagEl.textContent = '🗄️ SQL 50 SCHEDULE';
-    tagEl.style.background = '#E8F0FE';
-    tagEl.style.color = '#1967D2';
-    startInput.value = appState.sqlStartDate || '2026-08-30';
-    deadlineInput.value = appState.sqlTargetDeadline || '2026-09-30';
-    hintText.textContent = '⚡ Dedicated SQL 50 timeline re-allocates days across 7 SQL topics!';
+  if (isGate) {
+    tagEl.textContent = '🎓 GATE 2027 DA SYLLABUS';
+    tagEl.style.background = '#EDE7F6';
+    tagEl.style.color = '#5E35B1';
+    startInput.style.display = 'none';
+    deadlineInput.style.display = 'none';
+    if (startInput.previousElementSibling) startInput.previousElementSibling.style.display = 'none';
+    if (deadlineInput.previousElementSibling) deadlineInput.previousElementSibling.style.display = 'none';
+    hintText.innerHTML = '✨ <strong>IIT Madras GATE 2027 DA:</strong> 80 core concepts across 7 sections. Track mastery and revisions at your own study pace!';
   } else {
-    tagEl.textContent = '📋 DSA SCHEDULE';
-    tagEl.style.background = '#FFE8D6';
-    tagEl.style.color = '#D96B27';
-    startInput.value = appState.startDate || '2026-08-30';
-    deadlineInput.value = appState.targetDeadline || '2026-10-15';
-    hintText.textContent = '⚡ Dedicated DSA timeline re-allocates days across 18 DSA topics!';
+    startInput.style.display = '';
+    deadlineInput.style.display = '';
+    if (startInput.previousElementSibling) startInput.previousElementSibling.style.display = '';
+    if (deadlineInput.previousElementSibling) deadlineInput.previousElementSibling.style.display = '';
+
+    if (isSql) {
+      tagEl.textContent = '🗄️ SQL 50 SCHEDULE';
+      tagEl.style.background = '#E8F0FE';
+      tagEl.style.color = '#1967D2';
+      startInput.value = appState.sqlStartDate || '2026-08-30';
+      deadlineInput.value = appState.sqlTargetDeadline || '2026-09-30';
+      hintText.textContent = '⚡ Dedicated SQL 50 timeline re-allocates days across 7 SQL topics!';
+    } else {
+      tagEl.textContent = '📋 DSA SCHEDULE';
+      tagEl.style.background = '#FFE8D6';
+      tagEl.style.color = '#D96B27';
+      startInput.value = appState.startDate || '2026-08-30';
+      deadlineInput.value = appState.targetDeadline || '2026-10-15';
+      hintText.textContent = '⚡ Dedicated DSA timeline re-allocates days across 18 DSA topics!';
+    }
   }
 }
 
@@ -2436,6 +2724,28 @@ function computeTopicPoints(probs) {
 // COUNTDOWN TIMER ENGINE (Reflects Active Sheet Target)
 function updateCountdownBadge() {
   const isSql = appState.activeTab === 'sql-view';
+  const isGate = appState.activeTab === 'gate-view';
+
+  const valEl = document.getElementById('countdown-days-val');
+  const lblEl = document.getElementById('countdown-days-lbl');
+  const subLblEl = document.getElementById('countdown-sub-lbl');
+  const badgeEl = document.getElementById('header-countdown-badge');
+
+  if (isGate) {
+    const target = new Date(2027, 1, 6); // Feb 6, 2027 standard GATE exam weekend
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const diffTime = target.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    valEl.textContent = diffDays > 0 ? diffDays : '0';
+    lblEl.textContent = 'Days Left';
+    subLblEl.textContent = 'To GATE 2027 Exam';
+    badgeEl.style.background = 'linear-gradient(135deg, #2D2118, #4A2E20)';
+    badgeEl.style.borderColor = '#FFE082';
+    return;
+  }
+
   const activeDeadlineStr = isSql ? (appState.sqlTargetDeadline || '2026-09-30') : (appState.targetDeadline || '2026-10-15');
   const target = parseDate(activeDeadlineStr);
   const today = new Date();
@@ -2443,11 +2753,6 @@ function updateCountdownBadge() {
 
   const diffTime = target.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-  const valEl = document.getElementById('countdown-days-val');
-  const lblEl = document.getElementById('countdown-days-lbl');
-  const subLblEl = document.getElementById('countdown-sub-lbl');
-  const badgeEl = document.getElementById('header-countdown-badge');
 
   subLblEl.textContent = isSql ? 'To SQL Finish' : 'To DSA Finish';
 
@@ -2692,6 +2997,10 @@ function computeUserStats(userName) {
   let sqlSolved = 0;
   let sqlReview = 0;
 
+  let gateTotal = 0;
+  let gateSolved = 0;
+  let gateReview = 0;
+
   let activityDates = {};
 
   const currentOrderedData = getOrderedData();
@@ -2727,6 +3036,21 @@ function computeUserStats(userName) {
     });
   });
 
+  // GATE Stats
+  GATE_RAW_DATA.forEach(([sec, tag, items]) => {
+    items.forEach(([code]) => {
+      gateTotal++;
+      const item = userObj.progress[gateSlug(sec, code)];
+      if (item && item.done) {
+        gateSolved++;
+        if (item.date) activityDates[item.date] = (activityDates[item.date] || 0) + 1;
+      }
+      if (item && item.review) {
+        gateReview++;
+      }
+    });
+  });
+
   let streak = 0;
   let checkDate = new Date();
   while (true) {
@@ -2745,13 +3069,14 @@ function computeUserStats(userName) {
   const dsaSched = calculateScheduleForUser(userName, currentOrderedData, false);
   const sqlSched = calculateScheduleForUser(userName, currentSqlData, true);
 
-  const totalProbs = dsaTotal + sqlTotal;
-  const totalSolved = dsaSolved + sqlSolved;
-  const totalReview = dsaReview + sqlReview;
+  const totalProbs = dsaTotal + sqlTotal + gateTotal;
+  const totalSolved = dsaSolved + sqlSolved + gateSolved;
+  const totalReview = dsaReview + sqlReview + gateReview;
 
   return {
     dsaTotal, dsaSolved, dsaReview,
     sqlTotal, sqlSolved, sqlReview,
+    gateTotal, gateSolved, gateReview,
     totalProbs, totalSolved, totalReview,
     streak, activityDates,
     dsaSched, sqlSched
@@ -2765,70 +3090,118 @@ function render() {
   const swaroopStats = computeUserStats('Swaroop');
   const raniStats = computeUserStats('Rani');
   const isSql = (appState.activeTab === 'sql-view');
+  const isGate = (appState.activeTab === 'gate-view');
 
   // Update Swaroop Card
-  const sSolvedVal = isSql ? swaroopStats.sqlSolved : swaroopStats.dsaSolved;
-  const sTotalVal = isSql ? swaroopStats.sqlTotal : swaroopStats.dsaTotal;
-  const sReviewVal = isSql ? swaroopStats.sqlReview : swaroopStats.dsaReview;
-  const sSched = isSql ? swaroopStats.sqlSched : swaroopStats.dsaSched;
+  let sSolvedVal = swaroopStats.dsaSolved;
+  let sTotalVal = swaroopStats.dsaTotal;
+  let sReviewVal = swaroopStats.dsaReview;
+  let sSolvedLbl = 'DSA Solved';
+  let sReviewLbl = 'DSA Review';
+  let sPctLbl = 'DSA Completion';
+  let sFinishText = formatPrettyDate(swaroopStats.dsaSched.finalProjectedFinish);
+  let sStatusText = swaroopStats.dsaSched.hasOverdueTopic ? '⚠️ Extended (Overdue Topic)' : '🎯 Target On Track';
+  let sStatusColor = swaroopStats.dsaSched.hasOverdueTopic ? '#C62828' : 'var(--text-muted)';
+  let sFinishColor = swaroopStats.dsaSched.hasOverdueTopic ? '#C62828' : 'var(--brown-dark)';
+
+  if (isGate) {
+    sSolvedVal = swaroopStats.gateSolved;
+    sTotalVal = swaroopStats.gateTotal;
+    sReviewVal = swaroopStats.gateReview;
+    sSolvedLbl = 'GATE Topics Done';
+    sReviewLbl = 'GATE Revision';
+    sPctLbl = 'GATE 2027 Readiness';
+    sFinishText = 'Exam: Feb 2027';
+    sStatusText = '🚀 Self-Paced Checklist';
+    sStatusColor = 'var(--text-muted)';
+    sFinishColor = 'var(--brown-dark)';
+  } else if (isSql) {
+    sSolvedVal = swaroopStats.sqlSolved;
+    sTotalVal = swaroopStats.sqlTotal;
+    sReviewVal = swaroopStats.sqlReview;
+    sSolvedLbl = 'SQL 50 Solved';
+    sReviewLbl = 'SQL Review';
+    sPctLbl = 'SQL 50 Completion';
+    sFinishText = formatPrettyDate(swaroopStats.sqlSched.finalProjectedFinish);
+    sStatusText = swaroopStats.sqlSched.hasOverdueTopic ? '⚠️ Extended (Overdue Topic)' : '🎯 Target On Track';
+    sStatusColor = swaroopStats.sqlSched.hasOverdueTopic ? '#C62828' : 'var(--text-muted)';
+    sFinishColor = swaroopStats.sqlSched.hasOverdueTopic ? '#C62828' : 'var(--brown-dark)';
+  }
 
   document.getElementById('swaroop-solved').textContent = `${sSolvedVal} / ${sTotalVal}`;
-  document.getElementById('swaroop-solved-lbl').textContent = isSql ? 'SQL 50 Solved' : 'DSA Solved';
+  document.getElementById('swaroop-solved-lbl').textContent = sSolvedLbl;
   document.getElementById('swaroop-review').textContent = `${sReviewVal} 🔖`;
-  document.getElementById('swaroop-review-lbl').textContent = isSql ? 'SQL Review' : 'DSA Review';
+  document.getElementById('swaroop-review-lbl').textContent = sReviewLbl;
   document.getElementById('swaroop-streak').textContent = `${swaroopStats.streak} 🔥`;
   
   const sFinishEl = document.getElementById('swaroop-finish');
-  sFinishEl.textContent = formatPrettyDate(sSched.finalProjectedFinish);
-
-  if (sSched.hasOverdueTopic) {
-    document.getElementById('swaroop-schedule-status').textContent = '⚠️ Extended (Overdue Topic)';
-    document.getElementById('swaroop-schedule-status').style.color = '#C62828';
-    sFinishEl.style.color = '#C62828';
-  } else {
-    document.getElementById('swaroop-schedule-status').textContent = '🎯 Target On Track';
-    document.getElementById('swaroop-schedule-status').style.color = 'var(--text-muted)';
-    sFinishEl.style.color = 'var(--brown-dark)';
-  }
+  sFinishEl.textContent = sFinishText;
+  sFinishEl.style.color = sFinishColor;
+  document.getElementById('swaroop-schedule-status').textContent = sStatusText;
+  document.getElementById('swaroop-schedule-status').style.color = sStatusColor;
 
   const sPct = sTotalVal ? Math.round((sSolvedVal / sTotalVal) * 100) : 0;
-  document.getElementById('swaroop-pct-lbl').textContent = isSql ? 'SQL 50 Completion' : 'DSA Completion';
+  document.getElementById('swaroop-pct-lbl').textContent = sPctLbl;
   document.getElementById('swaroop-pct').textContent = `${sPct}% (${sSolvedVal}/${sTotalVal})`;
   document.getElementById('swaroop-bar').style.width = sPct + '%';
 
   // Update Rani Card
-  const rSolvedVal = isSql ? raniStats.sqlSolved : raniStats.dsaSolved;
-  const rTotalVal = isSql ? raniStats.sqlTotal : raniStats.dsaTotal;
-  const rReviewVal = isSql ? raniStats.sqlReview : raniStats.dsaReview;
-  const rSched = isSql ? raniStats.sqlSched : raniStats.dsaSched;
+  let rSolvedVal = raniStats.dsaSolved;
+  let rTotalVal = raniStats.dsaTotal;
+  let rReviewVal = raniStats.dsaReview;
+  let rSolvedLbl = 'DSA Solved';
+  let rReviewLbl = 'DSA Review';
+  let rPctLbl = 'DSA Completion';
+  let rFinishText = formatPrettyDate(raniStats.dsaSched.finalProjectedFinish);
+  let rStatusText = raniStats.dsaSched.hasOverdueTopic ? '⚠️ Extended (Overdue Topic)' : '🎯 Target On Track';
+  let rStatusColor = raniStats.dsaSched.hasOverdueTopic ? '#C62828' : 'var(--text-muted)';
+  let rFinishColor = raniStats.dsaSched.hasOverdueTopic ? '#C62828' : 'var(--brown-dark)';
+
+  if (isGate) {
+    rSolvedVal = raniStats.gateSolved;
+    rTotalVal = raniStats.gateTotal;
+    rReviewVal = raniStats.gateReview;
+    rSolvedLbl = 'GATE Topics Done';
+    rReviewLbl = 'GATE Revision';
+    rPctLbl = 'GATE 2027 Readiness';
+    rFinishText = 'Exam: Feb 2027';
+    rStatusText = '🚀 Self-Paced Checklist';
+    rStatusColor = 'var(--text-muted)';
+    rFinishColor = 'var(--brown-dark)';
+  } else if (isSql) {
+    rSolvedVal = raniStats.sqlSolved;
+    rTotalVal = raniStats.sqlTotal;
+    rReviewVal = raniStats.sqlReview;
+    rSolvedLbl = 'SQL 50 Solved';
+    rReviewLbl = 'SQL Review';
+    rPctLbl = 'SQL 50 Completion';
+    rFinishText = formatPrettyDate(raniStats.sqlSched.finalProjectedFinish);
+    rStatusText = raniStats.sqlSched.hasOverdueTopic ? '⚠️ Extended (Overdue Topic)' : '🎯 Target On Track';
+    rStatusColor = raniStats.sqlSched.hasOverdueTopic ? '#C62828' : 'var(--text-muted)';
+    rFinishColor = raniStats.sqlSched.hasOverdueTopic ? '#C62828' : 'var(--brown-dark)';
+  }
 
   document.getElementById('rani-solved').textContent = `${rSolvedVal} / ${rTotalVal}`;
-  document.getElementById('rani-solved-lbl').textContent = isSql ? 'SQL 50 Solved' : 'DSA Solved';
+  document.getElementById('rani-solved-lbl').textContent = rSolvedLbl;
   document.getElementById('rani-review').textContent = `${rReviewVal} 🔖`;
-  document.getElementById('rani-review-lbl').textContent = isSql ? 'SQL Review' : 'DSA Review';
+  document.getElementById('rani-review-lbl').textContent = rReviewLbl;
   document.getElementById('rani-streak').textContent = `${raniStats.streak} 🔥`;
   
   const rFinishEl = document.getElementById('rani-finish');
-  rFinishEl.textContent = formatPrettyDate(rSched.finalProjectedFinish);
-
-  if (rSched.hasOverdueTopic) {
-    document.getElementById('rani-schedule-status').textContent = '⚠️ Extended (Overdue Topic)';
-    document.getElementById('rani-schedule-status').style.color = '#C62828';
-    rFinishEl.style.color = '#C62828';
-  } else {
-    document.getElementById('rani-schedule-status').textContent = '🎯 Target On Track';
-    document.getElementById('rani-schedule-status').style.color = 'var(--text-muted)';
-    rFinishEl.style.color = 'var(--brown-dark)';
-  }
+  rFinishEl.textContent = rFinishText;
+  rFinishEl.style.color = rFinishColor;
+  document.getElementById('rani-schedule-status').textContent = rStatusText;
+  document.getElementById('rani-schedule-status').style.color = rStatusColor;
 
   const rPct = rTotalVal ? Math.round((rSolvedVal / rTotalVal) * 100) : 0;
-  document.getElementById('rani-pct-lbl').textContent = isSql ? 'SQL 50 Completion' : 'DSA Completion';
+  document.getElementById('rani-pct-lbl').textContent = rPctLbl;
   document.getElementById('rani-pct').textContent = `${rPct}% (${rSolvedVal}/${rTotalVal})`;
   document.getElementById('rani-bar').style.width = rPct + '%';
 
   // Render Sheets
   renderDsaSheet(swaroopStats, raniStats);
   renderSqlSheet(swaroopStats, raniStats);
+  renderGateSheet(swaroopStats, raniStats);
   renderCalendar(swaroopStats, raniStats);
   renderActivityLog();
 }
@@ -3507,6 +3880,261 @@ function renderSqlSheet(swaroopStats, raniStats) {
   });
 }
 
+// RENDER GATE 2027 DA SYLLABUS CHECKLIST
+function renderGateSheet(swaroopStats, raniStats) {
+  const activeStats = appState.activeUser === 'Swaroop' ? swaroopStats : raniStats;
+  const gateTopicsContainer = document.getElementById('gate-topics-container');
+  if (!gateTopicsContainer) return;
+  gateTopicsContainer.innerHTML = '';
+
+  const q = (appState.gateSearchQuery || '').toLowerCase();
+
+  GATE_RAW_DATA.forEach(([secTitle, secTag, items], idx) => {
+    const matchingItems = items.filter(([code, title, desc]) => {
+      const key = gateSlug(secTitle, code);
+      const sItem = appState.users.Swaroop.progress[key] || {};
+      const rItem = appState.users.Rani.progress[key] || {};
+      const sDone = !!sItem.done;
+      const rDone = !!rItem.done;
+      const sReview = !!sItem.review;
+      const rReview = !!rItem.review;
+      const myDone = appState.activeUser === 'Swaroop' ? sDone : rDone;
+      const myReview = appState.activeUser === 'Swaroop' ? sReview : rReview;
+
+      const matchesSearch = !q || title.toLowerCase().includes(q) || secTitle.toLowerCase().includes(q) || code.toLowerCase().includes(q) || desc.toLowerCase().includes(q);
+      
+      let matchesFilter = true;
+      if (appState.gateFilter === 'unsolved-me') {
+        matchesFilter = !myDone;
+      } else if (appState.gateFilter === 'for-review') {
+        matchesFilter = myReview;
+      } else if (appState.gateFilter === 'solved-me') {
+        matchesFilter = myDone;
+      } else if (appState.gateFilter === 'both-done') {
+        matchesFilter = (sDone && rDone);
+      }
+      return matchesSearch && matchesFilter;
+    });
+
+    if (matchingItems.length === 0 && (q || appState.gateFilter !== 'all')) return;
+
+    const isTopicOpen = openGateTopics.has(secTitle) || (q.length > 0);
+
+    const sDoneCount = items.filter(([code]) => appState.users.Swaroop.progress[gateSlug(secTitle, code)]?.done).length;
+    const rDoneCount = items.filter(([code]) => appState.users.Rani.progress[gateSlug(secTitle, code)]?.done).length;
+    const activeDoneCount = appState.activeUser === 'Swaroop' ? sDoneCount : rDoneCount;
+    const secPct = items.length ? Math.round((activeDoneCount / items.length) * 100) : 0;
+    const isSecAllDone = activeDoneCount === items.length && items.length > 0;
+    const isSAllDone = sDoneCount === items.length && items.length > 0;
+    const isRAllDone = rDoneCount === items.length && items.length > 0;
+
+    const card = document.createElement('div');
+    card.className = `topic-card ${isSecAllDone ? 'is-completed' : ''} ${isTopicOpen ? 'open' : ''}`;
+    card.dataset.topic = secTitle;
+
+    card.innerHTML = `
+      <div class="topic-header">
+        <div class="topic-title-group" style="flex:1;">
+          <!-- Topic Master Checkboxes for Swaroop & Rani -->
+          <div class="topic-master-checks" title="Mark entire GATE section complete">
+            <label class="user-check-wrap swaroop" title="Mark whole section for Swaroop">
+              <input type="checkbox" class="gate-master-check" data-section="${secTitle}" data-user="Swaroop" ${isSAllDone ? 'checked' : ''}>
+              <span>🦊 S</span>
+            </label>
+            <label class="user-check-wrap rani" title="Mark whole section for Rani">
+              <input type="checkbox" class="gate-master-check" data-section="${secTitle}" data-user="Rani" ${isRAllDone ? 'checked' : ''}>
+              <span>🌸 R</span>
+            </label>
+          </div>
+
+          <span class="gate-sec-badge">${secTag}</span>
+          <span class="topic-title" style="font-size:14.5px;">${secTitle}</span>
+
+          <div class="topic-user-progress-badges">
+            <span class="u-badge swaroop">🦊 S: ${sDoneCount}/${items.length}</span>
+            <span class="u-badge rani">🌸 R: ${rDoneCount}/${items.length}</span>
+          </div>
+        </div>
+
+        <div class="topic-schedule-meta" style="min-width:240px; justify-content:flex-end;">
+          <div class="gate-sec-progress-wrap" title="${activeDoneCount}/${items.length} completed (${secPct}%)">
+            <div class="gate-sec-progress-bar">
+              <div class="gate-sec-progress-fill" style="width:${secPct}%;"></div>
+            </div>
+            <span style="font-size:11.5px; font-weight:800; color:var(--brown-dark); min-width:38px;">${secPct}%</span>
+          </div>
+          ${isSecAllDone ? `<span class="status-tag done">✓ Section Mastered</span>` : `<span class="status-tag ontrack">${items.length - activeDoneCount} Left</span>`}
+          <span class="topic-chevron">▶</span>
+        </div>
+      </div>
+      <div class="problems-list"></div>
+    `;
+
+    // Set indeterminate states
+    const sMaster = card.querySelector('.gate-master-check[data-user="Swaroop"]');
+    if (sMaster && sDoneCount > 0 && sDoneCount < items.length) {
+      sMaster.indeterminate = true;
+    }
+    const rMaster = card.querySelector('.gate-master-check[data-user="Rani"]');
+    if (rMaster && rDoneCount > 0 && rDoneCount < items.length) {
+      rMaster.indeterminate = true;
+    }
+
+    // Toggle entire section on master check
+    card.querySelectorAll('.gate-master-check').forEach(masterInput => {
+      masterInput.addEventListener('click', (e) => e.stopPropagation());
+      masterInput.addEventListener('change', (e) => {
+        e.stopPropagation();
+        const user = e.target.dataset.user;
+        const sec = e.target.dataset.section;
+        const isChecked = e.target.checked;
+        const todayStr = formatDate(new Date());
+
+        items.forEach(([code]) => {
+          const k = gateSlug(sec, code);
+          if (!appState.users[user].progress[k]) {
+            appState.users[user].progress[k] = { done: false, date: null, review: false };
+          }
+          if (isChecked) {
+            appState.users[user].progress[k].done = true;
+            appState.users[user].progress[k].date = todayStr;
+          } else {
+            appState.users[user].progress[k].done = false;
+            appState.users[user].progress[k].date = null;
+          }
+        });
+
+        if (isChecked) {
+          triggerCelebration(sec, user);
+        }
+
+        openGateTopics.add(sec);
+        saveState();
+        render();
+      });
+    });
+
+    card.querySelector('.topic-header').onclick = (e) => {
+      if (e.target.closest('.topic-master-checks') || e.target.closest('.user-check-wrap')) return;
+      if (openGateTopics.has(secTitle)) {
+        openGateTopics.delete(secTitle);
+        card.classList.remove('open');
+      } else {
+        openGateTopics.add(secTitle);
+        card.classList.add('open');
+      }
+      saveLocalBackup();
+    };
+
+    const listEl = card.querySelector('.problems-list');
+
+    matchingItems.forEach(([code, title, desc]) => {
+      const key = gateSlug(secTitle, code);
+      const sItem = appState.users.Swaroop.progress[key] || {};
+      const rItem = appState.users.Rani.progress[key] || {};
+      const isSDone = !!sItem.done;
+      const isRDone = !!rItem.done;
+      const isSReview = !!sItem.review;
+      const isRReview = !!rItem.review;
+      const isMyReview = appState.activeUser === 'Swaroop' ? isSReview : isRReview;
+
+      const row = document.createElement('div');
+      row.className = `problem-row ${isMyReview ? 'is-marked-review' : ''}`;
+
+      row.innerHTML = `
+        <div class="partner-checkboxes" title="Mark topic completed">
+          <label class="user-check-wrap swaroop" title="Mark completed for Swaroop">
+            <input type="checkbox" class="gate-check" ${isSDone ? 'checked' : ''} data-user="Swaroop" data-key="${key}" data-type="done" data-section="${secTitle}">
+            <span>🦊 S</span>
+          </label>
+          <label class="user-check-wrap rani" title="Mark completed for Rani">
+            <input type="checkbox" class="gate-check" ${isRDone ? 'checked' : ''} data-user="Rani" data-key="${key}" data-type="done" data-section="${secTitle}">
+            <span>🌸 R</span>
+          </label>
+        </div>
+
+        <span class="gate-code-pill">${code}</span>
+
+        <div class="problem-title" style="flex:1;">
+          <div style="font-weight:700; color:var(--brown-dark); font-size:13.5px;">${title}</div>
+          <div class="gate-subtopic-desc">📌 ${desc}</div>
+        </div>
+
+        <div class="problem-review-group" title="Flag for revision / re-visiting">
+          <label class="review-check-wrap swaroop ${isSReview ? 'active' : ''}" title="Swaroop: Flag for Revision">
+            <input type="checkbox" class="gate-check" ${isSReview ? 'checked' : ''} data-user="Swaroop" data-key="${key}" data-type="review" data-section="${secTitle}">
+            <span>🔖 S Rev</span>
+          </label>
+          <label class="review-check-wrap rani ${isRReview ? 'active' : ''}" title="Rani: Flag for Revision">
+            <input type="checkbox" class="gate-check" ${isRReview ? 'checked' : ''} data-user="Rani" data-key="${key}" data-type="review" data-section="${secTitle}">
+            <span>🌸 R</span>
+          </label>
+        </div>
+
+        <div class="status-badges-group">
+          ${isSDone ? `<span class="solved-pill swaroop">🦊 ${sItem.date ? sItem.date.slice(5) : '✓'}</span>` : ''}
+          ${isRDone ? `<span class="solved-pill rani">🌸 ${rItem.date ? rItem.date.slice(5) : '✓'}</span>` : ''}
+          ${isSReview ? `<span class="review-pill swaroop" title="Marked for revision by Swaroop">🔖 S Rev</span>` : ''}
+          ${isRReview ? `<span class="review-pill rani" title="Marked for revision by Rani">🔖 R Rev</span>` : ''}
+        </div>
+      `;
+
+      row.querySelectorAll('input.gate-check').forEach(input => {
+        input.addEventListener('change', (e) => {
+          const user = e.target.dataset.user;
+          const k = e.target.dataset.key;
+          const type = e.target.dataset.type;
+          const isChecked = e.target.checked;
+          const sec = e.target.dataset.section;
+
+          openGateTopics.add(sec);
+
+          if (!appState.users[user].progress[k]) {
+            appState.users[user].progress[k] = { done: false, date: null, review: false };
+          }
+
+          if (type === 'done') {
+            appState.users[user].progress[k].done = isChecked;
+            appState.users[user].progress[k].date = isChecked ? formatDate(new Date()) : null;
+
+            if (isChecked) {
+              const secData = GATE_RAW_DATA.find(([s]) => s === sec);
+              if (secData) {
+                const [, , secItems] = secData;
+                const completedCount = secItems.filter(([c]) => appState.users[user].progress[gateSlug(sec, c)]?.done).length;
+                if (completedCount === secItems.length) {
+                  triggerCelebration(sec, user);
+                }
+              }
+            }
+          } else if (type === 'review') {
+            appState.users[user].progress[k].review = isChecked;
+          }
+          
+          saveState();
+          render();
+        });
+      });
+
+      listEl.appendChild(row);
+    });
+
+    gateTopicsContainer.appendChild(card);
+  });
+}
+
+function expandAllGateSections() {
+  GATE_RAW_DATA.forEach(([sec]) => openGateTopics.add(sec));
+  saveLocalBackup();
+  render();
+}
+
+function collapseAllGateSections() {
+  openGateTopics.clear();
+  saveLocalBackup();
+  render();
+}
+
 // CALENDAR
 function renderCalendar(swaroopStats, raniStats) {
   const grid = document.getElementById('calendar-grid');
@@ -3586,6 +4214,24 @@ function renderCalendar(swaroopStats, raniStats) {
       });
     });
 
+    // GATE items on this date
+    GATE_RAW_DATA.forEach(([sec, tag, items]) => {
+      items.forEach(([code, title, desc]) => {
+        const k = gateSlug(sec, code);
+        const sIt = appState.users.Swaroop.progress[k];
+        const rIt = appState.users.Rani.progress[k];
+
+        if (sIt && sIt.done && sIt.date === cellDateStr) {
+          sCount++;
+          details.swaroop.push({ sheet: 'GATE DA', topic: tag, title, num: code, diff: 'Core', link: '#' });
+        }
+        if (rIt && rIt.done && rIt.date === cellDateStr) {
+          rCount++;
+          details.rani.push({ sheet: 'GATE DA', topic: tag, title, num: code, diff: 'Core', link: '#' });
+        }
+      });
+    });
+
     cell.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <span class="day-num">${d}</span>
@@ -3632,6 +4278,16 @@ function renderActivityLog() {
         }
       });
     });
+
+    // GATE items
+    GATE_RAW_DATA.forEach(([sec, tag, items]) => {
+      items.forEach(([code, title, desc]) => {
+        const item = uObj.progress[gateSlug(sec, code)];
+        if (item && item.done && item.date) {
+          entries.push({ user: u, sheet: 'GATE DA', topic: tag, title, num: code, diff: 'Core', link: '#', date: item.date });
+        }
+      });
+    });
   });
 
   entries.sort((a, b) => b.date.localeCompare(a.date));
@@ -3648,7 +4304,7 @@ function renderActivityLog() {
     item.innerHTML = `
       <div class="log-date">📅 ${e.date} • <strong style="color:${isS ? 'var(--swaroop-color)' : 'var(--rani-color)'}">${isS ? '🦊 Swaroop' : '🌸 Rani'}</strong></div>
       <div class="log-desc">
-        Solved <a href="${e.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); font-weight:700; text-decoration:none;">#${e.num} ${e.title} ↗</a>
+        ${e.link && e.link !== '#' ? `Solved <a href="${e.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); font-weight:700; text-decoration:none;">#${e.num} ${e.title} ↗</a>` : `Mastered <strong style="color:var(--brown-dark);">${e.num}: ${e.title}</strong>`}
       </div>
       <div style="margin-top:4px; display:flex; gap:6px; align-items:center;">
         <span style="font-size:10px; font-weight:700; color:var(--brown-dark); background:#EAE2D5; padding:1px 5px; border-radius:3px;">${e.sheet}</span>
@@ -3672,22 +4328,26 @@ function showDayModal(dateStr, details) {
   const rLen = details.rani.length;
 
   if (sLen === 0 && rLen === 0) {
-    modalBody.innerHTML = `<p style="color:var(--text-muted); font-size:13.5px;">No problems solved on this date by either partner.</p>`;
+    modalBody.innerHTML = `<p style="color:var(--text-muted); font-size:13.5px;">No problems or topics completed on this date by either partner.</p>`;
   } else {
     modalBody.innerHTML = `
       <div style="margin-bottom:16px;">
-        <h4 style="color:var(--swaroop-color); font-size:14px; margin-bottom:6px;">🦊 Swaroop (${sLen} solved):</h4>
-        ${sLen === 0 ? '<div style="font-size:12px; color:var(--text-light);">No problems solved.</div>' : `
+        <h4 style="color:var(--swaroop-color); font-size:14px; margin-bottom:6px;">🦊 Swaroop (${sLen} completed):</h4>
+        ${sLen === 0 ? '<div style="font-size:12px; color:var(--text-light);">No items completed.</div>' : `
           <ul style="list-style:none;">
             ${details.swaroop.map(it => `
               <li style="font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between; align-items:center; gap:8px;">
                 <div>
                   <span style="font-size:10px; font-weight:700; background:#EAE2D5; color:var(--brown-dark); padding:1px 5px; border-radius:3px; margin-right:4px;">${it.sheet}</span>
-                  <a href="${it.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); text-decoration:none; font-weight:600;">
-                    #${it.num} ${it.title} <span style="font-size:10px; opacity:0.6;">↗</span>
-                  </a>
+                  ${it.link && it.link !== '#' ? `
+                    <a href="${it.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); text-decoration:none; font-weight:600;">
+                      #${it.num} ${it.title} <span style="font-size:10px; opacity:0.6;">↗</span>
+                    </a>
+                  ` : `
+                    <span style="color:var(--brown-dark); font-weight:600;">${it.num} ${it.title}</span>
+                  `}
                 </div>
-                <span class="diff-badge ${it.diff}">${it.diff}</span>
+                <span class="diff-badge ${it.diff || 'Core'}">${it.diff || 'Core'}</span>
               </li>
             `).join('')}
           </ul>
@@ -3695,18 +4355,22 @@ function showDayModal(dateStr, details) {
       </div>
 
       <div>
-        <h4 style="color:var(--rani-color); font-size:14px; margin-bottom:6px;">🌸 Rani (${rLen} solved):</h4>
-        ${rLen === 0 ? '<div style="font-size:12px; color:var(--text-light);">No problems solved.</div>' : `
+        <h4 style="color:var(--rani-color); font-size:14px; margin-bottom:6px;">🌸 Rani (${rLen} completed):</h4>
+        ${rLen === 0 ? '<div style="font-size:12px; color:var(--text-light);">No items completed.</div>' : `
           <ul style="list-style:none;">
             ${details.rani.map(it => `
               <li style="font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--border); display:flex; justify-content:space-between; align-items:center; gap:8px;">
                 <div>
                   <span style="font-size:10px; font-weight:700; background:#EAE2D5; color:var(--brown-dark); padding:1px 5px; border-radius:3px; margin-right:4px;">${it.sheet}</span>
-                  <a href="${it.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); text-decoration:none; font-weight:600;">
-                    #${it.num} ${it.title} <span style="font-size:10px; opacity:0.6;">↗</span>
-                  </a>
+                  ${it.link && it.link !== '#' ? `
+                    <a href="${it.link}" target="_blank" rel="noopener" style="color:var(--brown-dark); text-decoration:none; font-weight:600;">
+                      #${it.num} ${it.title} <span style="font-size:10px; opacity:0.6;">↗</span>
+                    </a>
+                  ` : `
+                    <span style="color:var(--brown-dark); font-weight:600;">${it.num} ${it.title}</span>
+                  `}
                 </div>
-                <span class="diff-badge ${it.diff}">${it.diff}</span>
+                <span class="diff-badge ${it.diff || 'Core'}">${it.diff || 'Core'}</span>
               </li>
             `).join('')}
           </ul>
@@ -3773,7 +4437,7 @@ function mergeSyncData() {
       updateScheduleStripUI();
       render();
       closeModal('sync-modal');
-      alert('Successfully merged Rani & Swaroop DSA & SQL progress data!');
+      alert('Successfully merged Rani & Swaroop DSA, SQL & GATE progress data!');
     } else {
       alert('Invalid backup data format. Please make sure the JSON contains Swaroop and Rani profiles.');
     }
@@ -3830,6 +4494,11 @@ document.getElementById('sql-search-input').addEventListener('input', (e) => {
   render();
 });
 
+document.getElementById('gate-search-input')?.addEventListener('input', (e) => {
+  appState.gateSearchQuery = e.target.value;
+  render();
+});
+
 document.getElementById('diff-filters').addEventListener('click', (e) => {
   if (e.target.tagName !== 'BUTTON' || e.target.classList.contains('reset-order-btn')) return;
   document.querySelectorAll('#diff-filters .filter-btn').forEach(b => b.classList.remove('active'));
@@ -3843,6 +4512,14 @@ document.getElementById('sql-diff-filters').addEventListener('click', (e) => {
   document.querySelectorAll('#sql-diff-filters .filter-btn').forEach(b => b.classList.remove('active'));
   e.target.classList.add('active');
   appState.sqlFilter = e.target.dataset.filter;
+  render();
+});
+
+document.getElementById('gate-filters')?.addEventListener('click', (e) => {
+  if (e.target.tagName !== 'BUTTON') return;
+  document.querySelectorAll('#gate-filters .filter-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  appState.gateFilter = e.target.dataset.filter;
   render();
 });
 
