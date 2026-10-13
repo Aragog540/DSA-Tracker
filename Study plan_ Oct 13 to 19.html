@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sprint Study Plan (Oct 13 to 19) — Rani &amp; Swaroop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Earthy Warm Light Palette - Standardized to Main Sheet */
+    --bg: #FBF8F4;
+    --bg-alt: #F4EFE6;
+    --card: #FFFFFF;
+    --card-subtle: #FDFCF9;
+    --border: #E8DEC8;
+    --border-hover: #D4C3A3;
+
+    --text-main: #2D2118;
+    --text-muted: #7A695A;
+    --text-light: #A39180;
+
+    --brown-dark: #3D261D;
+    --brown-medium: #6E473B;
+    --brown-light: #EFE4D8;
+
+    /* User Colors */
+    --swaroop-color: #D96B27;
+    --swaroop-bg: #FDF0E6;
+    --swaroop-border: #F7D4BD;
+
+    --rani-color: #D94E6B;
+    --rani-bg: #FDF0F3;
+    --rani-border: #F7D0D8;
+
+    /* Subject Badges */
+    --gate-color: #0E7C72;
+    --gate-bg: #E6F5F3;
+    --gate-border: #B2DFDB;
+
+    --dsa-color: #D96B27;
+    --dsa-bg: #FDF0E6;
+    --dsa-border: #F7D4BD;
+
+    --sql-color: #C07000;
+    --sql-bg: #FFF8E1;
+    --sql-border: #FFE082;
+
+    --wrap-color: #5A6B7B;
+    --wrap-bg: #EEF2F6;
+    --wrap-border: #CFD8DC;
+
+    --done-color: #9E8E81;
+    --done-bg: #F5EFEB;
+
+    /* Active dynamic accent */
+    --accent: var(--swaroop-color);
+    --accent-bg: var(--swaroop-bg);
+    --accent-border: var(--swaroop-border);
+
+    --shadow-sm: 0 2px 8px rgba(61, 38, 29, 0.04);
+    --shadow-md: 0 4px 16px rgba(61, 38, 29, 0.08);
+    --shadow-lg: 0 10px 30px rgba(61, 38, 29, 0.12);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-full: 9999px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.5;
+    padding-bottom: 70px;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px;
+  }
+
+  /* Header Section */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .brand-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-icon {
+    background: linear-gradient(135deg, var(--swaroop-color), var(--rani-color));
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    box-shadow: 0 4px 10px rgba(217, 107, 39, 0.25);
+    flex-shrink: 0;
+  }
+
+  .brand h1 {
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--brown-dark);
+    letter-spacing: -0.3px;
+  }
+
+  .brand p {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* Navigation Back Button */
+  .back-btn {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .back-btn:hover {
+    background: #EAE2D5;
+    border-color: var(--border-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Header Sprint Badge */
+  .header-badge {
+    background: linear-gradient(135deg, #3D261D, #6E473B);
+    color: #FFFFFF;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #FFE082;
+    box-shadow: var(--shadow-sm);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  .header-badge .badge-highlight {
+    color: #FFE082;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* User Switcher */
+  .user-switch-card {
+    background: var(--card-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 4px;
+    display: inline-flex;
+    gap: 4px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .user-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+  }
+
+  .user-btn:hover {
+    color: var(--text-main);
+  }
+
+  .user-btn.active-swaroop {
+    background: var(--swaroop-bg);
+    color: var(--swaroop-color);
+    border: 1px solid var(--swaroop-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .user-btn.active-rani {
+    background: var(--rani-bg);
+    color: var(--rani-color);
+    border: 1px solid var(--rani-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Target Cards Grid */
+  .targets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .target-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .target-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .target-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--card-accent, var(--accent));
+  }
+
+  .target-val {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--brown-dark);
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .target-label {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 2px;
+  }
+
+  .target-sub {
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+
+  /* Master Progress Card */
+  .progress-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .progress-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .progress-stats {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .bar-track {
+    height: 10px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bar-fill {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), #2D7A4D);
+    border-radius: var(--radius-full);
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .progress-sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* Strategic Rules Card */
+  .rules-card {
+    background: linear-gradient(135deg, #FFFDF9 0%, #FAF3E8 100%);
+    border: 1px solid #EAD8C3;
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 26px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .rules-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .rules-pill {
+    background: #FFE8D6;
+    color: #D96B27;
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .rules-card p {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--text-main);
+    margin-bottom: 6px;
+  }
+
+  .rules-card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .rules-card b {
+    color: var(--brown-dark);
+  }
+
+  /* Day Section Cards */
+  .day-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .day-card.is-today {
+    border: 2px solid var(--accent);
+    box-shadow: 0 6px 20px rgba(217, 107, 39, 0.15);
+  }
+
+  .day-header {
+    background: var(--card-subtle);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .day-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .day-date {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--brown-dark);
+    letter-spacing: -0.2px;
+  }
+
+  .day-topic {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .today-badge {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 9px;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: pulseToday 2s infinite;
+  }
+
+  @keyframes pulseToday {
+    0% { box-shadow: 0 0 0 0 rgba(217, 107, 39, 0.4); }
+    70% { box-shadow: 0 0 0 8px rgba(217, 107, 39, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(217, 107, 39, 0); }
+  }
+
+  .day-progress-badge {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    color: var(--text-muted);
+  }
+
+  .day-note {
+    background: #FFF9E6;
+    border-left: 3px solid #F0A63A;
+    padding: 10px 18px;
+    font-size: 12.5px;
+    color: #6E473B;
+    margin: 12px 20px 0;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .day-blocks {
+    padding: 8px 20px 16px;
+  }
+
+  /* Schedule Time Block */
+  .blk {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .blk:last-child {
+    border-bottom: none;
+    padding-bottom: 4px;
+  }
+
+  .time-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .time-badge {
+    font-size: 11.5px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .cat-badge {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    width: fit-content;
+    margin-bottom: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .cat-badge.g { background: var(--gate-bg); color: var(--gate-color); border: 1px solid var(--gate-border); }
+  .cat-badge.d { background: var(--dsa-bg); color: var(--dsa-color); border: 1px solid var(--dsa-border); }
+  .cat-badge.s { background: var(--sql-bg); color: var(--sql-color); border: 1px solid var(--sql-border); }
+  .cat-badge.w { background: var(--wrap-bg); color: var(--wrap-color); border: 1px solid var(--wrap-border); }
+
+  .blk-content h3 {
+    font-size: 14.5px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--brown-dark);
+  }
+
+  .blk-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .blk-content li {
+    margin-bottom: 4px;
+  }
+
+  .task-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 5px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+  }
+
+  .task-label:hover {
+    background: var(--bg-alt);
+  }
+
+  .task-input {
+    margin-top: 3px;
+    width: 17px;
+    height: 17px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .task-text {
+    font-size: 13.5px;
+    color: var(--text-main);
+    line-height: 1.45;
+    transition: color 0.2s, text-decoration 0.2s;
+  }
+
+  .task-input:checked + .task-text {
+    color: var(--done-color);
+    text-decoration: line-through;
+  }
+
+  .stretch-box {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #8C541B;
+    background: #FFF7EC;
+    border: 1px dashed #F2CC8F;
+    border-radius: 6px;
+    padding: 6px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Footer Note */
+  .footer-note {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .targets-grid {
+      grid-template-columns: 1fr;
+    }
+    .blk {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .header-actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>
+</head>
+<body>
+
+<audio id="completion-sound" src="completion.mp3" preload="auto"></audio>
+
+<div class="container">
+  <!-- Standardized Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-title-wrap">
+        <span class="logo-icon">⚡</span>
+        <h1>Sprint Study Plan: Oct 13 to 19</h1>
+      </div>
+      <p>7-Day Realistic Execution Blueprint • NeetCode 150 • SQL 50 • GATE 2027 DA PYQs</p>
+    </div>
+
+    <div class="header-actions">
+      <!-- Back to Sheet Link -->
+      <a href="index.html" class="back-btn" title="Return to Main Practice Tracker">
+        ← Back to Tracker
+      </a>
+
+      <!-- Header Countdown / Date Badge -->
+      <div class="header-badge" id="sprint-header-badge">
+        <span>SPRINT</span>
+        <span class="badge-highlight">OCT 13 - 19</span>
+      </div>
+
+      <!-- Active User Switcher -->
+      <div class="user-switch-card">
+        <button class="user-btn active-swaroop" id="user-btn-swaroop" onclick="setActiveUser('Swaroop')">
+          🦊 Swaroop
+        </button>
+        <button class="user-btn" id="user-btn-rani" onclick="setActiveUser('Rani')">
+          🌸 Rani
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3 Target Pillars -->
+  <div class="targets-grid">
+    <div class="target-card" style="--card-accent: var(--dsa-color);">
+      <div class="target-val">~29</div>
+      <div class="target-label">NeetCode 150 Problems</div>
+      <div class="target-sub">Arrays, Two Pointers, Sliding Window, Stack, Binary Search</div>
+    </div>
+
+    <div class="target-card" style="--card-accent: var(--sql-color);">
+      <div class="target-val">~32</div>
+      <div class="target-label">LeetCode SQL 50 Queries</div>
+      <div class="target-sub">Select, Joins, Aggregates, Grouping &amp; Advanced Queries</div>
+    </div>
+
+    <div class="target-card" style="--card-accent: var(--gate-color);">
+      <div class="target-val">3 Subjects</div>
+      <div class="target-label">GATE 2027 DA + PYQs</div>
+      <div class="target-sub">Linear Algebra, Probability &amp; Stats, Calculus with ~60 PYQs</div>
+    </div>
+  </div>
+
+  <!-- Master Progress Card -->
+  <div class="progress-card">
+    <div class="progress-header">
+      <div class="progress-title">
+        <span>🎯 Active Sprint Progress</span>
+        <span id="active-user-tag" style="font-size:12px; font-weight:700; color:var(--accent);">Swaroop</span>
+      </div>
+      <div class="progress-stats" id="prog-stats">0 of 0 tasks done (0%)</div>
+    </div>
+    <div class="bar-track">
+      <div class="bar-fill" id="bar-fill"></div>
+    </div>
+    <div class="progress-sub">
+      <span id="prog-summary">Ticking tasks automatically saves locally for this partner.</span>
+      <span id="days-done-count">0 of 7 days completed</span>
+    </div>
+  </div>
+
+  <!-- Strategic Rules & Tactics -->
+  <div class="rules-card">
+    <div class="rules-head">
+      <span class="rules-pill">TACTICAL SPRINT RULES</span>
+      <span style="font-size:11.5px; font-weight:700; color:var(--brown-medium); font-family:'Cinzel', serif;">Disciplined Focus</span>
+    </div>
+    <p><b>⏱️ Stuck for 25 minutes?</b> Peek at the editorial/solution, mark it for review, and move on. Do not let one question stall your day.</p>
+    <p><b>🚫 Deliberately Not in this week:</b> Graphs, DP, Trees, Heaps, and GATE ML, AI and DBMS sections. Fitting them in means rushing everything and retaining nothing.</p>
+    <p><b>📑 Order used:</b> Standard NeetCode 150 sequence and LeetCode SQL 50 sequence. Day 7 is reserved for catch-up and revision.</p>
+  </div>
+
+  <!-- Dynamic Days Container -->
+  <div id="days-container"></div>
+
+  <!-- Footer Note -->
+  <p class="footer-note">
+    Day 7 has almost nothing new on purpose. Slipped tasks land there. Stay consistent! 🚀
+  </p>
+</div>
+
+<script>
+var DAYS = [
+  {
+    d: 'Tue 13 Oct',
+    t: 'Arrays & Hashing (part 1)',
+    n: 'If the morning is already gone, do GATE at night and cut SQL to 30 minutes.',
+    g: ['Linear Algebra I', 'Vectors, matrices, rank, determinant, linear systems', 'Solve ~10 PYQs on these'],
+    a: ['Contains Duplicate', 'Valid Anagram', 'Two Sum', 'Group Anagrams'],
+    as: 'If time is left: Top K Frequent Elements',
+    sh: 'SQL: Select',
+    s: ['Recyclable and Low Fat Products', 'Find Customer Referee', 'Big Countries', 'Article Views I', 'Invalid Tweets']
+  },
+  {
+    d: 'Wed 14 Oct',
+    t: 'Arrays & Hashing (finish)',
+    g: ['Linear Algebra II', 'Eigenvalues and eigenvectors, LU, SVD, projections', 'Solve ~10 PYQs'],
+    a: ['Top K Frequent Elements', 'Product of Array Except Self', 'Valid Sudoku', 'Longest Consecutive Sequence', 'Encode and Decode Strings'],
+    sh: 'SQL: Basic Joins (1 to 5)',
+    s: ['Replace Employee ID With Unique Identifier', 'Product Sales Analysis I', 'Customer Who Visited but Did Not Make Any Transactions', 'Rising Temperature', 'Average Time of Process per Machine']
+  },
+  {
+    d: 'Thu 15 Oct',
+    t: 'Two Pointers',
+    g: ['Probability I', 'Axioms, conditional probability, Bayes, independence, expectation and variance', 'Solve ~10 PYQs'],
+    a: ['Valid Palindrome', 'Two Sum II', '3Sum', 'Container With Most Water', 'Trapping Rain Water'],
+    as: 'Trapping Rain Water is hard: do it last, peek at the idea if stuck',
+    sh: 'SQL: Basic Joins (6 to 9)',
+    s: ['Employee Bonus', 'Students and Examinations', 'Managers with at Least 5 Direct Reports', 'Confirmation Rate', 'Not Boring Movies']
+  },
+  {
+    d: 'Fri 16 Oct',
+    t: 'Sliding Window',
+    g: ['Probability II', 'Binomial, Poisson, normal, exponential, uniform; joint distributions; CLT', 'Solve ~10 PYQs'],
+    a: ['Best Time to Buy and Sell Stock', 'Longest Substring Without Repeating Characters', 'Longest Repeating Character Replacement', 'Permutation in String'],
+    as: 'Stretch: Minimum Window Substring (hard)',
+    sh: 'SQL: Basic Aggregates',
+    s: ['Average Selling Price', 'Project Employees I', 'Percentage of Users Attended a Contest', 'Queries Quality and Percentage', 'Monthly Transactions I']
+  },
+  {
+    d: 'Sat 17 Oct',
+    t: 'Stack',
+    g: ['Statistics', 'Mean, median, mode, covariance, correlation, hypothesis tests, confidence intervals', 'Solve ~10 PYQs'],
+    a: ['Valid Parentheses', 'Min Stack', 'Evaluate Reverse Polish Notation', 'Generate Parentheses', 'Daily Temperatures'],
+    sh: 'SQL: Aggregates (end) + Grouping',
+    s: ['Immediate Food Delivery II', 'Game Play Analysis IV', 'Number of Unique Subjects Taught by Each Teacher', 'User Activity for the Past 30 Days I', 'Product Sales Analysis III', 'Classes More Than 5 Students']
+  },
+  {
+    d: 'Sun 18 Oct',
+    t: 'Binary Search',
+    g: ['Calculus & Optimization', 'Limits, derivatives, maxima and minima, Taylor series, gradients, convexity basics', 'Solve ~10 PYQs'],
+    a: ['Binary Search', 'Search a 2D Matrix', 'Koko Eating Bananas', 'Find Minimum in Rotated Sorted Array', 'Search in Rotated Sorted Array'],
+    sh: 'SQL: Grouping (end) + Advanced Joins',
+    s: ['Find Followers Count', 'Biggest Single Number', 'Customers Who Bought All Products', 'The Number of Employees Which Report to Each Employee', 'Primary Department for Each Employee', 'Triangle Judgement']
+  },
+  {
+    d: 'Mon 19 Oct',
+    t: 'Catch-up and review',
+    n: 'Nothing new unless everything below is clean.',
+    g: ['Revision', 'Redo every PYQ you got wrong this week', 'Make a one-page formula sheet', 'One timed mixed test, 25 questions in 60 minutes'],
+    a: ['Redo every problem you marked for review'],
+    as: 'Only if clean: Sliding Window Maximum, Car Fleet, Largest Rectangle in Histogram',
+    sh: 'SQL: Redo the 3 hardest',
+    s: ['Redo the 3 queries that took longest this week'],
+    as2: 'Only if clean: Consecutive Numbers, Product Price at a Given Date'
+  }
+];
+
+// Partner Storage with dual user awareness and backwards compatibility
+var store = {
+  get: function(k) {
+    try {
+      // 1. Try user-namespaced key
+      var val = localStorage.getItem('plan26_' + activeUser + ':' + k);
+      if (val !== null) return val;
+      // 2. Fallback to legacy single key for Swaroop if active
+      if (activeUser === 'Swaroop') {
+        return localStorage.getItem('plan26:' + k);
+      }
+      return null;
+    } catch(e) {
+      return null;
+    }
+  },
+  set: function(k, v) {
+    try {
+      localStorage.setItem('plan26_' + activeUser + ':' + k, v);
+      // If Swaroop, also sync to legacy key for compatibility with original version
+      if (activeUser === 'Swaroop') {
+        localStorage.setItem('plan26:' + k, v);
+      }
+    } catch(e) {}
+  }
+};
+
+// Initial User Detection
+function getInitialUser() {
+  try {
+    var raw = localStorage.getItem('dsa_dual_app_v3');
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      if (parsed.activeUser === 'Rani' || parsed.activeUser === 'Swaroop') {
+        return parsed.activeUser;
+      }
+    }
+    var saved = localStorage.getItem('dsa_active_user');
+    if (saved === 'Rani' || saved === 'Swaroop') return saved;
+  } catch(e) {}
+  return 'Swaroop';
+}
+
+var activeUser = getInitialUser();
+
+function setActiveUser(user) {
+  activeUser = user;
+  try {
+    localStorage.setItem('dsa_active_user', user);
+    var raw = localStorage.getItem('dsa_dual_app_v3');
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      parsed.activeUser = user;
+      localStorage.setItem('dsa_dual_app_v3', JSON.stringify(parsed));
+    }
+  } catch(e) {}
+  updateUserUI();
+  renderDays();
+  upd();
+}
+
+function updateUserUI() {
+  var isSwaroop = activeUser === 'Swaroop';
+  document.getElementById('user-btn-swaroop').className = 'user-btn ' + (isSwaroop ? 'active-swaroop' : '');
+  document.getElementById('user-btn-rani').className = 'user-btn ' + (!isSwaroop ? 'active-rani' : '');
+  
+  var accent = isSwaroop ? 'var(--swaroop-color)' : 'var(--rani-color)';
+  var accentBg = isSwaroop ? 'var(--swaroop-bg)' : 'var(--rani-bg)';
+  var accentBorder = isSwaroop ? 'var(--swaroop-border)' : 'var(--rani-border)';
+
+  document.documentElement.style.setProperty('--accent', accent);
+  document.documentElement.style.setProperty('--accent-bg', accentBg);
+  document.documentElement.style.setProperty('--accent-border', accentBorder);
+
+  var tag = document.getElementById('active-user-tag');
+  if (tag) {
+    tag.textContent = activeUser + "'s Plan";
+    tag.style.color = accent;
+  }
+}
+
+function playCompletionSound() {
+  try {
+    var snd = document.getElementById('completion-sound');
+    if (snd) {
+      snd.currentTime = 0;
+      snd.play().catch(function() {});
+    }
+  } catch(e) {}
+}
+
+function createBlock(time, badgeCls, badgeText, title, items, key, extra) {
+  var li = items.map(function(item, idx) {
+    var itemKey = key + ':' + idx;
+    var isChecked = store.get(itemKey) === '1';
+    return '<li>' +
+      '<label class="task-label">' +
+        '<input type="checkbox" class="task-input" data-key="' + itemKey + '"' + (isChecked ? ' checked' : '') + '>' +
+        '<span class="task-text">' + item + '</span>' +
+      '</label>' +
+    '</li>';
+  }).join('');
+
+  var extraHtml = extra ? '<div class="stretch-box">💡 ' + extra + '</div>' : '';
+
+  return '<div class="blk">' +
+    '<div class="time-col">' +
+      '<span class="time-badge">' + time + '</span>' +
+      '<span class="cat-badge ' + badgeCls + '">' + badgeText + '</span>' +
+    '</div>' +
+    '<div class="blk-content">' +
+      '<h3>' + title + '</h3>' +
+      '<ul>' + li + '</ul>' +
+      extraHtml +
+    '</div>' +
+  '</div>';
+}
+
+function renderDays() {
+  var now = new Date();
+  var todayDate = (now.getFullYear() === 2026 && now.getMonth() === 9) ? now.getDate() : -1;
+  var html = '';
+
+  DAYS.forEach(function(day, i) {
+    var dayNumber = 13 + i;
+    var isToday = (dayNumber === todayDate);
+    var dayKey = 'd' + i;
+
+    html += '<section class="day-card' + (isToday ? ' is-today' : '') + '" id="card-day-' + i + '">';
+    html += '<div class="day-header">';
+    html += '  <div class="day-title-wrap">';
+    html += '    <span class="day-date">' + day.d + '</span>';
+    html += '    <span class="day-topic">• ' + day.t + '</span>';
+    if (isToday) {
+      html += '  <span class="today-badge">🔥 TODAY</span>';
+    }
+    html += '  </div>';
+    html += '  <span class="day-progress-badge" id="day-prog-' + i + '">0 tasks</span>';
+    html += '</div>';
+
+    if (day.n) {
+      html += '<div class="day-note">💡 ' + day.n + '</div>';
+    }
+
+    html += '<div class="day-blocks">';
+    // 1. GATE DA Block
+    html += createBlock('10:00 - 12:00 AM', 'g', 'GATE DA', 'GATE: ' + day.g[0], day.g.slice(1), dayKey + 'g');
+    // 2. DSA NeetCode Block
+    html += createBlock('10:00 - 11:40 PM', 'd', 'NeetCode 150', 'DSA Practice', day.a, dayKey + 'a', day.as);
+    // 3. SQL Block
+    html += createBlock('11:50 - 12:45 AM', 's', 'SQL 50', day.sh, day.s, dayKey + 's', day.as2);
+    // 4. Wrap up Block
+    html += createBlock('12:45 - 1:00 AM', 'w', 'Wrap Up', 'Daily Wrap Up & Sync', ['Update the shared sheet', 'Mark problems for review', "Write tomorrow's list"], dayKey + 'w');
+    html += '</div>';
+
+    html += '</section>';
+  });
+
+  document.getElementById('days-container').innerHTML = html;
+}
+
+function upd() {
+  var all = document.querySelectorAll('#days-container input[type="checkbox"]');
+  var checkedCount = 0;
+  all.forEach(function(c) {
+    if (c.checked) checkedCount++;
+  });
+
+  var total = all.length;
+  var pct = total ? Math.round((checkedCount / total) * 100) : 0;
+
+  var bar = document.getElementById('bar-fill');
+  if (bar) bar.style.width = pct + '%';
+
+  var stats = document.getElementById('prog-stats');
+  if (stats) stats.textContent = checkedCount + ' of ' + total + ' tasks done (' + pct + '%)';
+
+  // Update per-day counters
+  var completedDays = 0;
+  DAYS.forEach(function(d, i) {
+    var dayCard = document.getElementById('card-day-' + i);
+    if (dayCard) {
+      var dayChecks = dayCard.querySelectorAll('input[type="checkbox"]');
+      var dayChecked = 0;
+      dayChecks.forEach(function(c) { if (c.checked) dayChecked++; });
+      var dayBadge = document.getElementById('day-prog-' + i);
+      if (dayBadge) {
+        dayBadge.textContent = dayChecked + ' / ' + dayChecks.length + ' done';
+        if (dayChecked === dayChecks.length && dayChecks.length > 0) {
+          dayBadge.style.background = '#E8F5E9';
+          dayBadge.style.color = '#2D7A4D';
+          dayBadge.style.borderColor = '#C8E6C9';
+          completedDays++;
+        } else {
+          dayBadge.style.background = '';
+          dayBadge.style.color = '';
+          dayBadge.style.borderColor = '';
+        }
+      }
+    }
+  });
+
+  var daysCount = document.getElementById('days-done-count');
+  if (daysCount) daysCount.textContent = completedDays + ' of 7 days completed';
+}
+
+// Event Delegation for Checkboxes
+document.getElementById('days-container').addEventListener('change', function(e) {
+  var target = e.target;
+  if (target && target.dataset && target.dataset.key) {
+    var isChecked = target.checked;
+    store.set(target.dataset.key, isChecked ? '1' : '0');
+    if (isChecked && activeUser === 'Rani') {
+      playCompletionSound();
+    }
+    upd();
+  }
+});
+
+// Initialize on Load
+updateUserUI();
+renderDays();
+upd();
+</script>
+</body>
+</html>

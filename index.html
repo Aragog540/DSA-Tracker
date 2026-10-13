@@ -1268,6 +1268,19 @@
     background: #EAE2D5;
   }
 
+  .study-plan-btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .study-plan-btn:hover {
+    background: #EAE2D5;
+    border-color: var(--border-hover);
+    color: var(--text-main);
+  }
+
   footer {
     text-align: center;
     font-size: 12px;
@@ -1453,6 +1466,11 @@
       <button class="sync-btn" id="open-sync-btn" title="Offline JSON Backup and Manual Cross-Device Sync">
         🔄 Backup / Sync
       </button>
+
+      <!-- Sprint Study Plan Button -->
+      <a href="study-plan.html" class="sync-btn study-plan-btn" id="open-study-plan-btn" title="Oct 13 - 19 Sprint Study Plan">
+        📅 Study Plan
+      </a>
 
       <!-- Active User Switcher -->
       <div class="user-switch-card">
