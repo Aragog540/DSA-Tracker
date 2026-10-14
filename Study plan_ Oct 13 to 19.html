@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sprint Study Plan (Oct 13 to 19) — Rani &amp; Swaroop</title>
+<title>Sprint Study Plan (Oct 14 to 19) — Rani &amp; Swaroop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
@@ -642,9 +642,9 @@
     <div class="brand">
       <div class="brand-title-wrap">
         <span class="logo-icon">⚡</span>
-        <h1>Sprint Study Plan: Oct 13 to 19</h1>
+        <h1>Sprint Study Plan: Oct 14 to 19</h1>
       </div>
-      <p>7-Day Realistic Execution Blueprint • NeetCode 150 • SQL 50 • GATE 2027 DA PYQs</p>
+      <p>6-Day Realistic Execution Blueprint • NeetCode 150 • SQL 50 • GATE 2027 DA (AI &amp; ML)</p>
     </div>
 
     <div class="header-actions">
@@ -656,7 +656,7 @@
       <!-- Header Countdown / Date Badge -->
       <div class="header-badge" id="sprint-header-badge">
         <span>SPRINT</span>
-        <span class="badge-highlight">OCT 13 - 19</span>
+        <span class="badge-highlight">OCT 14 - 19</span>
       </div>
 
       <!-- Active User Switcher -->
@@ -674,7 +674,7 @@
   <!-- 3 Target Pillars -->
   <div class="targets-grid">
     <div class="target-card" style="--card-accent: var(--dsa-color);">
-      <div class="target-val">~29</div>
+      <div class="target-val">~26</div>
       <div class="target-label">NeetCode 150 Problems</div>
       <div class="target-sub">Arrays, Two Pointers, Sliding Window, Stack, Binary Search</div>
     </div>
@@ -686,9 +686,9 @@
     </div>
 
     <div class="target-card" style="--card-accent: var(--gate-color);">
-      <div class="target-val">3 Subjects</div>
-      <div class="target-label">GATE 2027 DA + PYQs</div>
-      <div class="target-sub">Linear Algebra, Probability &amp; Stats, Calculus with ~60 PYQs</div>
+      <div class="target-val">AI &amp; ML</div>
+      <div class="target-label">GATE 2027 DA (AI &amp; ML)</div>
+      <div class="target-sub">Search, Logic, Supervised Models, SVM, Trees, Clustering &amp; PCA</div>
     </div>
   </div>
 
@@ -706,7 +706,7 @@
     </div>
     <div class="progress-sub">
       <span id="prog-summary">Ticking tasks automatically saves locally for this partner.</span>
-      <span id="days-done-count">0 of 7 days completed</span>
+      <span id="days-done-count">0 of 6 days completed</span>
     </div>
   </div>
 
@@ -717,8 +717,8 @@
       <span style="font-size:11.5px; font-weight:700; color:var(--brown-medium); font-family:'Cinzel', serif;">Disciplined Focus</span>
     </div>
     <p><b>⏱️ Stuck for 25 minutes?</b> Peek at the editorial/solution, mark it for review, and move on. Do not let one question stall your day.</p>
-    <p><b>🚫 Deliberately Not in this week:</b> Graphs, DP, Trees, Heaps, and GATE ML, AI and DBMS sections. Fitting them in means rushing everything and retaining nothing.</p>
-    <p><b>📑 Order used:</b> Standard NeetCode 150 sequence and LeetCode SQL 50 sequence. Day 7 is reserved for catch-up and revision.</p>
+    <p><b>🚫 Deliberately Not in this week:</b> Graphs, DP, Trees (DSA), Heaps, and GATE Math/DBMS foundations. Fitting them in means rushing everything and retaining nothing.</p>
+    <p><b>📑 Order used:</b> Core AI &amp; ML sequence (AI Search &amp; Logic &rarr; Regression &amp; Classifiers &rarr; SVM &amp; Trees &rarr; Neural Nets &amp; Clustering &rarr; PYQ Drill). Day 6 is reserved for catch-up and revision.</p>
   </div>
 
   <!-- Dynamic Days Container -->
@@ -726,74 +726,173 @@
 
   <!-- Footer Note -->
   <p class="footer-note">
-    Day 7 has almost nothing new on purpose. Slipped tasks land there. Stay consistent! 🚀
+    Day 6 (Mon 19 Oct) has almost nothing new on purpose. Slipped tasks land there. Stay consistent! 🚀
   </p>
 </div>
 
 <script>
 var DAYS = [
   {
-    d: 'Tue 13 Oct',
-    t: 'Arrays & Hashing (part 1)',
-    n: 'If the morning is already gone, do GATE at night and cut SQL to 30 minutes.',
-    g: ['Linear Algebra I', 'Vectors, matrices, rank, determinant, linear systems', 'Solve ~10 PYQs on these'],
-    a: ['Contains Duplicate', 'Valid Anagram', 'Two Sum', 'Group Anagrams'],
-    as: 'If time is left: Top K Frequent Elements',
-    sh: 'SQL: Select',
-    s: ['Recyclable and Low Fat Products', 'Find Customer Referee', 'Big Countries', 'Article Views I', 'Invalid Tweets']
-  },
-  {
     d: 'Wed 14 Oct',
-    t: 'Arrays & Hashing (finish)',
-    g: ['Linear Algebra II', 'Eigenvalues and eigenvectors, LU, SVD, projections', 'Solve ~10 PYQs'],
-    a: ['Top K Frequent Elements', 'Product of Array Except Self', 'Valid Sudoku', 'Longest Consecutive Sequence', 'Encode and Decode Strings'],
-    sh: 'SQL: Basic Joins (1 to 5)',
-    s: ['Replace Employee ID With Unique Identifier', 'Product Sales Analysis I', 'Customer Who Visited but Did Not Make Any Transactions', 'Rising Temperature', 'Average Time of Process per Machine']
+    t: 'Arrays & Hashing',
+    n: 'Kickoff: Focus on frequency counts, hash maps, and AI Search algorithm formulations.',
+    g: [
+      'AI: Search Algorithms & Adversarial Games',
+      'Uninformed Search: Breadth-First (BFS), Depth-First (DFS), Uniform Cost Search (UCS)',
+      'Informed Search: Greedy Best-First & A* Search (heuristic admissibility & consistency)',
+      'Adversarial Search: Minimax algorithm, evaluation functions & Alpha-Beta pruning',
+      'Solve ~10 PYQs on AI Search & State Spaces'
+    ],
+    a: [
+      'Contains Duplicate & Two Sum',
+      'Valid Anagram & Group Anagrams',
+      'Top K Frequent Elements',
+      'Product of Array Except Self',
+      'Longest Consecutive Sequence'
+    ],
+    as: 'Stretch if time permits: Encode and Decode Strings, Valid Sudoku',
+    sh: 'SQL: Select & Basic Joins (Part 1)',
+    s: [
+      'Recyclable and Low Fat Products',
+      'Find Customer Referee',
+      'Big Countries',
+      'Replace Employee ID With Unique Identifier',
+      'Customer Who Visited but Did Not Make Any Transactions',
+      'Rising Temperature'
+    ]
   },
   {
     d: 'Thu 15 Oct',
     t: 'Two Pointers',
-    g: ['Probability I', 'Axioms, conditional probability, Bayes, independence, expectation and variance', 'Solve ~10 PYQs'],
-    a: ['Valid Palindrome', 'Two Sum II', '3Sum', 'Container With Most Water', 'Trapping Rain Water'],
-    as: 'Trapping Rain Water is hard: do it last, peek at the idea if stuck',
-    sh: 'SQL: Basic Joins (6 to 9)',
-    s: ['Employee Bonus', 'Students and Examinations', 'Managers with at Least 5 Direct Reports', 'Confirmation Rate', 'Not Boring Movies']
+    g: [
+      'AI: Logic & Probabilistic Reasoning',
+      'Propositional Logic: Truth tables, validity, satisfiability & resolution refutation',
+      'First-Order Predicate Logic: Quantifiers, unification & normal forms',
+      'Reasoning Under Uncertainty: Conditional independence & Bayesian Networks (DAG, d-separation)',
+      'Solve ~10 PYQs on Logic & Bayesian Networks'
+    ],
+    a: [
+      'Valid Palindrome',
+      'Two Sum II - Input Array Is Sorted',
+      '3Sum',
+      'Container With Most Water',
+      'Trapping Rain Water'
+    ],
+    as: 'Trapping Rain Water is tricky: do it last, peek at the two-pointer idea if stuck',
+    sh: 'SQL: Basic Joins (Part 2)',
+    s: [
+      'Employee Bonus',
+      'Students and Examinations',
+      'Managers with at Least 5 Direct Reports',
+      'Confirmation Rate',
+      'Average Time of Process per Machine'
+    ]
   },
   {
     d: 'Fri 16 Oct',
     t: 'Sliding Window',
-    g: ['Probability II', 'Binomial, Poisson, normal, exponential, uniform; joint distributions; CLT', 'Solve ~10 PYQs'],
-    a: ['Best Time to Buy and Sell Stock', 'Longest Substring Without Repeating Characters', 'Longest Repeating Character Replacement', 'Permutation in String'],
+    g: [
+      'ML: Linear Models & Supervised Classifiers',
+      'Simple & Multiple Linear Regression: OLS, normal equations, R-squared',
+      'Ridge Regression (L2 regularization) & Logistic Regression (log-odds, sigmoid)',
+      'k-Nearest Neighbour (k-NN) & Naive Bayes classifier (Laplace smoothing)',
+      'Linear Discriminant Analysis (LDA): Between-class & within-class scatter',
+      'Solve ~10 PYQs on Regression & Classifiers'
+    ],
+    a: [
+      'Best Time to Buy and Sell Stock',
+      'Longest Substring Without Repeating Characters',
+      'Longest Repeating Character Replacement',
+      'Permutation in String'
+    ],
     as: 'Stretch: Minimum Window Substring (hard)',
     sh: 'SQL: Basic Aggregates',
-    s: ['Average Selling Price', 'Project Employees I', 'Percentage of Users Attended a Contest', 'Queries Quality and Percentage', 'Monthly Transactions I']
+    s: [
+      'Not Boring Movies',
+      'Average Selling Price',
+      'Project Employees I',
+      'Percentage of Users Attended a Contest',
+      'Queries Quality and Percentage',
+      'Monthly Transactions I'
+    ]
   },
   {
     d: 'Sat 17 Oct',
     t: 'Stack',
-    g: ['Statistics', 'Mean, median, mode, covariance, correlation, hypothesis tests, confidence intervals', 'Solve ~10 PYQs'],
-    a: ['Valid Parentheses', 'Min Stack', 'Evaluate Reverse Polish Notation', 'Generate Parentheses', 'Daily Temperatures'],
-    sh: 'SQL: Aggregates (end) + Grouping',
-    s: ['Immediate Food Delivery II', 'Game Play Analysis IV', 'Number of Unique Subjects Taught by Each Teacher', 'User Activity for the Past 30 Days I', 'Product Sales Analysis III', 'Classes More Than 5 Students']
+    g: [
+      'ML: Support Vector Machines & Decision Trees',
+      'Support Vector Machines (SVM): Maximum margin hyperplane, support vectors, soft margin & kernel trick',
+      'Decision Trees: Entropy, Information Gain, Gini Impurity & pruning criteria',
+      'Model Evaluation: Bias-Variance tradeoff, k-fold cross validation, Precision, Recall & F1',
+      'Solve ~10 PYQs on SVMs, Trees & Validation'
+    ],
+    a: [
+      'Valid Parentheses',
+      'Min Stack',
+      'Evaluate Reverse Polish Notation',
+      'Generate Parentheses',
+      'Daily Temperatures'
+    ],
+    as: 'Stretch: Car Fleet',
+    sh: 'SQL: Aggregates & Grouping',
+    s: [
+      'Immediate Food Delivery II',
+      'Game Play Analysis IV',
+      'Number of Unique Subjects Taught by Each Teacher',
+      'User Activity for the Past 30 Days I',
+      'Product Sales Analysis III',
+      'Classes More Than 5 Students'
+    ]
   },
   {
     d: 'Sun 18 Oct',
     t: 'Binary Search',
-    g: ['Calculus & Optimization', 'Limits, derivatives, maxima and minima, Taylor series, gradients, convexity basics', 'Solve ~10 PYQs'],
-    a: ['Binary Search', 'Search a 2D Matrix', 'Koko Eating Bananas', 'Find Minimum in Rotated Sorted Array', 'Search in Rotated Sorted Array'],
-    sh: 'SQL: Grouping (end) + Advanced Joins',
-    s: ['Find Followers Count', 'Biggest Single Number', 'Customers Who Bought All Products', 'The Number of Employees Which Report to Each Employee', 'Primary Department for Each Employee', 'Triangle Judgement']
+    g: [
+      'ML: Neural Networks, Clustering & PCA',
+      'Multi-Layer Perceptron (MLP): Feedforward, activation functions, backpropagation & gradient descent',
+      'Unsupervised Clustering: k-Means centroid updates, Hierarchical clustering & linkage methods',
+      'Dimensionality Reduction: PCA eigendecomposition of covariance & variance ratio',
+      'Solve ~10 PYQs on Neural Nets, Clustering & PCA'
+    ],
+    a: [
+      'Binary Search',
+      'Search a 2D Matrix',
+      'Koko Eating Bananas',
+      'Find Minimum in Rotated Sorted Array',
+      'Search in Rotated Sorted Array'
+    ],
+    as: 'Stretch: Time Based Key-Value Store',
+    sh: 'SQL: Grouping & Advanced Joins',
+    s: [
+      'Find Followers Count',
+      'Biggest Single Number',
+      'Customers Who Bought All Products',
+      'The Number of Employees Which Report to Each Employee',
+      'Primary Department for Each Employee',
+      'Triangle Judgement'
+    ]
   },
   {
     d: 'Mon 19 Oct',
-    t: 'Catch-up and review',
-    n: 'Nothing new unless everything below is clean.',
-    g: ['Revision', 'Redo every PYQ you got wrong this week', 'Make a one-page formula sheet', 'One timed mixed test, 25 questions in 60 minutes'],
-    a: ['Redo every problem you marked for review'],
+    t: 'Catch-up, Review & Mock Drill',
+    n: 'Buffer day: clean all flagged problems, no new theory unless sprint is 100% green.',
+    g: [
+      'AI & ML: Comprehensive PYQ Drill & Review',
+      'Redo every tricky AI / ML question & concept missed this week',
+      'Formula & algorithm summary: A*, Bayes nets, SVM margins, Backprop, PCA',
+      'One timed mixed test: 25 questions in 60 minutes'
+    ],
+    a: [
+      'Redo every problem marked for review',
+      'Solve 1-2 new review problems if time permits'
+    ],
     as: 'Only if clean: Sliding Window Maximum, Car Fleet, Largest Rectangle in Histogram',
-    sh: 'SQL: Redo the 3 hardest',
-    s: ['Redo the 3 queries that took longest this week'],
-    as2: 'Only if clean: Consecutive Numbers, Product Price at a Given Date'
+    sh: 'SQL: Redo & Difficult Queries',
+    s: [
+      'Redo the 3 queries that took longest this week',
+      'Consecutive Numbers (Medium)',
+      'Product Price at a Given Date (Medium)'
+    ]
   }
 ];
 
@@ -921,7 +1020,7 @@ function renderDays() {
   var html = '';
 
   DAYS.forEach(function(day, i) {
-    var dayNumber = 13 + i;
+    var dayNumber = 14 + i;
     var isToday = (dayNumber === todayDate);
     var dayKey = 'd' + i;
 
@@ -943,7 +1042,7 @@ function renderDays() {
 
     html += '<div class="day-blocks">';
     // 1. GATE DA Block
-    html += createBlock('10:00 - 12:00 AM', 'g', 'GATE DA', 'GATE: ' + day.g[0], day.g.slice(1), dayKey + 'g');
+    html += createBlock('10:00 AM - 12:00 PM', 'g', 'GATE DA (AI/ML)', 'GATE: ' + day.g[0], day.g.slice(1), dayKey + 'g');
     // 2. DSA NeetCode Block
     html += createBlock('10:00 - 11:40 PM', 'd', 'NeetCode 150', 'DSA Practice', day.a, dayKey + 'a', day.as);
     // 3. SQL Block
@@ -1000,7 +1099,7 @@ function upd() {
   });
 
   var daysCount = document.getElementById('days-done-count');
-  if (daysCount) daysCount.textContent = completedDays + ' of 7 days completed';
+  if (daysCount) daysCount.textContent = completedDays + ' of ' + DAYS.length + ' days completed';
 }
 
 // Event Delegation for Checkboxes
